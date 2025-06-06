@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第2回 社会学的な捉え方——理論編</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 紺色 */
+            --secondary-color: #4a90e2; /* 青色 */
+            --accent-color: #e94e77; /* 赤系アクセント */
+            --background-color: #f8f9fa; /* 薄いグレー */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f2f8ff;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fff8f8;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .info-graphic-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fdfdfd;
+        }
+
+        .info-graphic-box {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            background-color: var(--action-blue);
+            width: 45%;
+        }
+
+        .info-graphic-box h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        
+        .info-graphic-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        
+        .info-graphic-box li {
+            margin-bottom: 5px;
+        }
+        
+        .arrow {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 0 1rem;
+        }
+        
+        .vertical-arrow {
+            text-align: center;
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin: 5px 0;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .example-box {
+            background-color: var(--confirm-green);
+            border: 1px solid #28a745;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        
+        .example-box h3 {
+            color: #155724;
+            border-bottom-color: #28a745;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .info-graphic-container {
+                flex-direction: column;
+            }
+            .info-graphic-box {
+                width: 90%;
+                margin-bottom: 10px;
+            }
+            .arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+        }
+
+                .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第2回 社会学的な捉え方——理論編</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 社会学的な「ものの見方」とは？</a>
+                    <ul>
+                        <li><a href="#sec1-1">1.1 社会とは何か？：関係性の学問</a></li>
+                        <li><a href="#sec1-2">1.2 前提知識：近代社会の3つの特徴</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. デュルケム：自殺は社会が引き起こす</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：なぜ人は自ら命を絶つのか？</a></li>
+                        <li><a href="#sec2-2">2.2 自殺の4類型：つながりと規範の視点</a></li>
+                        <li><a href="#sec2-3">2.3 デュルケムから学ぶ思考法</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. マルクス：資本主義と格差のメカニズム</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：なぜ経済格差は生まれるのか？</a></li>
+                        <li><a href="#sec3-2">3.2 資本主義の論理：安く作り、高く売る</a></li>
+                        <li><a href="#sec3-3">3.3 マルクスから学ぶ思考法</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. ジンメル：都市が「冷たい」個人を作る</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：都会で暮らす人の特徴は？</a></li>
+                        <li><a href="#sec4-2">4.2 都市環境への適応が性格を形作る</a></li>
+                        <li><a href="#sec4-3">4.3 ジンメルから学ぶ思考法</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. まとめ：社会学から何を学べるか</a>
+                    <ul>
+                        <li><a href="#sec5-1">5.1 4人の巨人の視点</a></li>
+                        <li><a href="#sec5-2">5.2 学びの核心：個人ではなく関係性を総体的に見る</a></li>
+                    </ul>
+                </li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 社会学的な「ものの見方」とは？</h2>
+            <p>「社会学」と聞くと、何を思い浮かべますか？アンケート調査？それともなんだか難しそうな理論？この講義では、社会学が提供するユニークな「ものの見方」を、4人の代表的な社会学者の理論を通して体感していきます。まずは、その入り口となる基本的な考え方から見ていきましょう。</p>
+            
+            <h3 id="sec1-1">1.1 社会とは何か？：関係性の学問</h3>
+            <div class="card">
+                <div class="card-header">社会学のスタート地点：「社会ってなんだろう？」</div>
+                <p>この素朴な問いから社会学は始まります。社会学では、社会を<strong class="marker">「何らかの共通性を持つ人々のまとまり（関係性）」</strong>と捉えます。そして、一見無関係に見える出来事の間に、隠れた「関係性」を見つけ出すことを目指します。つまり、社会学とは<strong class="text-action">「関係性の学問」</strong>なのです。</p>
+            </div>
+            
+            <p>この授業の目標は、社会学的な「ものの見方」を体感することです。具体的には、以下の3点を目指します。</p>
+            <ul>
+                <li>社会学的思考の代表例に触れる。</li>
+                <li>社会学的思考の多様性を理解する。</li>
+                <li>社会学的思考に共通する点を理解する。</li>
+            </ul>
+
+            <div class="question-box">
+                <h4>問題1.1</h4>
+                <p>社会学では、社会を「何らかの共通性を持つまとまり」、すなわち「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">関係性</span></span>」と捉える。そして、一見無関係に見える事象同士の間に潜む<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">関係性</span></span>を見出すことを探求する。どのように「関係性」に注目するかによって、その見方は<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">多様</span></span>になる。</p>
+            </div>
+
+            <h3 id="sec1-2">1.2 前提知識：近代社会の3つの特徴</h3>
+            <p>これから登場する社会学者たちは、皆「近代社会」という新しい時代の到来に直面し、それを理解しようとしました。彼らの議論を理解するために、近代社会の3つの基本的な特徴を押さえておきましょう。</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>近代社会の特徴</th>
+                            <th>解説</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>市民社会</strong></td>
+                            <td>王侯貴族ではなく、一般の市民が社会の中心となる社会。</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>産業社会</strong></td>
+                            <td>農業中心から、工業やサービス業が仕事の中心となる社会。</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>都市社会</strong></td>
+                            <td>人々の生活の中心が、農村から都市へと移り、都市で営まれる社会。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>これらの変化が、人々の生活や価値観、そして社会全体のあり方を根本から変えていきました。社会学は、この激動の時代に生まれた学問なのです。</p>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap2">2. デュルケム：自殺は社会が引き起こす</h2>
+            <p>「なぜ人は自ら命を絶つのか？」この極めて個人的で痛ましい問いに、社会学はどのように向き合うのでしょうか。社会学の父の一人、エミール・デュルケムは、この問いに「社会」という視点から光を当てました。</p>
+
+            <h3 id="sec2-1">2.1 問い：なぜ人は自ら命を絶つのか？</h3>
+            <div class="summary">
+                <p>デュルケムは、自殺が一見個人的な問題に見えるが、実は<strong class="marker">社会状況と密接に関わっている</strong>ことを統計データから明らかにしました。彼は、自殺率が地域や宗教によって異なることに注目したのです。</p>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>都市</th>
+                                <th>農村</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>プロテスタント</strong></td>
+                                <td class="text-problem">自殺率 高</td>
+                                <td class="text-problem">自殺率 中程度</td>
+                            </tr>
+                            <tr>
+                                <td><strong>カトリック</strong></td>
+                                <td class="text-problem">自殺率 中程度</td>
+                                <td class="text-confirm">自殺率 低</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>このデータは、個人の悩みだけでなく、その人が属する<strong class="text-action">社会のあり方（社会的な要因）が自殺率に相関している</strong>ことを示唆しています。ここからデュルケムは、自殺の原因を個人の心理ではなく、社会の構造に求めていきました。</p>
+            </div>
+
+            <h3 id="sec2-2">2.2 自殺の4類型：つながりと規範の視点</h3>
+            <p>デュルケムは、社会と個人の関係性を「つながり（集団への統合度）」と「規範（社会による規制度）」という2つの軸で分析し、自殺を4つのタイプに分類しました。これを知ると、なぜ自殺が個人的な問題ではないのかが、より深く理解できます。</p>
+
+            <div class="info-graphic-container" style="flex-wrap: wrap; justify-content: space-between;">
+                <div style="width: 48%; margin-bottom: 20px;">
+                    <h4>社会との「つながり」</h4>
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <span style="width: 40px;">弱</span>
+                        <div class="arrow" style="margin: 0 5px;">→</div>
+                        <div class="info-graphic-box" style="width: calc(100% - 70px); background-color: #fff8f8; border-color: var(--accent-color);">
+                            <h5>自己本位的自殺</h5>
+                            <p style="font-size: 0.9em; margin:0;">つながりが薄れ、孤独感から自殺する。</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span style="width: 40px;">強</span>
+                        <div class="arrow" style="margin: 0 5px;">→</div>
+                         <div class="info-graphic-box" style="width: calc(100% - 70px); background-color: #e6f4ea; border-color: #28a745;">
+                            <h5>集団本位的自殺</h5>
+                            <p style="font-size: 0.9em; margin:0;">人間関係が強すぎ、義務感や責任感から自殺する。（例：殉死）</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 48%; margin-bottom: 20px;">
+                    <h4>社会の「規範」</h4>
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <span style="width: 40px;">弱</span>
+                        <div class="arrow" style="margin: 0 5px;">→</div>
+                        <div class="info-graphic-box" style="width: calc(100% - 70px); background-color: #fff8f8; border-color: var(--accent-color);">
+                            <h5>アノミー的自殺</h5>
+                            <p style="font-size: 0.9em; margin:0;">社会のルールが崩壊し、生きる意味を見失い自殺する。</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center;">
+                        <span style="width: 40px;">強</span>
+                        <div class="arrow" style="margin: 0 5px;">→</div>
+                        <div class="info-graphic-box" style="width: calc(100% - 70px); background-color: #e6f4ea; border-color: #28a745;">
+                            <h5>宿命的自殺</h5>
+                            <p style="font-size: 0.9em; margin:0;">規制が強固で、自由を感じられず絶望して自殺する。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p>デュルケムによれば、近代社会は特に<strong class="text-problem">「自己本位的自殺」</strong>と<strong class="text-problem">「アノミー的自殺」</strong>で特徴づけられます。近代化は人々のつながりを弱め（個人化）、社会のルールを流動的にしました。都市で孤独を感じやすくなり（隣に誰が住んでいるかわからない）、信じていた価値観がすぐに変わってしまう（いい学校に行ったのに…）。だからこそ、真に考えるべきは個人の心の問題だけでなく、<strong class="text-action">社会のあり方そのもの</strong>なのだと、デュルケムは主張したのです。</p>
+
+            <h3 id="sec2-3">2.3 デュルケムから学ぶ思考法</h3>
+            <div class="card">
+                <div class="card-header">まとめ：デュルケム的思考法</div>
+                <p>デュルケムから学べるのは、<strong class="marker">「個人を超えた社会を見る」</strong>という視点です。</p>
+                <ul>
+                    <li>一見個人的に見える現象（自殺など）に、社会全体の影響を見出す。</li>
+                    <li>社会の影響は、個人の問題に還元できない「傾向性」として現れる。</li>
+                    <li>個人と社会をつなぐ「関係性」（つながりや規範）に注目する。</li>
+                </ul>
+            </div>
+
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>デュルケムは、自殺を個人の心理問題ではなく、社会的な要因から分析した。彼は、社会と個人の関係を「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">つながり</span></span>」と「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">規範</span></span>」の2軸で捉え、近代社会は特に、つながりの希薄化による「<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">自己本位的自殺</span></span>」と、規範の崩壊による「<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">アノミー的自殺</span></span>」が増加する傾向にあると論じた。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. マルクス：資本主義と格差のメカニズム</h2>
+            <p>現代社会の大きなテーマである「経済格差」。なぜ一部の人が莫大な富を築き、多くの人々が厳しい生活を強いられるのでしょうか。この問いに、カール・マルクスは「資本主義」というシステムの構造そのものに原因があると考えました。</p>
+
+            <h3 id="sec3-1">3.1 問い：なぜ経済格差は生まれるのか？</h3>
+            <div class="summary">
+                <p>「格差は個人の能力や努力の差だ」と考える人も多いかもしれません。しかしマルクスは、それをきっぱりと否定します。彼によれば、<strong class="marker">格差の拡大は資本主義の必然的な結果</strong>であり、そのメカニズムを解き明かすことが重要だと考えました。</p>
+                <div class="info-graphic-container">
+                    <div class="info-graphic-box" style="background-color: #fff8f8; border-color: var(--accent-color);">
+                        <h4>一般的な考え方(×)</h4>
+                        <p>個人の能力の差など</p>
+                        <div class="arrow">↓</div>
+                        <p>さまざまな格差が生じる</p>
+                    </div>
+                    <div class="info-graphic-box" style="background-color: #e6f4ea; border-color: #28a745;">
+                        <h4>マルクスの考え方(○)</h4>
+                        <p>資本主義のメカニズム</p>
+                        <div class="arrow">↓</div>
+                        <p>さまざまな格差が生じる</p>
+                    </div>
+                </div>
+                <p>つまり、問題は個々の人間にあるのではなく、私たち全員が組み込まれている<strong class="text-action">「資本主義」というシステム自体にある</strong>と指摘したのです。</p>
+            </div>
+
+            <h3 id="sec3-2">3.2 資本主義の論理：安く作り、高く売る</h3>
+            <p>では、その資本主義のメカニズムとは何でしょうか。マルクスによれば、それは「あらゆるものが『お金』でやりとりされる世界」であり、<strong class="text-action">すべてを貨幣化してきた</strong>歴史でもあります。</p>
+            <ul>
+                <li><strong>貨幣による結びつき：</strong>資本主義以前は、土地や人は貴族や教会が所有し、お金で全てが買えるわけではありませんでした。しかし資本主義社会では、人々はお金（貨幣）を介して互いに結びつくようになります。</li>
+                <li><strong>労働力の貨幣化：</strong>自分の身体と時間さえも貨幣で交換されるようになります。これが「労働の対価」としての人件費（給与）です。</li>
+            </ul>
+            <p>この「お金があれば何でも買える世界」で、なぜ格差が生まれるのでしょうか。その源泉は、<strong class="text-problem">「安く作って、高く売る」という利益追求の原則</strong>にあります。</p>
+
+            <div class="example-box">
+                <h3>事例：ハンバーガー屋さんの儲けの仕組み</h3>
+                <p>ハンバーガー屋さんを経営する資本家（社長）の視点で考えてみよう！</p>
+                <ol>
+                    <li><strong>原則：</strong>利益を最大化するため、「安く作って、高く売る」ことを目指す。</li>
+                    <li><strong>コスト削減：</strong>安く作るためには、材料費や人件費を抑えるのが一番手っ取り早い。アルバイトの時給を低く設定したり、レジをセルフ化（機械に置き換え）したりする。</li>
+                    <li><strong>利益の分配：</strong>ハンバーガーがたくさん売れても、その利益の多くは資本家（社長や株主）のものになる。労働者（アルバイト）に還元される成功の果実はごくわずか。</li>
+                </ol>
+                <p>このサイクルが繰り返されることで、資本家はますます豊かになり、労働者との格差は拡大していく。マルクスは、この<strong class="marker">格差拡大のメカニズムこそが、資本主義の論理そのものである</strong>と喝破したのです。</p>
+            </div>
+
+            <h3 id="sec3-3">3.3 マルクスから学ぶ思考法</h3>
+            <div class="card">
+                <div class="card-header">まとめ：マルクス的思考法</div>
+                <p>マルクスから学べるのは、<strong class="marker">「見えているものではなく、見えないものが重要」</strong>という視点です。</p>
+                <ul>
+                    <li>格差拡大のメカニズムそのものは、直接観察することはできない。</li>
+                    <li>観察できる現象（格差という事実）の背後にある「メカニズム」に注目する。</li>
+                    <li>そのメカニズムを解明することで、社会のあり方そのものが見えてくる。</li>
+                </ul>
+            </div>
+            
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>マルクスは、経済格差を個人の能力差ではなく「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">資本主義のメカニズム</span></span>」の必然的な結果と捉えた。資本家が利益を最大化するために「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">安く作り、高く売る</span></span>」ことを原則とし、そのために<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">人件費</span></span>を抑制することが、格差拡大の根源にあると分析した。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. ジンメル：都市が「冷たい」個人を作る</h2>
+            <p>「都会の人は冷たい」とよく言われますが、それは本当に都会人の性格が悪いからなのでしょうか？ゲオルク・ジンメルは、むしろ「都市」という環境そのものが、人々をある種の精神状態にさせると考えました。</p>
+
+            <h3 id="sec4-1">4.1 問い：都会で暮らす人の特徴は？</h3>
+            <div class="summary">
+                <p>ジンメルは、問いの立て方を少し変えました。「どうして都市の人は冷たいのだろうか？」ではなく、<strong class="marker">「どうして都市に住む人は冷たくなってしまうのか？」</strong>と問うたのです。これにより、問題は個人の内面から、個人を取り巻く<strong class="text-action">社会的環境</strong>へとシフトします。</p>
+                <div class="info-graphic-container">
+                    <div class="info-graphic-box" style="background-color: #fff8f8; border-color: var(--accent-color);">
+                        <h4>よくある問い(×)</h4>
+                        <p>どうして都市の人は冷たいのだろうか？<br>(個人の性格の問題)</p>
+                    </div>
+                    <div class="info-graphic-box" style="background-color: #e6f4ea; border-color: #28a745;">
+                        <h4>ジンメルの問い(○)</h4>
+                        <p>どうして都市に住む人は冷たくなってしまうのか？<br>(社会的環境の問題)</p>
+                    </div>
+                </div>
+                <p>彼の結論は明快です。都市の人が元々冷たいのではなく、<strong class="text-problem">都市のあり方そのものが、人を「冷たく」させている</strong>のです。</p>
+            </div>
+
+            <h3 id="sec4-2">4.2 都市環境への適応が性格を形作る</h3>
+            <p>ジンメルによれば、都市は<strong class="text-action">「刺激的で、匿名的」</strong>な空間です。大勢の人とモノに溢れ、隣近所の人が何をしているかもわからない。人間関係よりも貨幣による交換関係が主役となり、ショッピングモールや広告が絶えず欲望を刺激してきます。この特殊な環境が、私たちの生活態度を形作っていくのです。</p>
+            
+            <div class="example-box">
+                <h3>事例：東京での電車の乗り方</h3>
+                <p>毎日満員電車に乗るキミの行動も、ジンメル理論で説明できるぞ！</p>
+                <ul>
+                    <li><strong>人間関係が匿名的だからこそ…</strong><br>
+                    → <strong class="text-confirm">他人に対して過度に興味を持たないようになる。</strong>（毎日隣に座る人が違っても気にしない）</li>
+                    <li><strong>都市環境が刺激にあふれているため…</strong><br>
+                    → <strong class="text-confirm">些細なことでは反応しないようになる（鈍感になる）。</strong>（車内アナウンスや広告にいちいち気を取られない）</li>
+                    <li><strong>一方で、都市環境に飲み込まれないように…</strong><br>
+                    → <strong class="text-confirm">個性的であろうと努めるようになる。</strong>（独特のファッションや趣味で自分を表現する）</li>
+                </ul>
+                <p>このように、都市に生きる人々の「冷たさ」や「無関心」といった態度は、実は過剰な刺激や匿名性から自分を守るための、<strong class="marker">都市環境への合理的な「適応」の結果</strong>なのです。</p>
+            </div>
+
+            <h3 id="sec4-3">4.3 ジンメルから学ぶ思考法</h3>
+            <div class="card">
+                <div class="card-header">まとめ：ジンメル的思考法</div>
+                <p>ジンメルから学べるのは、<strong class="marker">「個人ではなく、暮らしのあり方を問題にする」</strong>という視点です。</p>
+                <ul>
+                    <li>人間の心理や態度は、社会環境によって構成されると考える。</li>
+                    <li>社会環境と個人の「相互関係」にこそ注目すべき。</li>
+                    <li>個々人の行動に共通する「形式」や「様式」を見出す。</li>
+                </ul>
+            </div>
+            
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>ジンメルは、都市生活者の精神や態度を、<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">都市環境</span></span>への適応の結果として分析した。都市の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">匿名性</span></span>は人々に無関心な態度をとらせ、過剰な<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">刺激</span></span>は人々を鈍感にさせる。これらは、個人が社会環境と結ぶ「<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">相互関係</span></span>」から生まれる生活態度である。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap5">5. まとめ：社会学から何を学べるか</h2>
+            <p>今回は、デュルケム、マルクス、ジンメルという3人の社会学の巨人（そして前回少し触れたウェーバー）の思考を通して、社会学的な「ものの見方」を探求してきました。最後に、彼らの視点を整理し、社会学を学ぶことの核心に迫ります。</p>
+
+            <h3 id="sec5-1">5.1 4人の巨人の視点</h3>
+            <p>社会学は「まとまり」や「関係性」を考える学問です。4人の学者は、それぞれ異なる角度からこの「関係性」にアプローチしました。</p>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>学者</th>
+                            <th>思考のポイント</th>
+                            <th>キーワード</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>デュルケム</strong></td>
+                            <td>自殺という個人的な現象に、社会全体の構造的な要因を見出した。</td>
+                            <td>つながり、規範、社会的事実</td>
+                        </tr>
+                        <tr>
+                            <td><strong>マルクス</strong></td>
+                            <td>経済格差の背後にある、資本家と労働者の関係という「見えないメカニズム」に注目した。</td>
+                            <td>資本主義、階級、メカニズム</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ジンメル</strong></td>
+                            <td>個人の性格や心理を、都市という「暮らしのあり方」との相互作用から分析した。</td>
+                            <td>都市、相互作用、形式</td>
+                        </tr>
+                        <tr>
+                             <td><strong>ウェーバー</strong></td>
+                            <td>宗教（プロテスタンティズム）の精神と資本主義の精神の間に、意外な共通点を見出した。</td>
+                            <td>価値、解釈、精神</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 id="sec5-2">5.2 学びの核心：個人ではなく関係性を総体的に見る</h3>
+            <div class="card">
+                <div class="card-header">社会学を学ぶことで得られる最強の武器</div>
+                <p>ここまで見てきたように、社会学は、ある問題が起きた時にその原因を個人の能力や性格だけに求めることをしません。そうではなく、<strong class="marker">個人を取り巻く人々や社会、環境との「関係性」の中に問題の根源を探ります。</strong></p>
+                <p>この視点は、複雑な現代社会を生き抜く上で非常に強力な武器となります。何か問題に直面した時、「自分のせいだ」と抱え込むのではなく、「もしかしたら、この状況や仕組み自体に問題があるのではないか？」と考えることができるようになります。物事を<strong class="text-action">総体的（マクロ）な視点</strong>で捉え、その構造を理解する力。これこそが、社会学が私たちに与えてくれる最大の学びなのです。</p>
+            </div>
+            
+             <div class="question-box">
+                <h4>問題5.1</h4>
+                <p>社会学の様々な理論に共通する核心は、個人の問題として片付けず、その個人を取り巻く<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">関係性</span></span>を<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">総体的</span></span>に見ることである。デュルケムは自殺に<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">社会的要因</span></span>を、マルクスは格差の背後に<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">メカニズム</span></span>を見出し、ジンメルは個人の性格を<span class="fill-in" onclick="toggleAnswer(this)">(5)<span class="answer">暮らしのあり方</span></span>から分析した。</p>
+            </div>
+
+            <div class="example-box" style="background-color: var(--action-blue); border-color: var(--secondary-color);">
+                <h3 style="color: var(--primary-color); border-bottom-color: var(--secondary-color);">次回予告：社会学的な調べ方——方法編</h3>
+                <p>今回は社会学の「理論」に注目しましたが、次回は「どうやって調べるか」という<strong class="text-action">「方法」</strong>に焦点を当てます。</p>
+                <ul>
+                    <li>ウェーバーは、社会をどのように捉え、どのように研究したか？</li>
+                    <li>デュルケムは、社会をどのように捉え、どのように研究したか？</li>
+                    <li>マルクスは、社会をどのように捉え、どのように研究したか？</li>
+                    <li>ジンメルは、社会をどのように捉え、どのように研究したか？</li>
+                </ul>
+                <p>今日紹介した4人が、そのユニークな「ものの見方」をどのようにして具体的な研究に結びつけていったのか。そのアプローチの違いを理解することで、社会学の面白さがさらに深まるはずです。お楽しみに！</p>
+            </div>
+
+            <div class="page-number">5</div>
+        </div>
+
+          <div class="button-container">
+    <!-- page2.html に置く場合は前に戻るボタンだけ表示 -->
+    <a href="page1.html" class="nav-button">← 前の講座へ</a>
+
+    <!-- page1.html に置く場合は次へ進むボタンだけ表示 -->
+    <a href="page3.html" class="nav-button">次の講座へ →</a>
+  </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、N-gaku osobowości KADOKAWA Dwight Gakuen が提供する講義「人文社会入門 第2回 社会学的な捉え方——理論編」（講師：谷口 祐人 先生）を元に作成されました。</li>
+                <li><a href="https://www.nnn.ed.nico/" target="_blank" rel="noopener noreferrer">N高等学校・S高等学校</a></li>
+                <li>各社会学者の肖像写真の出典は、講義スライドに記載のWikipedia Commons等の公開情報に基づいています。</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

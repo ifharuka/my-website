@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第5回 人類学の考え方2</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 紺色 */
+            --secondary-color: #4a90e2; /* 青色 */
+            --accent-color: #e94e77; /* 赤系アクセント */
+            --background-color: #f8f9fa; /* 薄いグレー */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f2f8ff;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fff8f8;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .flow-chart {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .flow-item {
+            padding: 10px 20px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            background-color: var(--action-blue);
+        }
+        .flow-arrow {
+            font-size: 2em;
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .flow-chart { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第5回 人類学の考え方2</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 文化人類学における「体験」</a>
+                    <ul>
+                        <li><a href="#sec1-1">1.1 問い：カルチャーショックを経験したことは？</a></li>
+                        <li><a href="#sec1-2">1.2 概要とポイント：「当たり前」は当たり前ではない</a></li>
+                        <li><a href="#sec1-3">1.3 事例：文化人類学は「旅」から始まった</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. 服装とアイデンティティ</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：どんな服装を着ればいい？</a></li>
+                        <li><a href="#sec2-2">2.2 事例：19世紀ズニ族の服装から「当たり前」を説明する</a></li>
+                        <li><a href="#sec2-3">2.3 概要とポイント：儀礼と文化が「身体」を作る</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. 儀礼と共同体</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：なぜ就活で同じスーツを着るのか？</a></li>
+                        <li><a href="#sec3-2">3.2 概要とポイント：「通過儀礼」の3段階</a></li>
+                        <li><a href="#sec3-3">3.3 事例：「なまはげ」とコスプレの共通点</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. 文化人類学の実用性</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：文化人類学は何の役に立つ？</a></li>
+                        <li><a href="#sec4-2">4.2 概要とポイント：応用人類学とポストコロニアリズム</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. まとめ：「人間」をめぐる想像力を広げる</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 文化人類学における「体験」</h2>
+            <p>海外旅行で、あるいは身近な人との会話で、「え、そうなの！？」と驚いた経験はありませんか？ この「驚き」、すなわちカルチャーショックこそが、文化人類学的な探求の入り口です。それは、自分の「当たり前」が、決して普遍的ではないと気づく瞬間なのです。</p>
+            
+            <h3 id="sec1-1">1.1 問い：カルチャーショックを経験したことは？</h3>
+            <p>例えば、日本では飲食店に入ると無料でお水やおしぼりが出てきますが、海外では有料なのが普通です。また、公共交通機関が時間通りに来ることも、世界的に見れば驚くべきことかもしれません。こうした<strong class="text-action">「当たり前」だと思っていたことに対する認識の違い</strong>に遭遇したとき、私たちはカルチャーショックを経験します。</p>
+
+            <h3 id="sec1-2">1.2 概要とポイント：「当たり前」は当たり前ではない</h3>
+            <p>カルチャーショックは、なぜ重要なのでしょうか。それは、以下の3つの点に集約されます。</p>
+            <ol>
+                <li><strong>「当たり前」な事は存在しない：</strong>自分の常識は、数ある文化の中の一つの選択肢に過ぎないことを教えてくれます。</li>
+                <li><strong>「肌で感じて」学ぶ：</strong>自分の文化に慣れていると、違いがあること自体を予測しません。だからこそ、予期せぬ「驚き」を伴う直接的な体験が、文化を学ぶ上で強力な手段となります。</li>
+                <li><strong>「体験」のインパクト：</strong>人から話を聞くよりも、自分で直接体験する方が、認識の「ズレ」は遥かに大きなインパクトを持ちます。頭で考えるだけでなく、体で感じることで、初めて「当たり前ではない」ことを深く理解できるのです。</li>
+            </ol>
+
+            <h3 id="sec1-3">1.3 事例：文化人類学は「旅」から始まった</h3>
+            <p>実は、文化人類学の歴史そのものが、この「体験」と深く結びついています。「人類学の父」と呼ばれるイギリスのエドワード・B・タイラーも、探検家との出会いをきっかけにメキシコへ旅立ち、そこで古代文明の遺跡と現代の民族に触れた体験が、彼の学問の基礎となりました。</p>
+            <p>文化人類学は、まさに<strong class="marker">「行って帰る」旅</strong>なのです。異文化を体験し、その体験を自文化に持ち帰って「紹介」する。その過程で、体験は文化に関する「議論」へと昇華されていきます。</p>
+            <div class="card">
+                <div class="card-header">まとめ：体験から議論へ</div>
+                <ul>
+                    <li>文化人類学の基本的な方法は、異文化を<strong class="text-action">体験</strong>し、それを自文化に<strong class="text-confirm">紹介</strong>すること。</li>
+                    <li>この「行って帰る」プロセスの中で、単なる体験談は、文化とは何かを問う<strong class="text-problem">議論</strong>へと発展する。</li>
+                </ul>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. 服装とアイデンティティ</h2>
+            <p>「今日は何を着ていこう？」毎朝のこの選択は、単に気温や予定に合わせるだけでなく、私たちが「何者であるか」を表現する行為でもあります。服装は、文化や社会との関係性の中で、私たちの身体と自己認識を形作っているのです。</p>
+
+            <h3 id="sec2-1">2.1 問い：どんな服装を着ればいい？</h3>
+            <p>服装を選ぶとき、私たちはTPO（時・場所・場合）を考えます。それは、<strong class="text-problem">社会的なルールや期待</strong>に無意識に従っている証拠です。就職活動のスーツ、お葬式の喪服、成人式の振袖や袴。これらの「特別な場所と時の服」は、私たちが属する集団やつながり、そして日常と非日常の境界線を示しています。</p>
+
+            <h3 id="sec2-2">2.2 事例：19世紀ズニ族の服装から「当たり前」を説明する</h3>
+            <p>ここで、私たちの「当たり前」を相対化するために、19世紀のアメリカ先住民ズニ族の服装を見てみましょう。彼らに、私たちの服装ルール（例えば、なぜ就活では皆同じ黒いスーツなのか、なぜ着る服で気分が変わるのか）を説明できるでしょうか？</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>人物</th>
+                            <th>服装の特徴</th>
+                            <th>文化的な意味</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>日常の男性 (1879)</strong></td>
+                            <td>綿のシャツ、ズボン、革のモカシン、貝殻のネックレスやイヤリング</td>
+                            <td>狩猟のお守りやタバコを入れるポーチなど、実用性と装飾性を兼ね備える。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>政治家ペドロ・ピノ (1882)</strong></td>
+                            <td>青いウールのシャツ、銀のメダリオン付きベルト、鹿革の半ズボン</td>
+                            <td>交易で得たウールや銀製品は、富と地位、そして他文化との交流を示す象徴。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>このように、彼らの服装にも、私たちのスーツや振袖と同じように、社会的な意味やルールが込められています。「当たり前のこと」を説明するのは、実は複雑なことを説明するより難しいのです。</p>
+
+            <h3 id="sec2-3">2.3 概要とポイント：儀礼と文化が「身体」を作る</h3>
+            <p>服装の選択は、単なる個人の趣味ではありません。それは、<strong class="marker">社会との緊張関係の中で「自分」を形成していくプロセス</strong>です。「自分だけの体」を装飾する行為は「自分を作る」ことにつながり、「みんなで作る体（共通の服装ルール）」は「社会を作る」ことにつながります。</p>
+            <p>文化人類学者のアルノルト・ファン・ヘネップは、このような個人と社会を結びつけるプロセスを<strong class="text-action">「儀礼」</strong>という概念で捉えました。服装は、まさにこの儀礼の一つの重要な機能なのです。</p>
+            
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>服装には、細かな暗黙のルールと明白なルールがあり、それらが個人と社会の<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">緊張</span></span>の中で「自分」を形成する。個人と社会を<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">身体</span></span>を通じて結びつけることは、<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">儀礼</span></span>の重要な機能の一つである。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. 儀礼と共同体</h2>
+            <p>入学式、成人式、そして就職活動。これらは人生の節目に行われる「通過儀礼」です。通過儀礼とは、ある社会的地位から別の地位へと移行する際に行われる儀式のこと。そこには、個人を共同体の一員として統合するための、巧みなメカニズムが隠されています。</p>
+
+            <h3 id="sec3-1">3.1 問い：なぜ就活で同じスーツを着るのか？</h3>
+            <p>就職活動は、現代の日本社会における代表的な通過儀礼と言えます。黒染めの髪とリクルートスーツは、カラフルな服装や髪型が許される「若者」という集団からの「分離」を意味します。そして、厳しい面接や「内定」「研修生」といった曖昧な期間は、どちらの集団にも属さない不安定な「過渡」の段階です。最終的に入社式を迎え、制服や名刺を与えられることで、晴れて「社会人」という新たな集団に「統合」されるのです。</p>
+
+            <h3 id="sec3-2">3.2 概要とポイント：「通過儀礼」の3段階</h3>
+            <p>アルノルト・ファン・ヘネップは、あらゆる通過儀礼に共通する構造として、以下の3段階を指摘しました。</p>
+            <div class="flow-chart">
+                <div class="flow-item"><strong>① 分離 (Separation)</strong><br>元の集団や地位から切り離される</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item"><strong>② 過渡 (Transition) / 境界 (Liminality)</strong><br>どちらにも属さない曖昧で危険な期間</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item"><strong>③ 統合 (Incorporation)</strong><br>新たな集団や地位に正式に組み込まれる</div>
+            </div>
+            <p>この中で特に重要なのが<strong class="text-problem">「過渡」</strong>の段階です。ここは日常から切り離された「非日常」の空間であり、参加者は社会的な地位を一時的に失います。この不安定な状態を経ることで、新たなアイデンティティへの変身が促されるのです。</p>
+            
+            <h3 id="sec3-3">3.3 事例：「なまはげ」とコスプレの共通点</h3>
+            <p>この「非日常」への変身は、様々な文化に見られます。秋田の「なまはげ」のような来訪神の儀礼では、仮面や化粧をすることで、人間ではない「神」へと変身します。これは<strong class="text-action">魔除け</strong>や、神の霊的な力を身にまとうという意味がありました。</p>
+            <p>実は、現代の「コスプレ」にも似た構造が見られます。評論家の小谷真理氏は、「現実世界では、服は常識に縛られた抑圧的なもの。コスプレは、その常識を脱ぎ捨て、異次元の世界の価値観を着ることで、現実を相対化し、自分を再発見できる」と述べています。リクルートスーツも、なまはげも、アニメのキャラクターも、<strong class="marker">ある「世界」の服を着ることで、別の自分へと変身する</strong>という点で、同じ儀礼的な構造を持っているのです。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>ファン・ヘネップは通過儀礼の構造を「分離」「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">過渡</span></span>」「統合」の3段階で説明した。特に、日常から切り離された「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">非日常</span></span>」の期間である過渡期が重要であり、それは化粧や仮面、<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">コスプレ</span></span>といった行為にも見られる変身のプロセスである。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. 文化人類学の実用性</h2>
+            <p>「文化人類学を学んで、何の役に立つの？」これはよく聞かれる質問です。異文化の珍しい習慣を知るだけでなく、文化人類学の視点や方法は、現代社会が抱える様々な問題の解決に応用できる、強力なツールとなり得るのです。</p>
+
+            <h3 id="sec4-1">4.1 問い：文化人類学は何の役に立つ？</h3>
+            <p>文化人類学の実用的な側面は<strong class="text-action">「応用人類学（applied anthropology）」</strong>と呼ばれます。これは、政府、NGO/NPO、企業、福祉団体などが直面する社会的、組織的、政策的な問題の解決に、文化人類学の知見や視点を活用する分野です。</p>
+            <p>例えば、ある地域で開発プロジェクトを進める際に、その土地の文化や価値観を理解していなければ、住民の反対に遭ったり、予期せぬ問題を引き起こしたりする可能性があります。文化人類学者は、<strong class="marker">そこに住む人々の視点から問題を捉え、より良い解決策を提案する</strong>ことができるのです。</p>
+            
+            <h3 id="sec4-2">4.2 概要とポイント：応用人類学とポストコロニアリズム</h3>
+            <p>文化人類学の誕生は、皮肉にも西洋の植民地政策と深く関わっていました。植民地を効率的に統治するために、現地の文化を理解する必要があったのです。そのため、当初の人類学は「植民地主義の手先」として批判されることもありました。</p>
+            <p>しかし、<strong class="text-problem">ポストコロニアリズム（脱植民地主義）</strong>の批判を受けて、人類学は大きく変わりました。一方的に相手を「研究対象」として見るのではなく、<strong class="text-confirm">相手の立場から考え、対話を通じて共に世界を理解しようとする「対話的」な視点</strong>へと転換したのです。</p>
+            <p>この転換により、文化人類学は、支配に対する抵抗、移民（ディアスポラ）と市民権の問題、民族浄化への抵抗、アイデンティティの政治など、より現代的で複雑なテーマに取り組むようになりました。ギアツの言う<strong class="marker">「人間言説の世界を広げる」</strong>こと、つまり、これまで声を持たなかった人々の視点や考え方を世界に示し、より豊かな人間理解を目指すことが、現代の文化人類学の重要な役割なのです。</p>
+
+            <div class="card">
+                <div class="card-header">まとめ：文化人類学の応用力</div>
+                <ul>
+                    <li>文化人類学は、社会科学の一分野として、新しい視点から多様な問題解決に応用できる。</li>
+                    <li>その方法は「相手の立場から考える」ことであり、エスノグラフィー（民族誌）のような調査が重視される。</li>
+                    <li>最終的に、文化人類学は「対話的」な人間理解を通じて、人間の世界をより広く、深く知ることを目指す。</li>
+                </ul>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap5">5. まとめ：「人間」をめぐる想像力を広げる</h2>
+            <p>2回にわたる人類学の講義を通して、私たちは「人間とは何か？」という問いに、多様性、文化、儀礼、モノといった様々な切り口から迫ってきました。それは、人間が「なれること」の境界線と、「なりたいこと」の可能性を探る旅でした。</p>
+            
+            <div class="card">
+                <div class="card-header">文化人類学が提供する視点</div>
+                <p>文化人類学は、単に異文化の知識を増やす学問ではありません。それは、<strong class="text-action">新しい発見を可能にする「姿勢」</strong>を私たちに与えてくれます。</p>
+                <ul>
+                    <li><strong>日常生活を異なる視点から見る力：</strong>自分の「当たり前」を疑い、その背後にある文化的なルールや意味を問い直す力。</li>
+                    <li><strong>自分の視点を相対化する力と方法：</strong>知らない文化を体験することで、初めて自分の文化の特異性や、その中で生きる自分自身の姿が浮かび上がってきます。</li>
+                </ul>
+                <p>この学問は、過去の「伝統の研究」というより、人間の<strong class="marker">「多様性」と「可能性」の研究</strong>なのです。</p>
+            </div>
+            
+            <p>過去150年、人類学は人類の文化的な表現や制度、そして人々の関係性への好奇心によって推進されてきました。トウモロコシの文化的な意味から、コンピュータの使い方といった一見小さな事柄まで、それらはすべて「私たちは何者か？」を教えてくれる手がかりです。</p>
+            <p>世界が絶えず変化する中で、私たちはこれからも「人間」をめぐる新たな問いに直面し続けるでしょう。そのとき、<strong class="text-confirm">他の人間科学と同様に、他者の理解を通して自分の理解を深め、「なれること」と「なりたいこと」の境界を探る</strong>文化人類学の視点は、私たちが「なりたい」自分へと向かう道を探るための、強力な羅針盤となるはずです。</p>
+            <p>人間は「なれる」だけでなく、「なりたい」ことにもなれる。そのための想像力を広げることこそ、文化人類学を学ぶ最大の意義なのかもしれません。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>文化人類学は、私たちの「当たり前」を疑い、自分の視点を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">相対化</span></span>する力を与える。それは過去の伝統だけでなく、人間の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">多様性</span></span>と<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">可能性</span></span>を探求する学問であり、変化する世界で「なりたい」自分への道を探る手助けとなる。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+        
+        <div class="button-container">
+            <a href="page4.html" class="nav-button">← 前の講座へ</a>
+            <a href="page6.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、N-gaku osobowości KADOKAWA Dwight Gakuen が提供する講義「人文社会入門 文化人類学②」（講師：エルナンデス アルバロ 先生）を元に作成されました。</li>
+                <li><a href="https://www.nnn.ed.nico/" target="_blank" rel="noopener noreferrer">N高等学校・S高等学校</a></li>
+                <li>各社会学者の肖像写真や図の出典は、講義スライドに記載のWikipedia Commons等の公開情報に基づいています。</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

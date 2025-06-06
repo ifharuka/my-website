@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第4回 人類学の考え方</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 紺色 */
+            --secondary-color: #4a90e2; /* 青色 */
+            --accent-color: #e94e77; /* 赤系アクセント */
+            --background-color: #f8f9fa; /* 薄いグレー */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f2f8ff;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fff8f8;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .infographic-bar-chart {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .bar-chart-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .bar-item {
+            display: flex;
+            align-items: center;
+        }
+        .bar-label {
+            width: 25%;
+            font-size: 0.9em;
+        }
+        .bar {
+            background-color: var(--secondary-color);
+            height: 20px;
+            color: var(--white-color);
+            font-size: 0.8em;
+            line-height: 20px;
+            padding-left: 5px;
+            border-radius: 3px;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .bar-label { width: 35%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第4回 人類学の考え方</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 文化人類学と多様性</a>
+                    <ul>
+                        <li><a href="#sec1-1">1.1 問い：多様性って何？</a></li>
+                        <li><a href="#sec1-2">1.2 ギアツの方法：「奇妙さ」から人間らしさを探る</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. 食文化と世界観</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：「食べたくないもの」はなぜある？</a></li>
+                        <li><a href="#sec2-2">2.2 概要とポイント：世界は「分類」でできている</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. 世界観と「きれい／きたない」の秩序</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：なぜトイレにスリッパがある？</a></li>
+                        <li><a href="#sec3-2">3.2 ダグラスの方法：「秩序」から外れた「汚れ」</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. モノの交換と人間関係（互酬性）</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：なぜプレゼントを交換するの？</a></li>
+                        <li><a href="#sec4-2">4.2 サーリンズの方法：互酬性の3つのタイプ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. モノに宿る霊的な力（ハウ）</a>
+                    <ul>
+                        <li><a href="#sec5-1">5.1 問い：なぜお返しをしたくなるのか？</a></li>
+                        <li><a href="#sec5-2">5.2 モースの方法：贈与に潜む強制力「ハウ」</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap6">6. まとめ：文化とは何か？</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 文化人類学と多様性</h2>
+            <p>私たちの周りには、考え方、行動、言語、習慣など、さまざまな「違い」があります。この「多様性」こそが、文化人類学の出発点です。文化人類学とは、<strong class="text-action">人間の文化的な多様性</strong>を通して、「人間とは何か？」という根源的な問いを探求する学問なのです。</p>
+            
+            <h3 id="sec1-1">1.1 問い：多様性って何？</h3>
+            <p>「多様性」と聞くと、国籍や人種、性別などを思い浮かべるかもしれません。しかし、文化人類学が注目するのはもっと広い範囲です。思考、行動、言語、慣習、宗教（信じること）など、<strong class="marker">人間生活のあらゆる側面に見られる「変化に富んでいること」</strong>そのものを指します。それは、ワンパターンではない、様々な可能性がある状態のことです。</p>
+
+            <h3 id="sec1-2">1.2 ギアツの方法：「奇妙さ」から人間らしさを探る</h3>
+            <p>文化人類学者のクリフォード・ギアツは、この文化の多様性（Variability of culture）こそが研究の中心だと考えました。彼は「なぜ人間の考え方、表現の仕方、他者との関わり方には、こんなにも多くの変化が見られるのか？」という問いを立てます。</p>
+            <div class="card">
+                <div class="card-header">ギアツの視点：特異性こそが本質を照らす</div>
+                <p>ギアツによれば、<strong class="marker">人々の文化的特異性、つまり私たちから見ると「奇妙さ（oddities）」に感じられる部分</strong>にこそ、人間が普遍的にもつ「人間らしさ」を理解するための最も有益な手がかりが隠されているかもしれません。</p>
+                <p>文化人類学の大きな貢献は、そうした「奇妙さ」を見つけ出し、そこから人間の概念を（再）構築する方法を示すことにあるのです。つまり、<strong class="text-action">変わったものの中にこそ、変わらない本質が見えてくる</strong>、という逆説的なアプローチが特徴です。</p>
+            </div>
+            
+            <div class="question-box">
+                <h4>問題1.1</h4>
+                <p>文化人類学は、なぜ人間にたくさんの<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">変化</span></span>が見られるのかを調べる。ギアツによれば、「人間」はその一般的な性質ではなく、その具体的な<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">特有性</span></span>（奇妙さ）から成る。変化するものと、すべての人間に共通するものを比べることで、「<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">人間らしさ</span></span>」を探究するのである。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. 食文化と世界観</h2>
+            <p>「あなたは何を食べますか？ そして、何を食べませんか？」この身近な問いは、実はあなたの「世界観」を映し出す鏡です。文化人類学は、日常的な食の選択から、その人が世界をどう捉えているかを探ります。</p>
+
+            <h3 id="sec2-1">2.1 問い：「食べたくないもの」はなぜある？</h3>
+            <p>鶏肉、豚肉、牛肉は食べるけれど、うさぎ、カエル、イナゴは食べたくない。多くの人がそう感じるかもしれません。その理由は様々です。「汚い／危ない」「気持ち悪い」「かわいそう」といった否定的な理由から、「きれい／安全」「美味しい」「みんなが食べるから」といった肯定的な理由まであります。</p>
+            <p>しかし、これらの理由は本当に客観的なのでしょうか？ 世界を見渡せば、イナゴを食べる文化もカエルを食べる文化も存在します。つまり、<strong class="text-problem">食べられる／食べられないの境界線は、個人の好みや習慣、そして文化的な価値観によって引かれている</strong>のです。</p>
+            
+            <div class="infographic-bar-chart">
+                <h4 style="text-align: center;">世界の人々がどの肉を食べるか（概算）</h4>
+                <div class="bar-chart-container">
+                    <div class="bar-item"><div class="bar-label">鶏肉</div><div class="bar" style="width: 90%;">90%</div></div>
+                    <div class="bar-item"><div class="bar-label">海魚</div><div class="bar" style="width: 85%;">85%</div></div>
+                    <div class="bar-item"><div class="bar-label">牛肉</div><div class="bar" style="width: 75%;">75%</div></div>
+                    <div class="bar-item"><div class="bar-label">豚肉</div><div class="bar" style="width: 70%;">70%</div></div>
+                    <div class="bar-item"><div class="bar-label">川魚</div><div class="bar" style="width: 60%;">60%</div></div>
+                    <div class="bar-item"><div class="bar-label">イナゴ</div><div class="bar" style="width: 25%;">25%</div></div>
+                    <div class="bar-item"><div class="bar-label">うさぎ</div><div class="bar" style="width: 20%;">20%</div></div>
+                    <div class="bar-item"><div class="bar-label">カエル</div><div class="bar" style="width: 10%;">10%</div></div>
+                </div>
+                 <p style="font-size: 0.8em; text-align: right; margin-top: 5px;">※FAO等のデータを基にした概算値</p>
+            </div>
+
+            <h3 id="sec2-2">2.2 概要とポイント：世界は「分類」でできている</h3>
+            <p>消化でき、栄養になるにも関わらず「食べない」という選択は、非合理的でしょうか？ いいえ、そうではありません。人間は、<strong class="marker">客観的な「世界」そのものではなく、自分で意味づけし、作り上げた「世界」において生きている</strong>からです。</p>
+            <p>私たちは、目の前のものを「食べ物」「友だち」「ゴミ」といったカテゴリーに無意識に分類しています。この<strong class="text-action">「世界をどう分類しているのか」</strong>ということ自体が、その人の持つ一つの「世界観」なのです。「タンパク質さえ摂れれば何でもいい」と考えないのは、私たちが物理的な現実だけでなく、意味の世界に生きている証拠です。</p>
+            
+            <div class="card">
+                <div class="card-header">まとめ：食の選択から見えるもの</div>
+                <ul>
+                    <li>人間は物理的な世界だけでなく、自分で作った世界（世界観）において生きる。</li>
+                    <li>人間の世界はカテゴリーによって秩序化されているが、その基準や論理は文化によって様々である。</li>
+                    <li>食べ物をめぐるルール、慣習や好みは、その人の世界観と深く関連している。</li>
+                </ul>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. 世界観と「きれい／きたない」の秩序</h2>
+            <p>私たちの日常は「きれいなもの」と「きたないもの」を区別する行為に満ちています。家の中で靴を脱ぐ、トイレ専用のスリッパを使う。これらの習慣は、単なる衛生観念だけでなく、私たちの世界観が作り出す「秩序」の現れなのです。</p>
+
+            <h3 id="sec3-1">3.1 問い：なぜトイレにスリッパがある？</h3>
+            <p>「土足で家を歩くのは汚いか？」「人の前で裸足になるのは恥ずかしいか？」これらの問いへの答えは、その文化が「家」や「親密さ」をどう定義しているかによります。</p>
+             <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0; padding: 10px; background-color: #f2f8ff; border-radius: 8px;">
+                <div style="text-align: center;">
+                    <svg width="80" height="80" viewBox="0 0 100 100"><path d="M10 90 V 40 L 50 10 L 90 40 V 90 H 70 V 60 H 30 V 90 H 10 Z" stroke="var(--primary-color)" stroke-width="4" fill="#e7f3ff"/><rect x="40" y="70" width="20" height="20" fill="var(--secondary-color)"/></svg>
+                    <p>家という空間</p>
+                </div>
+                 <p style="font-size: 2em; font-weight: bold; color: var(--accent-color);">↔</p>
+                <div style="text-align: center;">
+                     <svg width="80" height="80" viewBox="0 0 100 100"><path d="M10 80 Q 20 60, 50 70 T 90 80" stroke="var(--primary-color)" stroke-width="4" fill="none"/><path d="M20 78 L 30 50 L 70 50 L 80 78" stroke="var(--primary-color)" stroke-width="4" fill="#fff8f8"/></svg>
+                    <p>土足の是非</p>
+                </div>
+            </div>
+            <p>日本のトイレにスリッパがあるのも、この「空間の区別」が関係しています。かつてトイレは家の「外」にある不浄な場所でした。近代化で家の中に設置されても、その<strong class="text-problem">「外＝きたない」という観念</strong>は残ります。そこで、スリッパを履くことで、トイレという「外」の空間と、家という「内」の空間を象徴的に分けるのです。</p>
+
+            <h3 id="sec3-2">3.2 ダグラスの方法：「秩序」から外れた「汚れ」</h3>
+            <p>文化人類学者のメアリー・ダグラスは、この「きれい／きたない」という感覚、すなわち衛生感覚と世界観の関係に注目しました。彼女によれば、<strong class="marker">「汚れ」とは、体系的な秩序や分類から外れた「場違いなもの」</strong>を指します。</p>
+            <p>例えば、靴は外で履くものという秩序の中では「きれい」ですが、食卓の上にあれば「きたない」ものになります。この「きたない」ものをめぐるルールが「タブー」です。タブーとは、ポリネシア語で「明確にしるしをつける」という意味で、聖／俗、浄／不浄、正常／異常を区別する社会的なメカニズムなのです。</p>
+            <div class="card">
+                <div class="card-header">まとめ：ダグラスの秩序論</div>
+                <ul>
+                    <li>何が「汚い」と感じるかは、衛生の問題というよりも、文化的な<strong class="text-action">「秩序」</strong>の問題である。</li>
+                    <li>普遍的なルールはなく、何を基準にカテゴリー分けするかは文化によって多様である。</li>
+                    <li>人間は、ものを区別し、カテゴリー分けすることによって、独自の世界観を作り、秩序を整えていく。</li>
+                </ul>
+            </div>
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>メアリー・ダグラスは、「汚れ」を文化的な<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">秩序</span></span>から外れた「場違いなもの」と定義した。この秩序を維持するためのルールが<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">タブー</span></span>であり、それは衛生の問題というより<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">象徴的</span></span>な体系の問題である。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap4">4. モノの交換と人間関係（互酬性）</h2>
+            <p>誕生日プレゼント、お歳暮、旅先からのお土産。私たちはなぜ、モノを贈り合うのでしょうか？ それは単なる経済活動ではありません。文化人類学では、このモノのやり取りを「互酬性（ごしゅうせい）」という概念で捉え、人間関係を築き、維持するための重要な社会的メカニズムだと考えます。</p>
+
+            <h3 id="sec4-1">4.1 問い：なぜプレゼントを交換するの？</h3>
+            <p>プレゼント交換のルールを考えてみましょう。プレゼントをもらってお金で返したら、相手はどう思うでしょうか？ 友人からずっとプレゼントをもらっているのに、自分からは何もあげなかったら？ そこには「関係の拒否」や「感じが悪い」といった気まずさが生まれます。これは、プレゼントが単なるモノではなく、<strong class="marker">人間関係そのものと深く結びついている</strong>からです。</p>
+
+            <h3 id="sec4-2">4.2 サーリンズの方法：互酬性の3つのタイプ</h3>
+            <p>文化人類学者のマーシャル・サーリンズは、このモノのやり取りのルール、すなわち「互酬性（Reciprocity）」を3つのタイプに分類しました。互酬性とは、<strong class="text-action">モノやサービスのやり取りを通じて、社会的な関係を築き、確認するための交換の一種</strong>です。</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>互酬性のタイプ</th>
+                            <th>特徴</th>
+                            <th>人間関係の例</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>① <strong>否定的互酬性</strong></td>
+                            <td>自分の利益を最大化しようとする。等価交換。</td>
+                            <td>市場での買い物、見知らぬ人との取引</td>
+                        </tr>
+                        <tr>
+                            <td>② <strong>一般的互酬性</strong></td>
+                            <td>見返りを期待しない、与えっぱなしの関係。</td>
+                            <td>親子、地位差が明確な関係（先輩と後輩など）</td>
+                        </tr>
+                        <tr>
+                            <td>③ <strong>均衡的互酬性</strong></td>
+                            <td>贈られたら、同程度のものを返す義務が生じる。</td>
+                            <td>友人、同僚、隣人など地位差が明確でない関係</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>このように、私たちは相手との関係性によって、無意識に異なる交換のルールを使い分けているのです。人間関係は、この意味の世界で動いています。</p>
+            
+            <div class="card">
+                <div class="card-header">まとめ：互酬性から見る人間社会</div>
+                <ul>
+                    <li>モノのやり取りと人間関係の間には、切っても切れない関係がある。</li>
+                    <li>「互酬性」とは、つながりを作るためのモノやサービスのやり取りを指す。</li>
+                    <li>プレゼントには、お金（市場）では表現できない価値があり、人間をつなぐ力がある。</li>
+                </ul>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. モノに宿る霊的な力（ハウ）</h2>
+            <p>プレゼントをもらったら、なぜか「お返しをしなきゃ」という気持ちになりますよね。この不思議な感覚の正体は何なのでしょうか？ 文化人類学者のマルセル・モースは、その答えを「モノに宿る霊的な力」に見出しました。</p>
+
+            <h3 id="sec5-1">5.1 問い：なぜお返しをしたくなるのか？</h3>
+            <p>モースは著書『贈与論』の中で、<strong class="text-problem">「贈られた物に潜むどんな力が、受け取った人にその返礼をさせるのか？」</strong>という問いを立てました。これは、単なる社会的な義務感だけでは説明できない、もっと根源的な力の存在を示唆しています。</p>
+            <p>例えば、卒業記念にもらった時計。それは大量生産された他の時計と同じ「物」のはずです。しかし、大事な人からもらったその時計だけは「違う」と感じます。まるで、<strong class="marker">贈り主の魂の一部が宿っているかのように、自分にしか見えない特別な価値</strong>を帯びるのです。</p>
+
+            <h3 id="sec5-2">5.2 モースの方法：贈与に潜む強制力「ハウ」</h3>
+            <p>モースは、ポリネシア社会の「ハウ（hau）」という概念に注目しました。ハウとは、マオリ語で<strong class="text-action">「人、物、または場所の生命力」</strong>を指す言葉です。モースによれば、ある人から何かを受け取ることは、その人の霊的な本質、つまり魂（ハウ）を受け取ることになります。</p>
+            <div class="card">
+                <div class="card-header">ハウの力学</div>
+                <p>贈り手の魂が宿ったモノ（ハウ）を自分の元に留め続けることは危険であり、時には死をもたらすと信じられていました。なぜなら、ハウは元の持ち主の元へ帰りたがるからです。だから、受け取った人は、お返しという形で別のモノにハウを乗せて、元の持ち主に返さなければならない。この<strong class="marker">「返礼の義務」という強制力</strong>こそが、贈与交換を成り立たせているのです。</p>
+            </div>
+            <p>この考え方は、日本の文化にも見られます。民俗学者の折口信夫は、正月に飾る「門松」が、元々は山から神（山の霊）が持ってくるお土産「苞（つと）」の一種だったと指摘します。松は霊が乗り移る「のりもの」であり、それを受け取ることは、自然の生命力を家の中に迎え入れる儀式だったのです。</p>
+            
+            <div class="question-box">
+                <h4>問題5.1</h4>
+                <p>マルセル・モースは、贈与に返礼を強制する力を、ポリネシアの「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">ハウ</span></span>」という概念で説明した。これはモノに宿る贈り主の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">魂</span></span>や生命力を指し、受け取った者はそれを返す<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">義務</span></span>を感じるとした。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap6">6. まとめ：文化とは何か？</h2>
+            <p>これまで多様性、世界観、モノの交換といったテーマを通して、文化人類学的な考え方に触れてきました。最後に、これらの議論を踏まえて、クリフォード・ギアツが「文化」をどのように定義したのかを見ていきましょう。</p>
+            <p>「文化が異なるから多様性が生まれる」→「では、文化とは何か？」→<strong class="text-problem">「そもそも、人間とは何か？」</strong>。この問いの連鎖の果てに、ギアツは独自の文化の定義にたどり着きます。</p>
+
+            <div class="card">
+                <div class="card-header">ギアツの文化の定義</div>
+                <p>ギアツにとって、文化とは特定の慣習や伝統のことではありません。それは、<strong class="text-action">人間の行動を統制するための「制御メカニズム（プログラム）」のセット</strong>です。</p>
+                <p><strong class="marker">人間は、行動を秩序づけるために、このような遺伝子以外の制御メカニズム、すなわち「文化的プログラム」に最も強く依存している動物である</strong>、と彼は言います。</p>
+            </div>
+            
+            <p>これはどういうことでしょうか？ ギアツは、人間を<strong class="text-problem">「未完成な動物」</strong>と表現します。私たちは、生まれながらにして完成された存在ではありません。私たちは文化を通じて、しかも一般的な文化ではなく、非常に特定の形態の文化（例えば、ドブ島民やジャワ人、ホピ族やイタリア人、上流階級や下流階級、学者やビジネスマンなど）を通じて、<strong class="text-confirm">自らを完成させていく</strong>のです。</p>
+            
+            <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+                <div style="text-align: center;">
+                    <p><strong>未完成な動物<br>（人間）</strong></p>
+                </div>
+                <p style="font-size: 2em; font-weight: bold; color: var(--primary-color);">+</p>
+                <div style="text-align: center;">
+                    <p><strong>文化的プログラム<br>（特定の文化）</strong></p>
+                </div>
+                <p style="font-size: 2em; font-weight: bold; color: var(--primary-color);">=</p>
+                <div style="text-align: center;">
+                     <p><strong>完成された存在<br>（特定の人間）</strong></p>
+                </div>
+            </div>
+
+            <p>つまり、食事、世界観、「もの」の捉え方など、私たちがこれまで見てきた多様な行動はすべて、それぞれの文化というプログラムによって制御されているのです。そして、その特定のプログラムを身につけることで、私たちは初めて「特定の種類の人間」として完成する、とギアツは考えたのです。</p>
+
+            <div class="question-box">
+                <h4>問題6.1</h4>
+                <p>ギアツは、「人間」をその多様性によって定義し、「文化」を人間の多様な行動を制御する「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">プログラム</span></span>」と見なした。文化は遺伝にはない秩序のメカニズムであり、人間は特定の文化によって自らを完成させる<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">未完成</span></span>な動物であるとした。</p>
+            </div>
+            <div class="page-number">6</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page3.html" class="nav-button">← 前の講座へ</a>
+            <a href="page5.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、N-gaku osobowości KADOKAWA Dwight Gakuen が提供する講義「人文社会入門 文化人類学①」（講師：エルナンデス アルバロ 先生）を元に作成されました。</li>
+                <li><a href="https://www.nnn.ed.nico/" target="_blank" rel="noopener noreferrer">N高等学校・S高等学校</a></li>
+                <li>各社会学者の肖像写真や図の出典は、講義スライドに記載のWikipedia Commons等の公開情報に基づいています。</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

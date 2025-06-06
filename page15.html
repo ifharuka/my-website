@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第15回 物語論はどう役に立つのか</title>
+    <style>
+        :root {
+            --primary-color: #4a2e6b; /* 深い紫色 */
+            --secondary-color: #7b5aa6; /* やや明るい紫色 */
+            --accent-color: #d9534f; /* 赤系のアクセント */
+            --background-color: #f9f7fc; /* 薄い紫がかった背景 */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff2c4;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .lecturer {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f5f2fa;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul { list-style-type: none; padding-left: 0; }
+        .toc ul ul { padding-left: 20px; }
+        .toc a { text-decoration: none; color: var(--primary-color); }
+        .toc a:hover { text-decoration: underline; }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fdf5f5;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible { display: inline-block; }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .diagram {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            background-color: #faf8fd;
+            border-radius: 8px;
+        }
+
+        .diagram .box {
+            border: 2px solid var(--secondary-color);
+            background-color: var(--white-color);
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .diagram .arrow {
+            font-size: 2em;
+            color: var(--secondary-color);
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul { list-style: none; padding: 0; }
+        .references li { margin-bottom: 10px; font-size: 0.9em; }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover { background-color: var(--secondary-color); }
+        
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .page { padding: 1rem; }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第15回 物語論はどう役に立つのか</h1>
+        <p class="lecturer">講師：大塚 英志 先生</p>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. イントロダクション：なぜ「物語」を論じるのか？</a></li>
+                <li><a href="#chap2">2. 物語の法則を発見する</a>
+                    <ul>
+                        <li><a href="#sec2_1">2.1. 実験：5歳の少女は物語を「創れる」か？</a></li>
+                        <li><a href="#sec2_2">2.2. 行為項モデル：物語に潜む普遍的な構造</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. 英雄の旅と単一神話</a>
+                    <ul>
+                        <li><a href="#sec3_1">3.1. キャンベルの理論：あらゆる神話の原型</a></li>
+                        <li><a href="#sec3_2">3.2. 「鯨の胎内」：スター・ウォーズと村上春樹をつなぐ鍵</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. 物語論の応用①：情報リテラシーの武器として</a>
+                    <ul>
+                        <li><a href="#sec4_1">4.1. 「噂」や「流言」の生成メカニズム</a></li>
+                        <li><a href="#sec4_2">4.2. 事例：関東大震災とオルレアンのうわさ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. 物語論の応用②：自己を語るための安全弁</a>
+                    <ul>
+                        <li><a href="#sec5_1">5.1. ユング心理学と物語：無意識を統治する方法</a></li>
+                        <li><a href="#sec5_2">5.2. 箱庭療法に学ぶ「三重の守り」</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap6">6. 最後の問い：AIと物語</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. イントロダクション：なぜ「物語」を論じるのか？</h2>
+            <p>「物語論」と聞くと、文学部の専門的な学問で、自分には関係ないと思うかもしれません。しかし物語論は、<b class="marker">ハリウッド映画の脚本術からフェイクニュースの分析、さらには心理療法まで</b>、驚くほど広い分野で応用されている実践的な学問です。</p>
+            <p>作家の村上春樹氏は、自身の創作法について「物語のユニットを、記号的に扱う」と語っています。これは、物語には単語や文法のように、決まった部品（ユニット）と組み立てのルール（文法）があるという考え方に基づいています。この講座では、この「物語の文法」とは何かを探り、それが私たちの世界認識や自己理解にどう役立つのかを考えていきます。</p>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap2">2. 物語の法則を発見する</h2>
+            <h3 id="sec2_1">2.1. 実験：5歳の少女は物語を「創れる」か？</h3>
+            <p>ある心理学の実験で、5歳の少女に「オオカミ」「女の子」「おばあさん」「森」「花」が描かれたカードを見せ、「おはなしを作って下さい」とお願いしました。彼女は、有名な童話『赤ずきんちゃん』を思い浮かべながらも、<b class="text-confirm">カードの要素を使って全く新しい物語を「創作」</b>しました。</p>
+            <div class="card">
+                <div class="card-header">少女が創った物語のあらすじ</div>
+                <p>森に住む「まりこちゃん」は、オオカミに騙されて猟師の家に行ってしまう。猟師はまりこちゃんを子グマと間違えて撃ってしまうが、事情を知ってオオカミを追い払う。そしてまりこちゃんは、安心してまたおばあちゃんの家へ行けるようになった。</p>
+            </div>
+            <p>この実験が示すのは、私たちはたとえ幼くても、<b class="marker">無意識のうちに物語の「きまり」や「構文」を理解し、それを応用して新しい物語を創り出す能力を持っている</b>ということです。彼女は『赤ずきんちゃん』をただ再現しようとして失敗したのではなく、その構造を「文法」として利用し、新たな物語を生成したのです。</p>
+
+            <h3 id="sec2_2">2.2. 行為項モデル：物語に潜む普遍的な構造</h3>
+            <p>この物語の「文法」の一つに、記号学者のグレマスが提唱した<b class="text-action">「行為項モデル」</b>があります。これは、多くの物語が以下の6つの役割（行為項）の関係性で成り立っているという理論です。</p>
+            <div class="diagram">
+                <div style="display: flex; justify-content: space-around; align-items: center; margin-bottom: 10px;">
+                    <div class="box">送り手</div>
+                    <div class="arrow">→</div>
+                    <div class="box">客体</div>
+                    <div class="arrow">→</div>
+                    <div class="box">受け手</div>
+                </div>
+                <div style="font-size: 2em; line-height: 0;">↑</div>
+                <div style="display: flex; justify-content: space-around; align-items: center; margin-top: 10px;">
+                    <div class="box">補助者</div>
+                    <div class="arrow">→</div>
+                    <div class="box"><b>主体</b></div>
+                    <div class="arrow">←</div>
+                    <div class="box">反対者</div>
+                </div>
+            </div>
+            <p>例えば『赤ずきんちゃん』では、主体（赤ずきん）が、送り手（お母さん）の依頼で客体（パンとワイン）を受け手（おばあさん）に届けようとしますが、反対者（オオカミ）に妨害され、補助者（猟師）に助けられます。この構造は、<b class="text-problem">探偵小説やファンタジー、さらにはマルクス主義のようなイデオロギー</b>にまで応用できる、非常に強力な分析ツールなのです。</p>
+
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>物語に共通して見られる6つの役割（送り手、受け手、客体、主体、補助者、反対者）の関係性をモデル化した理論を、グレマスの<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">行為項モデル</span></span>といいます。このモデルで『赤ずきんちゃん』を分析すると、主体は<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">赤ずきん</span></span>、反対者は<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">オオカミ</span></span>、補助者は<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">猟師</span></span>となります。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. 英雄の旅と単一神話</h2>
+            <h3 id="sec3_1">3.1. キャンベルの理論：あらゆる神話の原型</h3>
+            <p>神話学者のジョーゼフ・キャンベルは、世界中の神話や英雄譚を比較研究し、それらがすべて<b class="marker">たった一つの「原型」的な物語のバリエーション</b>に過ぎないと考えました。彼が「単一神話（モノミス）」または「英雄の旅」と呼んだこの構造は、基本的に以下の三部構成からなります。</p>
+            <div class="diagram">
+                <div class="box">① 出立 (Departure)</div>
+                <div class="arrow">→</div>
+                <div class="box">② イニシエーション (Initiation)</div>
+                <div class="arrow">→</div>
+                <div class="box">③ 帰還 (Return)</div>
+            </div>
+            <p>この理論は、映画『スター・ウォーズ』の監督ジョージ・ルーカスに絶大な影響を与えました。初期三部作は、まさにこの三部構成に沿って作られています。この「英雄の旅」は、現代のクリエイターにとって<b class="text-action">ストーリーテリングのバイブル</b>とも言える存在になっています。</p>
+
+            <h3 id="sec3_2">3.2. 「鯨の胎内」：スター・ウォーズと村上春樹をつなぐ鍵</h3>
+            <p>「英雄の旅」の中には、「鯨の胎内」という重要なモチーフが登場します。これは、英雄が一度未知なるもの（＝鯨）に呑み込まれ、<b class="text-problem">象徴的な「死と再生」を経験する</b>という段階です。旧約聖書の「ヨナと鯨」の話がその典型例です。</p>
+            <div class="card">
+                <div class="card-header">「鯨の胎内」の応用例</div>
+                <ul>
+                    <li><b>スター・ウォーズ：</b> 吹雪で凍死しかけたルークを、ハン・ソロがトーントーン（異星の動物）の腹を裂いてその中に入れ、命を救う場面。これはルークの「再生」を象徴しています。</li>
+                    <li><b>村上春樹『羊をめぐる冒険』：</b> 主人公が滞在する「ドルフィン・ホテル」は、メルヴィルの小説『白鯨』から名付けられています。作中で主人公は「いっそ鯨ホテルにすればよかったのに」と語り、このモチーフを意識していることを示唆します。</li>
+                </ul>
+            </div>
+            <p>物語の構造を知ることで、一見無関係に見える作品同士の間に、深い繋がりを発見することができます。村上春樹は、探偵小説の「行為項モデル」と神話の「単一神話」という<b class="text-confirm">二つの物語論を自覚的に実装</b>することで、独自の文学世界を築き上げたのです。</p>
+            
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>世界中の神話に共通する構造をジョーゼフ・キャンベルは<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">単一神話（モノミス）</span></span>と呼びました。この構造は「出立」「イニシエーション」「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">帰還</span></span>」の三部構成からなります。英雄が象徴的な死と再生を経験する段階は、旧約聖書の逸話から「<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">鯨の胎内</span></span>」と呼ばれます。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. 物語論の応用①：情報リテラシーの武器として</h2>
+            <h3 id="sec4_1">4.1. 「噂」や「流言」の生成メカニズム</h3>
+            <p>物語論は、文学や映画の分析だけでなく、現代社会が直面する<b class="text-problem">「フェイクニュース」や「陰謀論」を読み解く</b>ための強力な武器にもなります。なぜなら、多くの「噂」や「流言」は、情報としての体裁を取りながら、実は非常に古典的な「物語の論理」で構成されているからです。</p>
+            <p>これらの偽情報は、以下の３つの要素が組み合わさることで、強力な説得力を持って拡散していきます。</p>
+            <div class="diagram">
+                <div style="text-align: center;">
+                    <div class="box" style="background-color: #fdf5f5; border-color: var(--accent-color);">① 社会的な不安</div>
+                    <div class="arrow">↓</div>
+                    <div class="box" style="background-color: #f5f2fa; border-color: var(--primary-color);">② 「物語」の論理<br>（例：共同体の外から来た存在が社会を破壊する）</div>
+                    <div class="arrow">↓</div>
+                    <div class="box" style="background-color: #fdf5f5; border-color: var(--accent-color);">③ 差別や偏見を実装</div>
+                </div>
+            </div>
+            <p>つまり、社会に漠然とした不安が広がっているとき、<b class="marker">「外部から来た敵が災厄をもたらしている」という分かりやすい物語</b>が提示されると、人々はそれを信じやすくなります。そして、その「敵」役として、既存の差別や偏見の対象となっている集団が当てはめられるのです。</p>
+
+            <h3 id="sec4_2">4.2. 事例：関東大震災とオルレアンのうわさ</h3>
+            <p>このメカニズムは、歴史上何度も繰り返されてきました。</p>
+            <ul>
+                <li><b>関東大震災（1923年）：</b> 震災後の混乱という「社会不安」の中、「朝鮮人が井戸に毒を入れた」という「物語」が広まり、既存の「偏見」と結びついて、多くの朝鮮人が虐殺されるという悲劇を生みました。このパターンは、14世紀ヨーロッパのペスト流行時に「ユダヤ人が井戸に毒を入れた」という噂でユダヤ人が迫害された歴史とも共通しています。</li>
+                <li><b>オルレアンのうわさ（1969年）：</b> フランスの地方都市で「ユダヤ人が経営するブティックの試着室で女性が誘拐されている」という噂が広まりました。これは、都市化による「社会不安」と「女性誘拐」という物語の型、そして「ユダヤ人への偏見」が結びついた典型例です。</li>
+            </ul>
+            <p>物語の構造を理解することは、こうした<b class="text-action">危険なデマに騙されず、批判的に情報を受け止めるための「情報リテラシー」の基礎</b>となるのです。</p>
+            
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>関東大震災時に広まった「朝鮮人が井戸に毒を入れた」という言説は<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">流言</span></span>の一種です。これは、社会不安、物語の論理、<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">偏見（差別）</span></span>という3つの要素が結びついて生まれます。このような偽情報を見抜く能力を<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">情報リテラシー</span></span>といいます。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. 物語論の応用②：自己を語るための安全弁</h2>
+            <h3 id="sec5_1">5.1. ユング心理学と物語：無意識を統治する方法</h3>
+            <p>物語論の最後の応用は、私たち自身の「こころ」と向き合うためのツールとしての役割です。精神科医のカール・ユングは、人間のこころには個人の経験を超えた、人類共通の無意識の層<b class="text-action">「集合的無意識」</b>が存在し、そこには「元型（アーキタイプ）」と呼ばれる神話的なイメージのパターンが眠っていると考えました。</p>
+            <p>夢や妄想、あるいは未完成の物語は、この無意識の領域から湧き出てくる、まだ整理されていない断片的なイメージです。これらがコントロールを失うと、精神的な混乱につながる可能性があります。ユングは、<b class="marker">これらの内なるカオスを「物語の文法」によって統治し、コントロールする方法</b>を模索しました。</p>
+            <div class="card">
+                <div class="card-header">ユングが実践した「統治法」</div>
+                <ul>
+                    <li><b>曼荼羅の描画：</b> 心理的に不安定だった時期、ユングは毎日ノートに円形の模様（曼荼羅）を描きました。これは、カオス的な心象を「円」という秩序ある形に収めることで、自己の状態を客観視し、コントロールする試みでした。</li>
+                    <li><b>ミニチュアの街作り：</b> 湖畔で石を拾い集め、小さな村や城のミニチュアを作る遊びに没頭しました。これもまた、内なる世界を具体的な形にすることで、それを安全に外部化し、飼い慣らす行為でした。</li>
+                </ul>
+            </div>
+
+            <h3 id="sec5_2">5.2. 箱庭療法に学ぶ「三重の守り」</h3>
+            <p>ユングの考え方は、のちに「箱庭療法」という心理療法に発展しました。これは、クライエントが砂の入った箱の中にミニチュアの玩具を自由に配置し、自身の内面世界を表現する手法です。ここには、暴走しがちな物語を安全に語るための、巧みな「安全装置」が備わっています。</p>
+            <ol>
+                <li><b>第一の守り：</b>カウンセリングルームという限られた時間・空間。</li>
+                <li><b>第二の守り：</b>箱庭の「枠」という物理的・心理的な境界。</li>
+                <li><b>第三の守り：</b>クライエントが作る世界を、カウンセラーが「物語の文法」に沿って解釈し、言語化してあげること。</li>
+            </ol>
+            <p>この<b class="text-confirm">「三重の守り」</b>があるからこそ、人は安心して自らの内なる物語を語り、それをコントロールできるようになるのです。村上春樹の小説が、しばしば高い「壁」に囲まれた街を舞台にするのは、彼が自らの創作活動を、この箱庭療法のような自己治癒的なプロセスとして捉えているからなのかもしれません。</p>
+
+            <div class="question-box">
+                <h4>問題5.1</h4>
+                <p>ユングは、個人の経験を超えた人類共通の無意識層を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">集合的無意識</span></span>と呼びました。内なるイメージを砂の入った箱の中に表現する心理療法を<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">箱庭療法</span></span>といいます。この療法では、①カウンセリングルーム、②箱庭の枠、③<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">物語の文法</span></span>という「三重の守り」が、クライエントの安全を確保します。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap6">6. 最後の問い：AIと物語</h2>
+            <p>生成AIが驚異的なスピードで進化し、プロ並みの物語を創り出せるようになりつつある今、私たちは一つの根源的な問いに直面しています。それは、<b class="text-problem">「人は自ら『物語ること』を放棄してしまってよいのか？」</b>という問いです。</p>
+            <p>物語を創るという行為は、単なる娯楽や創作活動ではありません。これまで見てきたように、それは情報を批判的に吟味する力であり、自らの内面世界と向き合い、それを秩序立てるための重要な営みです。私たちの思考や感情が詰まった「ブラックボックス」を、AIというもう一つの、そして中身の見えない「ブラックボックス」に委ねてしまうことは、一体何を意味するのでしょうか。</p>
+            <div class="card">
+                <div class="card-header">村上春樹の警鐘</div>
+                <p>村上春樹は、オウム真理教の信者たちが、自ら物語ることを放棄し、麻原彰晃という教祖に「自我を譲り渡し」た結果、彼の「影」をも受け取ってしまったと分析しました。</p>
+            </div>
+            <p>生成AIに物語るという自我を委ねたとき、私たちはAIの語る物語とともに、<b class="marker">いったいどんな「影」を受け取ることになるのでしょうか？</b> 物語論を学ぶことは、このテクノロジー時代の新しい問いに答えるための、重要な羅針盤を与えてくれるはずです。</p>
+            <div class="page-number">6</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page14.html" class="nav-button">← 前の講座へ</a>
+            <span>&nbsp;</span>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、ZEN大学（仮称・設置認可申請中）が提供する講義「人文社会入門 第15回 物語論はどう役に立つのか」（講師：大塚 英志 先生）を元に作成されました。</li>
+                <li>ジョーゼフ・キャンベル (著), 倉田 真木 (翻訳)『千の顔をもつ英雄』(ハヤカワ・ノンフィクション文庫)</li>
+                <li>ウラジーミル・プロップ (著), 北岡 誠司 (翻訳)『昔話の形態学』(水声社)</li>
+                <li>エドガール・モラン (著), 杉山 光信 (翻訳)『オルレアンのうわさ―女性誘拐のうわさとその神話作用』(みすず書房)</li>
+                <li>河合 隼雄 (編集)『箱庭療法入門』(誠信書房)</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

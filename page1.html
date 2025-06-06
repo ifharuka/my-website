@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第1回 人文学・社会科学の重要性</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 紺色 */
+            --secondary-color: #4a90e2; /* 青色 */
+            --accent-color: #e94e77; /* 赤系アクセント */
+            --background-color: #f8f9fa; /* 薄いグレー */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f2f8ff;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fff8f8;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .info-graphic-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fdfdfd;
+        }
+
+        .info-graphic-box {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            background-color: var(--action-blue);
+            width: 45%;
+        }
+
+        .info-graphic-box h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        
+        .info-graphic-box ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        
+        .info-graphic-box li {
+            margin-bottom: 5px;
+        }
+        
+        .arrow {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .example-box {
+            background-color: var(--confirm-green);
+            border: 1px solid #28a745;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+        
+        .example-box h3 {
+            color: #155724;
+            border-bottom-color: #28a745;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .info-graphic-container {
+                flex-direction: column;
+            }
+            .info-graphic-box {
+                width: 90%;
+                margin-bottom: 10px;
+            }
+            .arrow {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+        }
+
+                .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第1回 人文学・社会科学の重要性</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 複雑化する現代社会と学問の役割</a>
+                    <ul>
+                        <li><a href="#sec1-1">1.1 21世紀という時代：複雑で先の読めない社会</a></li>
+                        <li><a href="#sec1-2">1.2 近代社会と現代社会の特徴：なぜ複雑なのか？</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. 学問とは何か？ - 近代科学の成立</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 学問の定義：対象と方法</a></li>
+                        <li><a href="#sec2-2">2.2 近代化と学問分類の変化</a></li>
+                        <li><a href="#sec2-3">2.3 近代科学の特徴：実験・観察・批判</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. 人文・社会科学の特徴と困難</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 自然科学との違い：再現性と客観性</a></li>
+                        <li><a href="#sec3-2">3.2 価値や解釈という問題</a></li>
+                        <li><a href="#sec3-3">3.3 人文・社会科学の代表的な学問分野</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. なぜ様々な学問を学ぶのか？</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 学問が提示する「ものの見方」</a></li>
+                        <li><a href="#sec4-2">4.2 「見方」を組み合わせて複雑な社会に対処する</a></li>
+                        <li><a href="#sec4-3">4.3 新たな知を生み出す</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. 学問は仕事や人生に役立つのか？</a>
+                    <ul>
+                        <li><a href="#sec5-1">5.1 問題発見・提起の力が身につく</a></li>
+                        <li><a href="#sec5-2">5.2 リサーチ力や分析力が身につく</a></li>
+                        <li><a href="#sec5-3">5.3 知ること自体の楽しさ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 複雑化する現代社会と学問の役割</h2>
+            <p>「人文社会科学って、なんだか難しそう…」「勉強して何の役に立つの？」そう思う人も多いかもしれません。この講義では、そんな疑問に答えながら、人文社会科学の世界を探求していきます。まずは、私たちが生きる「現代社会」がどんな時代なのか、そこから考えてみましょう。</p>
+
+            <h3 id="sec1-1">1.1 21世紀という時代：複雑で先の読めない社会</h3>
+            <div class="summary">
+                <p>現代は、<strong class="marker">「複雑で流動的で、先の読めない時代」</strong>だと言われます。例えば、こんな問いにすぐ答えられるでしょうか？</p>
+                <ul>
+                    <li>コンビニで買うおにぎりは、どこで、誰が、どうやって作っている？</li>
+                    <li>今ある仕事のうち、50年後も残っている仕事はどれくらい？</li>
+                    <li>10年後、自分は何をしているか想像できる？</li>
+                </ul>
+                <p>一つ一つのモノやサービスがグローバルな繋がりの中で作られ、テクノロジーは日々進化し、私たちの働き方や生き方も常に変化しています。このような時代だからこそ、社会や人間について深く考える<strong class="text-action">「人文社会科学」</strong>が重要なのです。</p>
+            </div>
+
+            <div class="question-box">
+                <h4>問題1.1</h4>
+                <p>現代社会は、<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">複雑</span></span>で<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">流動的</span></span>で、先の読めない時代と表現される。これは、社会の範囲が広がり、テクノロジーが急速に発展し、人々の生活様式が多様化したことに起因する。</p>
+            </div>
+            
+            <h3 id="sec1-2">1.2 近代社会と現代社会の特徴：なぜ複雑なのか？</h3>
+            <div class="card">
+                <div class="card-header">ポイント：近代化が社会の複雑さを生み出した</div>
+                <p>現代社会の複雑さは、<strong>「近代化」</strong>がもたらした3つの大きな変化にルーツがあります。そして、現代ではその変化がさらに加速しています。</p>
+            </div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>近代社会の特徴</th>
+                            <th>現代社会での加速</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>社会範囲の拡大</strong><br>交通網や航路が整備され、人・モノの流れが活発になった。</td>
+                            <td><strong>インターネット</strong>の登場により、世界中の人や情報が瞬時に繋がり、社会はより広く緊密になった。</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>テクノロジーの発展</strong><br>蒸気機関などのイノベーションが多発し、人々の生活に大きな影響を与えた。</td>
+                            <td><strong>AI技術</strong>をはじめとする急速な技術進歩が、生活や仕事のあり方を根本から変えようとしている。</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>産業化の進展</strong><br>農業中心社会から工業社会へ移行し、人々の生活拠点や職業の選択肢が広がった。</td>
+                            <td>グローバルな経済活動の中で、<strong>持続可能な経済活動（SDGsなど）</strong>が重要なテーマになっている。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="example-box">
+                <h3>身近な例で考えてみよう！「スマホゲームの裏側」</h3>
+                <p>キミが毎日遊んでいるスマホゲーム、これも人文社会科学の視点で見ると面白いぞ！</p>
+                <ul>
+                    <li><strong>経済学：</strong>どうして基本プレイは無料なのに、会社は儲かるんだろう？（課金モデルの分析）</li>
+                    <li><strong>心理学：</strong>「あと1回だけ…」とガチャを引いてしまうのはなぜ？（行動心理学）</li>
+                    <li><strong>社会学：</strong>ゲーム内の仲間（ギルド）との繋がりって、現実の友達とどう違う？（コミュニティ論）</li>
+                    <li><strong>法学：</strong>ガチャの確率表示って法律で決まってるの？（消費者保護法）</li>
+                </ul>
+                <p>ほら、一つのゲームをとっても、いろんな学問の「見方」で分析できるんだ。こうやって物事を多角的に捉える力が、これからの時代には絶対必要になる！</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap2">2. 学問とは何か？ - 近代科学の成立</h2>
+            <p>社会が複雑になるにつれて、それを理解するための「学問」も形を変えてきました。そもそも「学問」や「科学」とは何なのでしょうか？その特徴と歴史を紐解いていきましょう。</p>
+
+            <h3 id="sec2-1">2.1 学問の定義：対象と方法</h3>
+            <div class="summary">
+                <p>学問とは、<strong>「特定の対象と方法をもった知の生産活動」</strong>と定義できます。つまり、「何を（対象）」、「どのように（方法）」研究するのかが、それぞれの学問分野を特徴づけているのです。</p>
+                <ul>
+                    <li><strong>物理学</strong>は、<span class="text-action">物理現象（対象）</span>を<span class="text-confirm">数式でモデル化する（方法）</span>。</li>
+                    <li><strong>心理学</strong>は、<span class="text-action">人間の行動特性（対象）</span>を<span class="text-confirm">実験によって明らかにする（方法）</span>。</li>
+                    <li><strong>文学</strong>は、<span class="text-action">テクスト（対象）</span>を<span class="text-confirm">解釈する（方法）</span>。</li>
+                </ul>
+                <p>このように、各学問は独自の「武器（方法）」を持って、それぞれの「敵（対象）」に挑んでいるイメージです。</p>
+            </div>
+
+            <h3 id="sec2-2">2.2 近代化と学問分類の変化</h3>
+            <div class="card">
+                <div class="card-header">ポイント：社会の変化が学問の地図を書き換えた</div>
+                <p>近代化によって社会が大きく変わると、学問の分類も変化しました。かつては神学や哲学が中心でしたが、近代以降、自然や社会を科学的に分析する新しい学問が次々と誕生したのです。</p>
+            </div>
+
+            <div class="info-graphic-container">
+                <div class="info-graphic-box">
+                    <h4>近代以前</h4>
+                    <ul>
+                        <li>哲学／神学</li>
+                        <li>法学／医学</li>
+                        <li>論理・文法・修辞<br>(リベラルアーツの一部)</li>
+                        <li>数学・幾何・音楽・天文<br>(リベラルアーツの一部)</li>
+                    </ul>
+                </div>
+                <div class="arrow">→</div>
+                <div class="info-graphic-box" style="background-color: var(--confirm-green); border-color: #28a745;">
+                    <h4>近代以降</h4>
+                    <ul>
+                        <li><strong>人文学</strong> (人間を扱う)</li>
+                        <li><strong>自然科学</strong> (自然を扱う)</li>
+                        <li><strong>社会科学</strong> (社会を扱う)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 id="sec2-3">2.3 近代科学の特徴：実験・観察・批判</h3>
+            <p>近代以降の学問、特に<strong class="text-action">自然科学</strong>の成功は、他の学問分野にも大きな影響を与えました。その特徴は、論理だけで真理を追求した近代以前の学問とは大きく異なります。</p>
+            
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>近代科学の大きな特徴は、<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">経験的実証</span></span>に基づいて一般法則を導き出すことである。これは、実験や観察によって<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">データ</span></span>を取得し、誰もが反論可能な形で議論を行い、<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">先行研究</span></span>を批判的に検討することで、学問全体を発展させていくという考え方に基づいている。</p>
+            </div>
+            
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>近代以前の学問の特徴</th>
+                            <th>近代以降の学問（科学）の特徴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><strong>論理による普遍的真理の追求</strong><br>・説得的な論証や矛盾のない説明が重要。</td>
+                            <td><strong>経験的実証による一般法則の導出</strong><br>・実験と観察によるデータ取得が基本。</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>古典の権威</strong><br>・アリストテレスやプラトンなどの古典が絶対的な基準とされた。</td>
+                            <td><strong>批判と発展</strong><br>・反論可能な議論を行い、先行研究を批判することで学問が発展する。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>この「<strong>実験・観察・批判</strong>」という近代科学のスタイルが、社会や人間を対象とする学問にも取り入れられ、社会科学が発展していくことになります。</p>
+            <div class="page-number">2</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap3">3. 人文・社会科学の特徴と困難</h2>
+            <p>自然科学の方法は非常に強力でしたが、それをそのまま人間や社会に当てはめるのには、いくつかの困難が伴いました。ここが、人文・社会科学の面白さでもあり、難しさでもあります。</p>
+
+            <h3 id="sec3-1">3.1 自然科学との違い：再現性と客観性</h3>
+            <p>「人間や社会のことは、実験と観察だけで理解できるだろうか？」この問いが、人文・社会科学が直面する大きな課題です。</p>
+            
+            <div class="info-graphic-container">
+                <div class="info-graphic-box">
+                    <h4>自然科学</h4>
+                    <p>自然界の出来事は実験環境を整えやすく、<strong class="text-confirm">再現性</strong>が高い。再現可能な実験を繰り返すことで、一般法則を発見しやすい。</p>
+                </div>
+                <div class="info-graphic-box" style="background-color: #fff8f8; border-color: var(--accent-color);">
+                    <h4>人文・社会科学</h4>
+                    <p>個人の人生や歴史的な大事件は<strong class="text-problem">一回きり</strong>で実験できない。また、意思を持つ人間を完全にコントロールして実験することは不可能に近い。</p>
+                </div>
+            </div>
+
+            <h3 id="sec3-2">3.2 価値や解釈という問題</h3>
+            <div class="card">
+                <div class="card-header">ポイント：研究者自身も「人間」であるという事実</div>
+                <p>人文・社会科学では、研究対象が人間や社会であるため、研究者の<strong class="marker">「価値観」や「解釈」</strong>がどうしても入り込みやすくなります。完全に客観的であることは極めて難しいのです。</p>
+            </div>
+            <ul>
+                <li><strong>書き手の価値観：</strong>ある歴史的事件を記述する際、書き手がどの立場に立つかによって、その描き方は大きく変わってしまいます。</li>
+                <li><strong>観察者の限界：</strong>社会の中にいる観察者（研究者）が、その社会から完全に独立して、純粋に客観的な視点を持つことはできません。</li>
+            </ul>
+            <p>この「価値や解釈」という問題をどう扱うかが、人文・社会科学の各分野で常に問われ続ける重要なテーマとなっています。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>人文・社会科学が自然科学と異なる大きな点は、研究対象の<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">再現性</span></span>が低いこと、そして研究者の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">価値観</span></span>や<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">解釈</span></span>が記述に影響を与えやすい点である。</p>
+            </div>
+
+            <h3 id="sec3-3">3.3 人文・社会科学の代表的な学問分野</h3>
+            <p>こうした特徴や困難を抱えながらも、人文・社会科学は人間と社会を理解するために、多様な分野に分かれて発展してきました。以下に代表的な学問を挙げます。</p>
+            
+             <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>人文学</th>
+                            <th>社会科学</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>哲学、文学、歴史学、言語学、芸術学、文化人類学</td>
+                            <td>政治学、経済学、社会学、法学、経営学、心理学</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>これらの学問は、それぞれ異なる「ものの見方」や「方法」で、人間と社会という壮大なテーマにアプローチしています。次章では、なぜこれらの多様な学問を学ぶ意味があるのかを考えていきましょう。</p>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. なぜ様々な学問を学ぶのか？</h2>
+            <p>「心理学だけやりたいのに、なんで他の科目もやらなきゃいけないの？」そう思うかもしれません。しかし、一つの完璧な視点など存在しないからこそ、様々な学問を学ぶことに大きな意味があるのです。</p>
+
+            <h3 id="sec4-1">4.1 学問が提示する「ものの見方」</h3>
+            <div class="summary">
+                <p>それぞれの学問は、世界を捉えるためのユニークな<strong class="text-action">「ものの見方（視点）」</strong>を私たちに提供してくれます。</p>
+                <div class="info-graphic-container">
+                    <div class="info-graphic-box">
+                        <h4>人文学がくれる視点</h4>
+                        <ul>
+                            <li>人間が作る文化の多様性や共通性を理解できる。</li>
+                            <li>人間が世界をどう認識し、関わっているかを知ることができる。</li>
+                        </ul>
+                    </div>
+                    <div class="info-graphic-box">
+                        <h4>社会科学がくれる視点</h4>
+                        <ul>
+                            <li>現代社会のメカニズム（仕組み）を理解できる。</li>
+                            <li>そもそも人間が社会を形成するとはどういうことかを知ることができる。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h3 id="sec4-2">4.2 「見方」を組み合わせて複雑な社会に対処する</h3>
+            <div class="card">
+                <div class="card-header">ポイント：専門化の功罪と総合的視点の必要性</div>
+                <p>近代学問は、複雑な社会に対応するために<strong>専門化</strong>を進めてきました。しかし、専門化が進みすぎた結果、学問間の交流が少なくなり、視野が狭くなるという弊害も生まれました。</p>
+                <p>現代のように複雑化した社会の問題に対処するためには、一つの学問分野の視点だけでは不十分です。複数の学問の「見方」を組み合わせ、社会を<strong class="marker">多角的かつ総合的な視点</strong>から知る必要があります。</p>
+            </div>
+            
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>複雑化した現代社会の問題解決には、一つの専門分野だけでなく、複数の学問の「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">ものの見方</span></span>」を組み合わせ、<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">多角的</span></span>かつ<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">総合的</span></span>な視点から物事を捉えることが求められる。</p>
+            </div>
+
+            <h3 id="sec4-3">4.3 新たな知を生み出す</h3>
+            <p>21世紀の私たちは、これまでの人類が経験したことのない新しい問題に直面しています。</p>
+            <ul>
+                <li>環境問題</li>
+                <li>構造的な格差問題</li>
+                <li>アイデンティティやライフスタイルの多様性</li>
+                <li>テクノロジーの急速な進歩と倫理</li>
+                <li>戦争や紛争</li>
+                <li>民主主義の危機</li>
+            </ul>
+            <p>これらの新しい問題に対処するためには、既存の学問の「見方」をただ使うだけでなく、それらを<strong class="text-action">創造的に組み合わせて、新しい「見方」や「知」を生み出す</strong>ことが求められているのです。これこそが、大学で多様な学問を学ぶ最大の意義と言えるでしょう。</p>
+            <div class="page-number">4</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. 学問は仕事や人生に役立つのか？</h2>
+            <p>とはいえ、「結局、学問は仕事に役立つの？」という疑問は残るでしょう。結論から言えば、直接的にも間接的にも大いに役立ちます。そして、それ以上に大切な価値も秘めているのです。</p>
+
+            <h3 id="sec5-1">5.1 問題発見・提起の力が身につく</h3>
+            <div class="card">
+                <div class="card-header">ポイント：「何を問題とすべきか」を見抜く力</div>
+                <p>仕事で新しいプロジェクトを立ち上げる時、最も重要なのは<strong class="marker">「そもそも何が問題なのか」「何を問題とすべきか」を定義する</strong>ことです。この力は、多様な学問に触れることで確実に身につきます。</p>
+                <ul>
+                    <li><strong>問題発見力：</strong>様々な「ものの見方」を獲得することで、これまで見過ごされてきた問題点に気づけるようになります。</li>
+                    <li><strong>問題提起力：</strong>「なぜこれが問題なのか」を、確立された「ものの見方」に基づいて説得的に議論し、他者を巻き込むことができるようになります。</li>
+                </ul>
+            </div>
+
+            <h3 id="sec5-2">5.2 リサーチ力や分析力が身につく</h3>
+            <p>問題が見つかっても、それに適切にアプローチできなければ意味がありません。学問の世界は、リサーチやデータ分析の方法に関して、常に最先端を走る「トップランナー」です。</p>
+            <ul>
+                <li><strong>リサーチ力：</strong>課題に対して、どのような情報を、どこから、どのように集めるべきかを計画・実行する力がつきます。</li>
+                <li><strong>分析力：</strong>集めた情報やデータを客観的に分析し、そこから意味のある結論を導き出す訓練ができます。</li>
+            </ul>
+            <p>自分で研究（レポート作成や卒業論文など）に取り組む過程で、これらのスキルは自然と身につき、社会のあらゆる場面で通用する強力な武器となります。</p>
+
+            <div class="question-box">
+                <h4>問題5.1</h4>
+                <p>学問を通じて得られる実用的なスキルとして、問題を発見し提起する力や、課題に対して調査を行い、その結果を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">分析</span></span>する力が挙げられる。これらは、仕事や社会生活において極めて重要な能力である。</p>
+            </div>
+
+            <h3 id="sec5-3">5.3 知ること自体の楽しさ</h3>
+            <div class="summary">
+                <p>ここまで実用的な側面を強調してきましたが、最後に伝えたいのは<strong class="text-action">「知ることは、単純に楽しい！」</strong>ということです。</p>
+                <p>役に立つかどうかを抜きにして、知的好奇心を満たす喜びは、人生を豊かにしてくれます。例えば、今までモヤモヤと考えていたことが、ある学問の概念を知ることでスッキリと言語化できた時の快感。あるいは、歴史小説や映画を、学んだ知識を使ってより深く味わえるようになった時の感動。</p>
+                <p>学問は、役に立てようと思えばいくらでも役に立てることができます。しかし、それ以上に、知ることそれ自体が「楽しい」と思える日が、きっと来るはずです。この講義が、そのきっかけになることを願っています。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+
+        <div class="button-container">
+    <!-- page1.html に置く場合は次へ進むボタンだけ表示 -->
+    <a href="page2.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+</body>
+</html>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、N-gaku osobowości KADOKAWA Dwight Gakuen が提供する講義「人文社会入門 第1回 人文学・社会科学の重要性」（講師：谷口 祐人 先生）を元に作成されました。</li>
+                <li><a href="https://www.nnn.ed.nico/" target="_blank" rel="noopener noreferrer">N高等学校・S高等学校</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

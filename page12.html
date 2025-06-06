@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第12回 文学的な捉え方</title>
+    <style>
+        :root {
+            --primary-color: #4b0082; /* 濃い紫 */
+            --secondary-color: #8a2be2; /* 青紫 */
+            --accent-color: #ff69b4; /* ホットピンク */
+            --background-color: #f8f7fa; /* 薄いラベンダー */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .lecturer {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f7f5fc;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fff7fb;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .two-column {
+            display: flex;
+            gap: 20px;
+        }
+
+        .two-column > div {
+            flex: 1;
+        }
+
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .two-column {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第12回 文学的な捉え方</h1>
+        <p class="lecturer">講師：プラダン・ゴウランガ・チャラン 先生</p>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 「文学」とは何か？ ～定義の難しさ～</a></li>
+                <li><a href="#chap2">2. 夏目漱石が考えた「文学」 ～普遍性への問い～</a></li>
+                <li><a href="#chap3">3. 歴史の中の「作者」と「作品」 ～社会を映す鏡～</a></li>
+                <li><a href="#chap4">4. 人文科学の危機 ～「役に立つ」とは何か～</a></li>
+                <li><a href="#chap5">5. 文学は何の役に立つのか ～世界を再編する力～</a></li>
+                <li><a href="#chap6">6. まとめ</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 「文学」とは何か？ ～定義の難しさ～</h2>
+            <p>「この本は文学じゃない」「その小説は良くない」。誰かからそう言われた経験はありませんか？ そもそも「文学」とは何でしょうか。小説、詩、エッセイなどを思い浮かべますが、それで十分なのでしょうか。</p>
+            <p>文学の定義は、実は非常に<b class="marker">主観的で、時代や文化によって大きく変化</b>します。例えば、現代の私たちにとって「漢詩」は文学でしょうか？ 江戸時代の人にとって「小説」は文学だったのでしょうか？ このように、文学を一つの言葉で定義するのは非常に困難です。</p>
+
+            <div class="card">
+                <div class="card-header">文学を定義する多様な切り口</div>
+                <ul>
+                    <li><b class="text-problem">ファクトかフィクションか？</b>：文学は想像（イマジネーション）の産物でしょうか？でも、『源氏物語』のようなフィクションにも、当時の社会というファクト（事実）が色濃く反映されています。</li>
+                    <li><b class="text-action">言語の使い方？</b>：読者の感情を動かす「文学的な」言葉を使ったものが文学でしょうか？しかし、ラップソングのように、あえて日常的な言葉で心を揺さぶる作品もあります。</li>
+                    <li><b class="text-confirm">実用性はあるか？</b>：文学は理系分野と違って応用性がないと言われがちです。しかし、小説『白鯨』からは捕鯨の具体的な方法が学べますし、SFが実際の科学技術開発のヒントになることもあります。</li>
+                    <li><b class="text-problem">「良い文学」とは？</b>：芥川賞などの文学賞を受賞した作品は「良い文学」なのでしょうか。それは選考委員という特定の個人の価値観が反映されたものであり、絶対的な基準ではありません。</li>
+                </ul>
+            </div>
+            
+            <p>このように、文学を定義しようとすると、様々な問いが生まれます。固定された定義は難しく、あらゆる基準は単純化されたものに過ぎないのかもしれません。この難しさこそが、文学の奥深さと言えるでしょう。</p>
+
+            <div class="question-box">
+                <h4>問題1.1</h4>
+                <p>「文学」の定義は極めて<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">主観的</span></span>であり、時代や<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">空間</span></span>（文化・地理）によってその理解は異なります。フィクションの中にも<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">ファクト</span></span>（事実）が含まれることがあり、両者を明確に分けることは困難です。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. 夏目漱石が考えた「文学」 ～普遍性への問い～</h2>
+            <p>近代日本文学を代表する夏目漱石もまた、「文学とは何か」という問いに生涯向き合った一人でした。彼は漢文や国文に精通し、大学で英文学を専攻しましたが、それでもなお「文学」の本質を掴むのに苦心したのです。</p>
+            <p>特に漱石を悩ませたのは、<b class="marker">東アジアの文学と西洋文学の違い</b>でした。彼は、日本や中国の文学しか知らなかった頃、「文学」はどこでも同じようなものだと考えていました。しかし、西洋文学に触れたことで、その考えは根底から覆されます。</p>
+
+            <div class="card">
+                <div class="card-header">漱石の苦悩と『文学論』</div>
+                <p>漱石が英文学を学んでいた当時、日本には「物語」や「随筆」「俳句」はあっても、西欧的な意味での「小説（Novel）」というジャンルは存在しませんでした。開国後に入ってきた新しい文学の形に、漱石は衝撃を受け、その違いに深く悩まされたのです。この苦悩の末に生まれたのが、彼の大著『文学論』（1907年）です。</p>
+            </div>
+
+            <p>そして漱石は、ある結論に達します。それは<b class="text-action">「文学は普遍的なものではなく、あくまでローカルなものである」</b>という考え方です。なぜなら、あらゆる創作は特定の時代と空間の中で生まれるからです。</p>
+            <p>この考えに基づけば、例えばシェイクスピアが特定の時代（17世紀イギリス）で高く評価されたとしても、それが他の時代や文化で同じように評価されるとは限らない、ということになります。だからこそ漱石は、「シェイクスピアもいつか忘れられるかもしれない」とまで述べたのです。これは、<b class="text-problem">永遠に残る文学や作者は存在し得ない</b>という、非常にラディカルな視点でした。</p>
+
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>夏目漱石は、文学は普遍的ではなく、特定の時代と空間から生まれる<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">ローカル</span></span>なものであると考えました。彼は、日本文学と西洋文学の定義の違いに驚き、その思索を『<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">文学論</span></span>』にまとめました。この視点によれば、現在普遍的とされる「<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">小説</span></span>」というジャンルでさえ、特定の歴史的空間（17世紀フランス）から生まれたものに過ぎません。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. 歴史の中の「作者」と「作品」 ～社会を映す鏡～</h2>
+            <p>文学が「特定の時代空間から生まれる」ものであるならば、当然、作者も作品もその社会や文化と深く結びついています。つまり、<b class="marker">文学は社会現象を映す鏡であり、文化の一部</b>なのです。</p>
+            <p>作者は一人の個人であると同時に、社会の一員です。そのため、その思想や創作活動は、自らが生きる時代の社会現象から大きな影響を受けざるを得ません。</p>
+
+            <div class="two-column">
+                <div class="card">
+                    <div class="card-header">社会学や理系分野</div>
+                    <p>社会をできる限り<b class="text-confirm">客観的</b>に分析・表象しようと試みます。データや法則に基づき、普遍的な真理を探求することが目的です。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">文学</div>
+                    <p>作者個人の<b class="text-action">主観的なフィルター</b>を通して社会を描きます。比喩、夢、信念、時には作者の思い込みや勘違いといったフィルターが、作品に独自の色彩と深みを与えるのです。</p>
+                </div>
+            </div>
+
+            <p>この「主観的なフィルター」の好例が、映画『ゴジラ』（1954年）や『スター・ウォーズ』（1977年）です。</p>
+            <div class="card">
+                <div class="card-header">事例：社会を映す作品たち</div>
+                <ul>
+                    <li><b>『ゴジラ』（1954年）</b>：この作品は、戦後日本の「第五福竜丸事件」という特定の歴史的状況から生まれました。核実験によって目覚めたゴジラは、人類の近視眼的な破壊性への恐怖と警告を象徴しています。ファンタジーというフィルターを通して、当時の社会不安が色濃く描かれています。</li>
+                    <li><b>『スター・ウォーズ』（1977年）</b>：ジョージ・ルーカスは、ベトナム戦争やニクソン大統領のウォーターゲート事件など、当時のアメリカ社会が抱える問題を反映させてこの壮大な物語を創り上げました。帝国軍は、巨大な権力（アメリカ政府）のメタファーであり、SFというフィルターを通して現実社会を批判的に描いています。</li>
+                </ul>
+            </div>
+            <p>漱石の『吾輩は猫である』も同様に、猫という動物の視点（フィルター）を通して、明治末期の日本社会の状況や人間模様を風刺的に描いているのです。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>文学は<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">社会現象</span></span>を映し出す文化の一部です。他の学問分野が客観性を求めるのに対し、文学は作者の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">主観的</span></span>なフィルターを通して社会を描きます。『ゴジラ』や『スター・ウォーズ』におけるファンタジーやSFといった要素が、この<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">フィルター</span></span>に当たります。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. 人文科学の危機 ～「役に立つ」とは何か～</h2>
+            <p>「人文科学の危機」という言葉を聞いたことがありますか？ 近年、日本を含む世界中の高等教育機関で、文学や哲学といった人文科学の価値が問われています。</p>
+            <p>特に、科学（Science）、技術（Technology）、工学（Engineering）、数学（Mathematics）を指す<b class="marker">「STEM」分野</b>が重視される傾向が強まっています。即戦力となる技術や、すぐに経済的価値を生む学問が注目される一方で、人文科学への公的な助成金が削減されたり、学科自体が廃止されたりする事例も出てきています。</p>
+
+            <div class="card">
+                <div class="card-header">学問の2つの効用</div>
+                <p>文部科学省の文書によれば、学問には2つの効用があるとされています。</p>
+                <ol>
+                    <li><b class="text-action">生活上の便宜と利得の増大</b>：科学技術の発展のように、直接的に社会を豊かにし、生活を便利にする効用。STEM分野が主に担う役割です。</li>
+                    <li><b class="text-confirm">人間形成と社会の形成</b>：自分を作り上げ、確立していく「教養（Bildung）」としての効用。人間存在の複雑さや、答えのない問いを探求することを通じて、より良い人間と社会を形成する役割です。人文科学が主に担います。</li>
+                </ol>
+                <p>現代社会は、前者を重視するあまり、後者の重要性を見失いがちではないでしょうか。</p>
+            </div>
+            
+            <p>人文科学は、目先の現実や実用性を超えて、<b class="text-problem">「人間のあり方そのもの」を考える学問</b>です。思想、道徳、感情といった、簡単には答えの出ない問題を探し求めます。文学や哲学、芸術は、人間存在の複雑さを理解し、ひいては自分自身を深く理解するための学問なのです。</p>
+            <p>「役に立つか、立たないか」という単純な価値判断だけで、学問の価値を測ることはできません。人文科学が育む批判的思考力や多角的な視点は、複雑化する現代社会を生きていく上で、むしろ不可欠な能力と言えるでしょう。</p>
+
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>近年、実用性の高い<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">STEM</span></span>分野が注目され、人文科学への関心が薄れる「人文科学の危機」が世界的に議論されています。しかし、学問には生活を便利にする効用だけでなく、教養を通じて人間や社会を形成するという重要な<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">効用</span></span>もあります。人文科学は、目先の現実を超え、答えのない問いを探求することで、私たちに<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">自分自身</span></span>を理解する視点を与えてくれます。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap5">5. 文学は何の役に立つのか ～世界を再編する力～</h2>
+            <p>では、改めて「文学は何の役に立つのか」という問いに戻ってみましょう。文学を読むという行為は、私たちに何をもたらすのでしょうか。</p>
+            <p>まず、文学を読むことは、<b class="marker">作者という他者と、その人が生きる世界に出会うこと</b>を意味します。作者の希望、夢、知識は、その人一人のものではなく、彼が生きた社会と広く共有されたものです。私たちは読書を通じて、普段出会うことのない場面や人々に触れ、未知の世界を体験することができます。</p>
+            
+            <div class="card">
+                <div class="card-header">文学が持つ「打ち破る力」</div>
+                <p>文学は、読者を不慣れな状況へと導きます。そして、私たちが「当たり前」だと思い込んでいる社会的な規範や価値観を一度中断させ、<b class="text-problem">読者の自己中心主義を打ち破る</b>力を持っています。自分のコンフォートゾーンから外に出ることを強いられることで、私たちは新たな視点を獲得し、自分や世界を問い直すきっかけを得るのです。</p>
+            </div>
+
+            <p>村田沙耶香氏の『コンビニ人間』（2016年）は、この文学の力を象徴する作品です。社会から疎外された主人公が、コンビニ店員として「役に立つ」ことで、社会における自分の存在意義を見出そうとします。しかし物語は、その「社会的な役目」自体が社会を維持するための手段に過ぎないという矛盾を突きつけます。</p>
+            <p>この作品は、人間の内なる矛盾や両義性を描き出すことで、読者に「普通とは何か」「社会とは何か」を強く問いかけます。このように、<b class="text-action">文学は、私たちが生きる世界を新たな視点で「再編」する力</b>を持っているのです。</p>
+
+            <p>フィクションの読書が、他者の感情や意図を正確に見分ける能力（心の理論）を向上させるという科学的な研究結果もあります。しかし、そうした実用的な価値判断を超えて、文学は私たちに自分自身と、そして世界と出会う新たな機会を与えてくれる、かけがえのない営みと言えるでしょう。</p>
+            
+            <div class="question-box">
+                <h4>問題5.1</h4>
+                <p>文学を読む行為は、普段は注意しないことや人々へ注意を払うことを要求し、読者を自身の<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">コンフォートゾーン</span></span>から外に出るよう促します。これにより、読者が当たり前だと思っている社会的な規範を中断させ、自己中心主義を打ち破るきっかけを与えます。読書は、他者とその世界に出会うと同時に、<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">自分自身</span></span>との出会いの機会にもなります。作者は創作を通して、読者に新たな視点を提供し、読者自身の<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">世界再編</span></span>を呼びかけるのです。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap6">6. まとめ</h2>
+            <p>今回の講義では、「文学」を多角的に捉え、その定義の難しさから、社会における役割や私たち個人にとっての価値までを探求してきました。</p>
+
+            <div class="card">
+                <div class="card-header">今回の学びのポイント</div>
+                <ul>
+                    <li><b class="text-problem">文学の定義は難しい</b>：文学は極めて主観的で、時代や文化によって変化します。だからこそ、「文学的だ」「文学的ではない」と単純に片づけることはできません。</li>
+                    <li><b class="text-action">文学はローカルな現象</b>：夏目漱石が看破したように、文学は特定の時代空間の中で生まれるローカルなものです。絶対的・普遍的な文学は存在しないのかもしれません。</li>
+                    <li><b class="text-confirm">文学は社会を映し、社会を創る</b>：作者は社会の一員として、創作を通して社会現象を映し出します。そしてその作品は、読者に働きかけ、社会や個人の認識を再編する力を持っています。</li>
+                    <li><strong style="color:var(--primary-color);">文学は精神の健康を支える</strong>：「健康で文化的な最低限度の生活」における「健康」とは、身体的なものだけではありません。文学や芸術は、私たちの精神的な健康を保つために不可欠な教養です。</li>
+                </ul>
+            </div>
+            
+            <p>文学は、単なる娯楽ではありません。それは、作者からのメッセージが込められた、積極性に富んだ芸術であり学問です。目先の有用性だけでは測れない価値を持ち、私たちに答えの出ない問いへ挑戦させ、世界を新たな視点で見つめ直すきっかけを与えてくれます。</p>
+            <p>文学の読書は、自分だけではない他者との出会いの空間であり、世界を知ると共に、自分自身を、そして世界を再編していく行為でもあるのです。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>文学の定義が難しいからこそ、「文学的」「文学的ではない」という<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">単純な片づけ</span></span>はできません。漱石は、文学は普遍的ではなく<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">ローカル</span></span>な現象だと述べました。作者が創作を通して読者に働きかけ、社会<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">再編</span></span>を促すことも文学の重要な役割です。文学作品は単なる娯楽ではなく、私たちの<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">精神的な健康</span></span>を支える積極性に富んだ芸術・学問と言えます。</p>
+            </div>
+            <div class="page-number">6</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page11.html" class="nav-button">← 前の講座へ</a>
+            <a href="page13.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、ZEN大学（仮称・設置認可申請中）が提供する講義「人文社会入門 第12回 文学的な捉え方」（講師：プラダン・ゴウランガ・チャラン 先生）を元に作成されました。</li>
+                <li><a href="https://zen-univ.jp/" target="_blank" rel="noopener noreferrer">ZEN大学（仮称・設置認可申請中）</a></li>
+                <li>夏目漱石 (1907). 『文学論』. 大倉書店ほか.</li>
+                <li>村田沙耶香 (2016). 『コンビニ人間』. 文藝春秋.</li>
+                <li>Kidd, D. C., & Castano, E. (2013). Reading literary fiction improves theory of mind. *Science*, *342*(6156), 377-380.</li>
+                <li>文部科学省 (2011). 「学問の意義について（序）」. 科学技術・学術審議会 学術分科会.</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

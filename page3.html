@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第3回 社会学的な考え方——方法編</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 紺色 */
+            --secondary-color: #4a90e2; /* 青色 */
+            --accent-color: #e94e77; /* 赤系アクセント */
+            --background-color: #f8f9fa; /* 薄いグレー */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f2f8ff;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fff8f8;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第3回 社会学的な考え方——方法編</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 社会学的な「研究の仕方」とは何か？</a>
+                    <ul>
+                        <li><a href="#sec1-1">1.1 授業の目標：研究の「方法」を体感する</a></li>
+                        <li><a href="#sec1-2">1.2 問い：見えない社会をどう研究するか？</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. ウェーバーの方法：比較と関係性の理解</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：なぜ資本主義は西洋から始まったのか？</a></li>
+                        <li><a href="#sec2-2">2.2 方法：比較によって本質をあぶり出す</a></li>
+                        <li><a href="#sec2-3">2.3 社会観：社会は有意味な行為の積み重ね</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. デュルケムの方法：社会的事実を「もの」として扱う</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：自殺は個人的な問題なのか？</a></li>
+                        <li><a href="#sec3-2">3.2 方法：統計によって個人を超えた傾向を見る</a></li>
+                        <li><a href="#sec3-3">3.3 社会観：社会は個人を超えた存在である</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. マルクスの方法：メカニズムを批判する</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：資本主義社会の問題点は何か？</a></li>
+                        <li><a href="#sec4-2">4.2 方法：社会を分析し、変革する「批判」</a></li>
+                        <li><a href="#sec4-3">4.3 社会観：社会は下部構造と上部構造で形成される</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. ジンメルの方法：相互作用に注目する</a>
+                    <ul>
+                        <li><a href="#sec5-1">5.1 問い：近代社会の特徴は何か？</a></li>
+                        <li><a href="#sec5-2">5.2 方法：「よそ者」の視点で観察する</a></li>
+                        <li><a href="#sec5-3">5.3 社会観：社会は相互作用によって生じるプロセス</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap6">6. まとめ：社会の捉え方が、社会への迫り方を変える</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 社会学的な「研究の仕方」とは何か？</h2>
+            <p>前回は社会学の「理論（ものの見方）」を学びました。今回は、その理論をどのようにして導き出すのか、つまり「研究の仕方（方法）」に焦点を当てます。「社会」という目に見えないものを、社会学者たちはどのようにして科学的に分析してきたのでしょうか。</p>
+            
+            <h3 id="sec1-1">1.1 授業の目標：研究の「方法」を体感する</h3>
+            <p>この講義の目標は、社会学的な「研究の仕方」を体感することです。前回同様、以下の3点を目指します。</p>
+            <ul>
+                <li>社会学的研究の代表例に触れる。</li>
+                <li>社会学的研究の多様性を理解する。</li>
+                <li>社会学的視点の共通点について理解する。</li>
+            </ul>
+
+            <h3 id="sec1-2">1.2 問い：見えない社会をどう研究するか？</h3>
+            <div class="card">
+                <div class="card-header">社会学の「方法」の核心</div>
+                <p><strong class="marker">社会は目に見えない。</strong>だからこそ、社会を科学的に捉えるためには、何らかの「手続き」や「方法」が必要です。社会を見える化するために、社会学者たちは<strong class="text-action">比較、統計、観察、批判</strong>といった様々なアプローチを編み出してきました。</p>
+                <p>そして、社会学の面白いところは、<strong class="marker">「社会をどのようなものとしてみなすか（社会観）」と「研究の仕方（方法）」が密接に関連している</strong>点です。これから紹介する4人の巨人が、それぞれの社会観に基づいて、どのように独自の研究方法を確立していったのかを見ていきましょう。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap2">2. ウェーバーの方法：比較と関係性の理解</h2>
+            <p>「なぜ、現代につながる資本主義は西洋から始まったのだろうか？」この壮大な問いに、マックス・ウェーバーは「比較」という方法で挑みました。</p>
+
+            <h3 id="sec2-1">2.1 問い：なぜ資本主義は西洋から始まったのか？</h3>
+            <p>ウェーバーは、西洋社会と非西洋社会を分けるものは何か、という問いを立てました。そして、西洋文明では資本主義が発展し、非西洋文明では（当時は）未発展だったという事実に着目します。</p>
+            <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0;">
+                <div style="text-align: center;">
+                    <h4>西洋文明</h4>
+                    <p style="font-size: 2em; margin: 5px 0;">↓</p>
+                    <p style="border: 2px solid var(--confirm-green); padding: 10px; border-radius: 5px; background-color: #f0fff4;">資本主義が発展</p>
+                </div>
+                <div style="text-align: center;">
+                    <h4>非西洋文明</h4>
+                    <p style="font-size: 2em; margin: 5px 0;">↓</p>
+                    <p style="border: 2px solid var(--accent-color); padding: 10px; border-radius: 5px; background-color: #fff0f0;">資本主義が未発展</p>
+                </div>
+            </div>
+
+            <h3 id="sec2-2">2.2 方法：比較によって本質をあぶり出す</h3>
+            <p>ウェーバーはこの違いを生んだ要因を探るため、「比較」という方法を用いました。西洋社会にあって、非西洋社会になかったものは何かを特定しようとしたのです。</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>要素</th>
+                            <th>西洋社会</th>
+                            <th>非西洋社会</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>商業取引</td>
+                            <td style="text-align: center; color: var(--confirm-green); font-weight: bold;">✔ あり</td>
+                            <td style="text-align: center; color: var(--confirm-green); font-weight: bold;">✔ あり</td>
+                        </tr>
+                        <tr>
+                            <td>商業に関する法制度</td>
+                            <td style="text-align: center; color: var(--confirm-green); font-weight: bold;">✔ あり</td>
+                            <td style="text-align: center; color: var(--confirm-green); font-weight: bold;">✔ あり</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ビジネス拡大を正当化する倫理</strong></td>
+                            <td style="text-align: center; color: var(--confirm-green); font-weight: bold;">✔ あり</td>
+                            <td style="text-align: center; color: var(--accent-color); font-weight: bold;">✗ なし</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>比較の結果、商業活動や法制度はどちらの社会にも存在しましたが、<strong class="marker">「ビジネスの拡大を正当化する倫理」、すなわちプロテスタンティズムの倫理は、西洋社会に特有のものである</strong>ことを見出しました。</p>
+            
+            <h3 id="sec2-3">2.3 社会観：社会は有意味な行為の積み重ね</h3>
+            <p>ウェーバーにとって社会とは、人々が意味を込めて行う<strong class="text-action">「行為」や「制度」の連鎖</strong>によって成立するものです。様々な要素が互いに関連し合うことで、一つの大きな流れ（資本主義的行動様式）が生まれると考えました。</p>
+            <div class="card">
+                <div class="card-header">まとめ：ウェーバーから学ぶ研究法</div>
+                <p><strong class="marker">比較と関係性（因果関係）の理解</strong></p>
+                <ul>
+                    <li>ある社会を他の時代や他の文化と比較する。</li>
+                    <li>比較を通して、ある社会や文化に特有のものを特定する。</li>
+                    <li>特徴的な要素単体ではなく、それらの結びつきや因果関係を理解する。</li>
+                </ul>
+            </div>
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>ウェーバーは、資本主義の起源を探るために「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">比較</span></span>」という方法を用いた。彼は、西洋社会と非西洋社会の間に「ビジネス拡大を正当化する<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">倫理</span></span>」の有無を見出し、社会を個々の要素の<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">因果関係</span></span>の連鎖として理解しようとした。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. デュルケムの方法：社会的事実を「もの」として扱う</h2>
+            <p>「社会はどこに存在するのか？」この問いに、エミール・デュルケムは「個人の外に、客観的な事実として存在する」と答えました。そして、その「社会的事実」を捉えるために「統計」という強力な武器を手にしました。</p>
+
+            <h3 id="sec3-1">3.1 問い：自殺は個人的な問題なのか？</h3>
+            <p>デュルケムは、一見個人的な行為である「自殺」も、社会的な要因によって引き起こされると考えました。彼は、社会と個人の関係性を「つながり」と「規範」の2軸で分析し、自殺を4類型に分類しました。</p>
+            <div style="display: flex; justify-content: space-around; margin: 20px 0; flex-wrap: wrap;">
+                 <div style="width: 45%; text-align: center; margin-bottom: 10px;">
+                    <h4>社会的つながり</h4>
+                    <p>弱 → <strong class="text-problem">自己本位的自殺</strong><br>
+                       強 → <strong class="text-confirm">集団本位的自殺</strong></p>
+                 </div>
+                 <div style="width: 45%; text-align: center; margin-bottom: 10px;">
+                    <h4>社会的規範</h4>
+                    <p>弱 → <strong class="text-problem">アノミー的自殺</strong><br>
+                       強 → <strong class="text-confirm">宿命的自殺</strong></p>
+                </div>
+            </div>
+
+            <h3 id="sec3-2">3.2 方法：統計によって個人を超えた傾向を見る</h3>
+            <p>デュルケムは、この理論を証明するために「統計」という方法を用いました。統計を用いると、個人の問題には還元できない、<strong class="text-action">集団的な特徴や傾向性</strong>が見えてきます。</p>
+             <div style="width: 100%; max-width: 600px; margin: 20px auto; border: 1px solid #ccc; padding: 15px; border-radius: 5px;">
+                <h4 style="text-align: center;">都市別の自殺者数（架空データ）</h4>
+                <div style="display: flex; justify-content: space-around; align-items: flex-end; height: 200px; border-bottom: 2px solid #333; padding-bottom: 5px;">
+                    <div style="text-align: center;">
+                        <div style="background-color: var(--secondary-color); width: 25px; height: 240px; margin: 0 auto;"></div><div style="background-color: var(--accent-color); width: 25px; height: 180px; margin: 0 auto; position: relative; top: -180px;"></div><p style="margin-top: -180px;">A市</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background-color: var(--secondary-color); width: 25px; height: 155px; margin: 0 auto;"></div><div style="background-color: var(--accent-color); width: 25px; height: 95px; margin: 0 auto; position: relative; top: -95px;"></div><p style="margin-top: -95px;">B市</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background-color: var(--secondary-color); width: 25px; height: 145px; margin: 0 auto;"></div><div style="background-color: var(--accent-color); width: 25px; height: 55px; margin: 0 auto; position: relative; top: -55px;"></div><p style="margin-top: -55px;">C市</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background-color: var(--secondary-color); width: 25px; height: 120px; margin: 0 auto;"></div><div style="background-color: var(--accent-color); width: 25px; height: 45px; margin: 0 auto; position: relative; top: -45px;"></div><p style="margin-top: -45px;">D市</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background-color: var(--secondary-color); width: 25px; height: 95px; margin: 0 auto;"></div><div style="background-color: var(--accent-color); width: 25px; height: 25px; margin: 0 auto; position: relative; top: -25px;"></div><p style="margin-top: -25px;">E市</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background-color: var(--secondary-color); width: 25px; height: 65px; margin: 0 auto;"></div><div style="background-color: var(--accent-color); width: 25px; height: 15px; margin: 0 auto; position: relative; top: -15px;"></div><p style="margin-top: -15px;">F市</p>
+                    </div>
+                </div>
+                 <div style="text-align: right; font-size: 0.9em; margin-top: 10px;"><span style="color: var(--secondary-color);">■</span>男性自殺者数 <span style="color: var(--accent-color);">■</span>女性自殺者数</div>
+            </div>
+            <p>例えば、この架空のデータからは「なぜA市では自殺者が多いのか？」「なぜ女性よりも男性の方が多いのか？」といった問いが生まれます。こうした傾向は、個人の心理だけでは説明できず、その集団が置かれた社会状況を分析する必要があるのです。</p>
+
+            <h3 id="sec3-3">3.3 社会観：社会は個人を超えた存在である</h3>
+            <p>デュルケムは、このような個人を超えた社会の傾向性を<strong class="marker">「社会的事実」</strong>と呼びました。社会的事実とは、個人の外部に存在し、個人の行動や考えを拘束する力を持つものです。私たちは、知らず知らずのうちに社会のルールや慣習に従って生きています。</p>
+            <div class="card">
+                <div class="card-header">まとめ：デュルケムから学ぶ研究法</div>
+                <p><strong class="marker">社会的事実を「もの」として扱う</strong></p>
+                <ul>
+                    <li>社会の問題は、個人の問題に還元することはできないと考える。</li>
+                    <li>社会的事実は、法律や言語のように客観的に存在する「もの」として捉える。</li>
+                    <li>社会的事実は、統計などの客観的な手法によって明らかにできる。</li>
+                </ul>
+            </div>
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>デュルケムは、個人の問題に還元できない集団的な傾向を明らかにするため、「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">統計</span></span>」という方法を用いた。彼は、個人を超えて客観的に存在する<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">社会的事実</span></span>を「もの」として扱うことで、社会のあり方が個人の行動を<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">拘束</span></span>する力を持つことを示した。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. マルクスの方法：メカニズムを批判する</h2>
+            <p>「なぜ格差は生まれるのか？」この問いに対し、カール・マルクスは「社会のあり方を分析するだけでなく、それを変革すべきだ」と主張しました。彼の研究方法は、単なる分析に留まらない「批判」という強い意志に貫かれています。</p>
+
+            <h3 id="sec4-1">4.1 問い：資本主義社会の問題点は何か？</h3>
+            <p>マルクスは資本主義社会を、生産手段を持つ「資本家」と、自身の労働力を売るしかない「労働者」の二つの階級に分かれる社会として捉えました。この関係性こそが、格差や搾取を生む根源だと考えたのです。</p>
+            <div style="display: flex; justify-content: space-around; margin: 20px 0; flex-wrap: wrap;">
+                 <div style="width: 45%; text-align: center; border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                    <h4>資本主義以前の世界</h4>
+                    <p>貴族 ↔ 土地・貢納 ↔ 農民</p>
+                 </div>
+                 <div style="width: 45%; text-align: center; border: 1px solid #ccc; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+                    <h4>資本主義以降の世界</h4>
+                    <p>資本家 ↔ 給与・労働力 ↔ 労働者</p>
+                </div>
+            </div>
+
+            <h3 id="sec4-2">4.2 方法：社会を分析し、変革する「批判」</h3>
+            <p>マルクスにとって学問とは、社会のあり方を分析するだけでは不十分でした。その分析を通じて、<strong class="text-action">現実世界の問題点を明らかにし、社会変革につなげる「批判」</strong>こそが重要だと考えたのです。</p>
+            <ul>
+                <li>資本主義は、労働者から生活環境だけでなく、尊厳をも剥奪し、新たな格差を生み出している。</li>
+                <li>資本主義がどのようなメカニズムで生じているかを理解することは、そのメカニズムを変えるための知識を提供する。</li>
+                <li>学問は、知識を生産するだけでなく、現実世界への批判を通じて社会変革も行わなければならない。</li>
+            </ul>
+
+            <h3 id="sec4-3">4.3 社会観：社会は下部構造と上部構造で形成される</h3>
+            <p>マルクスは、社会を二つの層で捉えました。人々の働き方や生き方といった<strong class="text-confirm">「社会生活の基盤（下部構造）」</strong>が、その社会の思想や価値規範といった<strong class="text-problem">「社会通念（上部構造）」</strong>を決定するという考え方です。</p>
+            <div class="card">
+                <div class="card-header">まとめ：マルクスから学ぶ研究法</div>
+                <p><strong class="marker">メカニズムを批判する</strong></p>
+                <ul>
+                    <li>学問の役割は、ただ知るだけでなく、社会を変えることにあると考える。</li>
+                    <li>社会を変えるためには、その社会が動いている「メカニズム」の正確な理解が必要。</li>
+                    <li>社会のメカニズムを理解する上で、経済的な土台（下部構造）が特に重要だと考える。</li>
+                </ul>
+            </div>
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>マルクスは、学問の役割を社会の分析に留めず、社会変革を目指す「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">批判</span></span>」にあると考えた。彼は、社会を経済的な<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">下部構造</span></span>と、それによって規定される思想的な<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">上部構造</span></span>から成ると捉え、社会の根本的な「メカニズム」を解明しようとした。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. ジンメルの方法：相互作用に注目する</h2>
+            <p>「社会はどのようにして生じるのだろうか？」この根源的な問いに、ゲオルク・ジンメルは「人々の相互作用のプロセスそのものが社会だ」と答えました。彼の方法は、日常に潜む人間関係の「かたち」を見つけ出す「観察」でした。</p>
+
+            <h3 id="sec5-1">5.1 問い：近代社会の特徴は何か？</h3>
+            <p>ジンメルは、近代の都市では新しい「社会」が生まれつつあると感じていました。そこでは以下のような特徴が見られます。</p>
+            <ul>
+                <li>個人化と集団化が同時に生じている。</li>
+                <li>すべてのものが貨幣で交換可能である。</li>
+                <li>多様な文化（サブカルチャー）が存在する。</li>
+                <li>分業によって複雑な仕事が遂行される。</li>
+            </ul>
+            <p>これらの現象の背後にある、共通の人間関係のパターン（形式）を探求することが、彼の課題でした。</p>
+
+            <h3 id="sec5-2">5.2 方法：「よそ者」の視点で観察する</h3>
+            <p>ジンメルの方法は、具体的な現象の「観察」から始まります。ある社会に暮らしながらも、まるで<strong class="text-action">「よそ者」のように距離を置いて観察</strong>し、そこに潜む不思議な点やパターンを探します。そして、その疑問に説明を与えることで、抽象的な理論を構築していくのです。</p>
+             <div style="display: flex; justify-content: space-around; align-items: center; margin: 20px 0; border: 1px solid #ccc; padding: 20px; border-radius: 8px;">
+                <div style="text-align: center; width: 45%;">
+                    <p style="border: 2px dashed var(--accent-color); padding: 10px; border-radius: 5px;"><strong>問い：</strong><br>都会の人はなぜ殺伐としているのか？</p>
+                </div>
+                <p style="font-size: 2.5em; font-weight: bold; color: var(--primary-color);">→</p>
+                <div style="text-align: center; width: 45%;">
+                     <p style="border: 2px solid var(--confirm-green); padding: 10px; border-radius: 5px;"><strong>説明：</strong><br>都市の過剰な刺激から身を守るために無関心を装うのだ。</p>
+                </div>
+            </div>
+
+            <h3 id="sec5-3">5.3 社会観：社会は相互作用によって生じるプロセス</h3>
+            <p>ジンメルにとって、社会も個人も、あらかじめどこかに固定的に存在するものではありませんでした。社会とは、<strong class="marker">人々の相互作用によって絶えず生み出されるプロセス</strong>そのものです。人々の関係性のあり方（相互作用の形式）が変われば、社会もまた変わっていくのです。</p>
+            <div class="card">
+                <div class="card-header">まとめ：ジンメルから学ぶ研究法</div>
+                <p><strong class="marker">相互作用に注目する</strong></p>
+                <ul>
+                    <li>社会は、人々の相互作用によって生み出されるプロセスであると考える。</li>
+                    <li>どのような相互作用が存在するかを「よそ者」の視点で観察する。</li>
+                    <li>観察した相互作用のあり方を、抽象化・一般化して説明する。</li>
+                </ul>
+            </div>
+            <div class="question-box">
+                <h4>問題5.1</h4>
+                <p>ジンメルは、日常的な現象を「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">観察</span></span>」することから社会の本質を探った。彼にとって社会とは、人々の「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">相互作用</span></span>」によって絶えず生み出されるプロセスであり、その関係性の「<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">形式</span></span>」を分析することが重要だと考えた。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap6">6. まとめ：社会の捉え方が、社会への迫り方を変える</h2>
+            <p>今回は、ウェーバー、デュルケム、マルクス、ジンメルの4人が、目に見えない「社会」という存在にどう迫っていったのか、その「研究の仕方」を見てきました。</p>
+            <div class="card">
+                <div class="card-header">今回の授業の振り返り</div>
+                <p>社会学的な研究法とは、<strong class="text-action">「社会」という見えない存在にどう迫るかについての手続き</strong>です。そして、その手続きは、各学者が「社会」をどう捉えるかという社会観と深く結びついていました。</p>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>学者</th>
+                                <th>社会観（社会の捉え方）</th>
+                                <th>方法（社会への迫り方）</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ウェーバー</strong></td>
+                                <td>社会を行為の因果的連関の結果として捉える</td>
+                                <td>比較</td>
+                            </tr>
+                            <tr>
+                                <td><strong>デュルケム</strong></td>
+                                <td>社会を個人に外在する客観的事実として捉える</td>
+                                <td>統計</td>
+                            </tr>
+                            <tr>
+                                <td><strong>マルクス</strong></td>
+                                <td>社会を生産関係（人々のつながり方）として捉える</td>
+                                <td>批判</td>
+                            </tr>
+                            <tr>
+                                <td><strong>ジンメル</strong></td>
+                                <td>社会を相互作用によって生じるプロセスと捉える</td>
+                                <td>観察</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>このことから学べる最も重要なことは、<strong class="marker">「社会」の捉え方によって、「社会」への迫り方も変わる</strong>ということです。絶対的に正しい一つの方法があるわけではなく、問いに応じて様々な方法を使い分けること、あるいは新しい方法を編み出すことこそが、社会学の面白さであり、奥深さなのです。</p>
+            </div>
+            <div class="page-number">6</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page2.html" class="nav-button">← 前の講座へ</a>
+            <a href="page4.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、N-gaku osobowości KADOKAWA Dwight Gakuen が提供する講義「人文社会入門 第3回 社会学的な考え方——方法編」（講師：谷口 祐人 先生）を元に作成されました。</li>
+                <li><a href="https://www.nnn.ed.nico/" target="_blank" rel="noopener noreferrer">N高等学校・S高等学校</a></li>
+                <li>各社会学者の肖像写真の出典は、講義スライドに記載のWikipedia Commons等の公開情報に基づいています。（File:Max_Weber_1918.jpg, File:Emile_Durkheim.jpg, File:Marx7.jpg, GHDI「Georg Simmel, Philosopher and Sociologist (c. 1914)」）</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第7回 経営学とは何か</title>
+    <style>
+        :root {
+            --primary-color: #005a9c; /* 濃い青 */
+            --secondary-color: #007bff; /* 青 */
+            --accent-color: #f5a623; /* オレンジ系アクセント */
+            --background-color: #f0f8ff; /* 薄い青 */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f2f8ff;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fffaf0;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第7回 経営学とは何か</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 経営学を学ぶ前に：学問の大きな流れ</a>
+                    <ul>
+                        <li><a href="#sec1-1">1.1 問い：文系と理系、どう違う？</a></li>
+                        <li><a href="#sec1-2">1.2 概要とポイント：文理の壁を超えた知の探求</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. 数学的思考法とは何か？</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：バラバラのものをどう整理する？</a></li>
+                        <li><a href="#sec2-2">2.2 事例：サブスクリプションサービスの共通点</a></li>
+                        <li><a href="#sec2-3">2.3 概要とポイント：メタレイヤー思考と抽象化</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. 思考のメカニズム</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：私たちはどうやって「考えて」いるのか？</a></li>
+                        <li><a href="#sec3-2">3.2 概要とポイント：思考のプロセスと３つの目的</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. 学びをデザインする：Value Proposition</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：あなたは何をどう学ぶのか？</a></li>
+                        <li><a href="#sec4-2">4.2 概要とポイント：学びのPDCAサイクル</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. まとめ：思考力を鍛え、未来を拓く</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 経営学を学ぶ前に：学問の大きな流れ</h2>
+            <p>「経営学」と聞くと、会社の社長になるための学問？と思うかもしれません。もちろんそれも一部ですが、この学問の本質はもっと広く、深いところにあります。今回は、経営学の具体的な内容に入る前に、学問全体を俯瞰し、これからの時代に求められる「考え方」について探っていきます。</p>
+            
+            <h3 id="sec1-1">1.1 問い：文系と理系、どう違う？</h3>
+            <p>皆さんは高校で「文系」「理系」のコース選択を経験したかもしれません。この区分は日本で非常に強く意識されていますが、果たして世界の常識なのでしょうか？</p>
+            <p>実は、このような厳格な文理の区分は日本特有のものです。例えばアメリカでは、科学・技術・工学・数学をまとめた<strong class="text-action">「STEM」</strong>という言葉がよく使われます。そして近年、ここに<strong class="text-confirm">「Arts（リベラルアーツ、芸術）」</strong>を加えた<strong class="marker">「STEAM」</strong>という考え方が主流になりつつあります。これは、論理的な思考だけでなく、創造性や感性も同样に重要だという認識の表れです。</p>
+
+            <h3 id="sec1-2">1.2 概要とポイント：文理の壁を超えた知の探求</h3>
+            <p>現代社会の課題は、一つの学問分野だけで解決できるほど単純ではありません。人文社会、自然科学、そして芸術など、<strong class="text-problem">様々な分野の知を融合させる</strong>ことが不可欠です。この講義を担当する千葉先生の経歴は、まさにその体現と言えるでしょう。</p>
+            <div class="card">
+                <div class="card-header">講師紹介：千葉 尚志 先生</div>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="background: var(--primary-color); color: white; padding: 5px 10px; border-radius: 5px;">理論物理学</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="var(--primary-color)" d="m14 18l-1.4-1.4l4.6-4.6l-4.6-4.6L14 6l6 6l-6 6Z"/></svg>
+                        <span style="background: var(--secondary-color); color: white; padding: 5px 10px; border-radius: 5px;">経営コンサルティング</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path fill="var(--primary-color)" d="m14 18l-1.4-1.4l4.6-4.6l-4.6-4.6L14 6l6 6l-6 6Z"/></svg>
+                        <span style="background: var(--accent-color); color: white; padding: 5px 10px; border-radius: 5px;">データ解析</span>
+                    </div>
+                </div>
+                <p style="margin-top: 15px;">宇宙の成り立ちを研究する理論物理学からキャリアをスタートし、ビジネスの世界へ。経営学やマーケティングに携わり、最終的にはデータ解析という、再び数学が中心となる分野で活躍。まさに文理の壁を越えた知の探求を実践されてきました。</p>
+            </div>
+            <p>学問の歴史を振り返ると、哲学が全ての学問の母であったように、元々は明確な区分はありませんでした。デジタル化が進み、あらゆる情報が繋がり合う現代において、私たちは再び<strong class="marker">学問の垣根を越えて物事を多角的に捉える力</strong>が求められています。</p>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. 数学的思考法とは何か？</h2>
+            <p>文理の壁を越える上で、強力な武器となるのが「数学的思考法」です。これは数学の問題を解くための技術だけを指すのではありません。一見すると全く関係ない事柄の中から、<strong class="text-action">共通の構造や本質を見つけ出し、物事をシンプルに捉える</strong>ための考え方です。</p>
+
+            <h3 id="sec2-1">2.1 問い：バラバラのものをどう整理する？</h3>
+            <p>目の前にたくさんの和菓子があるとします。「おはぎ」「大福」「どら焼き」「ようかん」...。これらをあなたならどう分類しますか？ 「あんこを使っているか」「形が丸いか四角いか」など、色々な分け方が考えられますね。</p>
+
+            <h3 id="sec2-2">2.2 事例：サブスクリプションサービスの共通点</h3>
+            <p>では、もっと複雑なビジネスの世界で考えてみましょう。音楽のストリーミング、動画配信、洋服のレンタル、車のサブスク...。これらは全て「サブスクリプション（サブスク）」と呼ばれるサービスです。</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>カテゴリ</th>
+                            <th>サービスの本質</th>
+                            <th>プレーヤー例</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>音楽</td>
+                            <td>ストリーミング配信サービス</td>
+                            <td>Spotify, Apple Music</td>
+                        </tr>
+                        <tr>
+                            <td>動画</td>
+                            <td>動画配信サービス</td>
+                            <td>Netflix, Amazon Prime Video</td>
+                        </tr>
+                        <tr>
+                            <td>洋服</td>
+                            <td>洋服の定額借り放題</td>
+                            <td>airCloset, メチャカリ</td>
+                        </tr>
+                        <tr>
+                            <td>自動車</td>
+                            <td>定額クルマ乗り換え放題</td>
+                            <td>KINTO, NOREL</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>提供されるモノやサービスは全く異なりますが、これらには共通点があります。それは「<strong class="text-confirm">所有するのではなく、一定期間利用する権利に対して料金を支払う</strong>」というビジネスモデルです。この「ビジネスモデル」という一つ上の視点から見ることで、個々の違いに惑わされず、全てのサービスが同じ構造を持っていることがわかります。</p>
+
+            <h3 id="sec2-3">2.3 概要とポイント：メタレイヤー思考と抽象化</h3>
+            <p>このように、物事を一つ上の次元から俯瞰して本質を捉える考え方を<strong class="text-problem">「メタレイヤー思考」</strong>と言います。「メタ(meta)」とはギリシャ語で「高次の」「超越した」という意味です。</p>
+             <div class="card">
+                <div class="card-header">抽象化のプロセス</div>
+                <div style="text-align: center; padding: 20px 0;">
+                    <div style="display: inline-block; padding: 10px 20px; border: 2px solid var(--secondary-color); border-radius: 8px; background: #fff;">
+                        <p style="margin:0; font-weight: bold;">おはぎ, 大福, どら焼き...</p>
+                        <p style="font-size: 0.8em; margin: 5px 0 0 0;">個別の商品</p>
+                    </div>
+                    <div style="margin: 10px 0; font-size: 2em; color: var(--primary-color);">↑</div>
+                    <div style="display: inline-block; padding: 10px 20px; border: 2px solid var(--primary-color); border-radius: 8px; background: #e7f3ff;">
+                        <p style="margin:0; font-weight: bold;">餅物, 焼き物, 蒸し物...</p>
+                        <p style="font-size: 0.8em; margin: 5px 0 0 0;">製法による分類（抽象化レベル1）</p>
+                    </div>
+                     <div style="margin: 10px 0; font-size: 2em; color: var(--primary-color);">↑</div>
+                    <div style="display: inline-block; padding: 10px 20px; border: 2px solid var(--accent-color); border-radius: 8px; background: #fffaf0;">
+                        <p style="margin:0; font-weight: bold;">和菓子</p>
+                        <p style="font-size: 0.8em; margin: 5px 0 0 0;">カテゴリ（抽象化レベル2）</p>
+                    </div>
+                </div>
+            </div>
+            <p>具体的な事象（おはぎ、どら焼き）から共通の要素を抜き出して、より上位の概念（焼き物、和菓子）でまとめる。このプロセスを<strong class="marker">「抽象化」</strong>と呼びます。メタレイヤー思考は、この抽象化を巧みに使うことで、複雑な問題をシンプルに捉え、解決の糸口を見つけるための強力なツールなのです。</p>
+
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>具体的な事象から共通点を見つけ、より上位の概念で捉え直すことを<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">抽象化</span></span>という。この考え方を用いて、一つ上の次元から物事を俯瞰する思考法が<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">メタレイヤー思考</span></span>である。これにより、一見バラバラに見えるサブスクリプションサービスも、共通の<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">ビジネスモデル</span></span>を持っていることが理解できる。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap3">3. 思考のメカニズム</h2>
+            <p>私たちは日々、無意識のうちに「考えて」います。しかし、その「考える」という行為を分解してみると、いくつかのステップと目的があることがわかります。このメカニズムを理解することは、思考力を高める第一歩です。</p>
+
+            <h3 id="sec3-1">3.1 問い：私たちはどうやって「考えて」いるのか？</h3>
+            <p>何か問題に直面したとき、私たちの頭の中ではどのようなプロセスが働いているのでしょうか。それは大まかに次のようなサイクルで捉えることができます。</p>
+            <ol>
+                <li><strong class="text-action">準備・認識：</strong>何を考えるべきか（考察対象）を明確にする。</li>
+                <li><strong class="text-problem">思考そのもの：</strong>関連する知識や情報を集め、整理し、新しい意味合いを考える。</li>
+                <li><strong class="text-confirm">検証：</strong>考え出した結果が、元の目的に合っているかを確認する。</li>
+            </ol>
+            <p>複雑な問題の場合は、まず問題をいくつかの小さな要素に分解する<strong class="marker">「イシューアナリシス」</strong>という手法が有効です。要素に分解してしまえば、あとは上記のサイクルを繰り返すことで解決に近づけます。</p>
+
+            <h3 id="sec3-2">3.2 概要とポイント：思考のプロセスと３つの目的</h3>
+            <p>「考える」という行為は、その深さや目的によっていくつかのレベルに分けられます。この講義では、それを3つの段階で整理します。</p>
+            <div class="card">
+                <div class="card-header">思考の3つの目的</div>
+                <ul>
+                    <li><strong style="color:var(--secondary-color)">① わかる（理解）：</strong>知らなかった知識を得る、疑問に対する答えを見つける段階。物事の仕組みや原因、解決策を探ります。</li>
+                    <li><strong style="color:var(--primary-color)">② ひらめく（洞察）：</strong>理解した上で、さらに深く掘り下げる段階。「これはどういうことか？」「この場合はどうなるか？」と考え、物事の背景や関係性を見抜きます。</li>
+                    <li><strong style="color:var(--accent-color)">③ 思いつく（創造）：</strong>新しいアイデアや方策、概念や理論を構築する段階。現状を分析し、未来を予測して、新しい価値を生み出します。</li>
+                </ul>
+            </div>
+            <p>日常のほとんどの「考え事」は①のレベルですが、学問やビジネスの世界で求められるのは、②の洞察や③の創造です。そして、これらの思考を支える土台となるのが、前章で学んだ<strong class="text-action">「論理的思考」</strong>と<strong class="text-problem">「数学的思考法」</strong>なのです。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>考える目的には3つのレベルがある。第一に、知らないことを知る「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">わかる</span></span>」。第二に、物事の背景や本質を見抜く「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">ひらめく</span></span>」。そして第三に、新しいアイデアや理論を生み出す「<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">思いつく</span></span>」である。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. 学びをデザインする：Value Proposition</h2>
+            <p>これまで学んできた思考法を、自分自身の「学び」にどう活かしていくか。ここで重要になるのが<strong class="text-action">「Value Proposition（価値提案）」</strong>という考え方です。もともとはマーケティング用語ですが、これを自分自身のキャリアや学習計画に応用してみましょう。</p>
+
+            <h3 id="sec4-1">4.1 問い：あなたは何をどう学ぶのか？</h3>
+            <p>Value Propositionとは、元々は「企業が顧客に提供する価値」、つまり「なぜ顧客がその商品を選ぶのか」という理由を明確にするための概念です。これを自分に置き換えてみましょう。</p>
+            <p><strong class="marker">「あなたは、社会や学問の世界で、どのような価値を提供できる人間になりたいのか？」</strong></p>
+            <p>これが、あなたの「学びのValue Proposition」です。将来のなりたい姿（将来像）を明確にすることで、そこに至るために「何を」「どのように」学ぶべきかという計画が見えてきます。</p>
+
+            <h3 id="sec4-2">4.2 概要とポイント：学びのPDCAサイクル</h3>
+            <p>将来像を描いたら、それに向かって計画的に進むための仕組みが必要です。そこで役立つのが<strong class="text-confirm">「PDCAサイクル」</strong>です。</p>
+             <div class="card">
+                <div class="card-header">学びのPDCAサイクル</div>
+                 <div style="display: flex; justify-content: center; align-items: center; padding: 20px; text-align: center; flex-wrap: wrap; gap: 15px;">
+                    <div style="min-width: 120px;">
+                        <div style="font-weight: bold; background: var(--action-blue); padding: 5px; border-radius: 5px;">Plan (計画)</div>
+                        <p style="font-size: 0.9em; margin-top: 5px;">将来像に基づき学習計画を立てる</p>
+                    </div>
+                    <div style="font-size: 1.5em; color: var(--secondary-color);">→</div>
+                    <div style="min-width: 120px;">
+                        <div style="font-weight: bold; background: var(--action-blue); padding: 5px; border-radius: 5px;">Do (実行)</div>
+                        <p style="font-size: 0.9em; margin-top: 5px;">計画に沿って学ぶ</p>
+                    </div>
+                    <div style="font-size: 1.5em; color: var(--secondary-color);">→</div>
+                    <div style="min-width: 120px;">
+                        <div style="font-weight: bold; background: var(--action-blue); padding: 5px; border-radius: 5px;">Check (評価)</div>
+                        <p style="font-size: 0.9em; margin-top: 5px;">何を学んだか、何が足りないか確認</p>
+                    </div>
+                    <div style="font-size: 1.5em; color: var(--secondary-color);">→</div>
+                    <div style="min-width: 120px;">
+                        <div style="font-weight: bold; background: var(--action-blue); padding: 5px; border-radius: 5px;">Action (改善)</div>
+                        <p style="font-size: 0.9em; margin-top: 5px;">計画を修正し、次の学びへ</p>
+                    </div>
+                </div>
+            </div>
+            <p>重要なのは、このサイクルを<strong class="text-problem">常に回し続ける</strong>ことです。学びを進める中で、「知っていること（Fact）」は増え、「学びたいこと」も変化します。その変化をリアルタイムでフィードバックし、計画を柔軟に更新していく。この<strong class="marker">仮説思考に基づいた学びのサイクル</strong>こそが、あなたを目標とする将来像へと導いてくれるのです。</p>
+
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>自分自身が社会に提供できる価値を明確にすることを「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">Value Proposition</span></span>」という。これを達成するために、計画(P)→実行(D)→評価(C)→改善(A)の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">PDCA</span></span>サイクルを回し、常に学習計画を<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">更新</span></span>していくことが重要である。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. まとめ：思考力を鍛え、未来を拓く</h2>
+            <p>今回の講義では、「経営学」という入り口から、文理の壁を越えた学問の捉え方、そして「数学的思考法」という強力なツールについて学んできました。これらの知識は、特定の学問分野だけでなく、あらゆる場面であなたの助けとなるはずです。</p>
+            
+            <div class="card">
+                <div class="card-header">思考力とは何か？</div>
+                <p>思考力は、単なる知識の量ではありません。それは、以下の3つの要素から構成される総合的な力です。</p>
+                <ul>
+                    <li><strong class="text-action">思考スキル：</strong>論理的思考やメタレイヤー思考など、考えるための技術。後からでも習得可能。</li>
+                    <li><strong class="text-problem">思考意欲：</strong>考えたい、知りたいという好奇心や情熱。思考のエンジンとなる部分。</li>
+                    <li><strong class="text-confirm">思考体力：</strong>長時間、深く考え続けることができる身体的・精神的なスタミナ。</li>
+                </ul>
+                <p>これらの要素をバランス良く鍛えることが、真の思考力を養う鍵となります。</p>
+            </div>
+            
+            <h3 id="sec5-1">これからの学びの姿勢</h3>
+            <p>現代は、情報が溢れ、変化のスピードが非常に速い時代です。このような時代を生き抜くためには、特定の知識を覚えるだけでなく、<strong class="marker">「学び方を学ぶ」</strong>こと、そして自らの学びを主体的にデザインしていく力が不可欠です。</p>
+            <p>自分の「Value Proposition」は何かを常に問い続け、仮説と検証のサイクル（PDCA）を回しながら、自分だけの知の体系を構築していく。そのプロセス自体が、これからの時代を生きる上での最も重要な「学び」と言えるでしょう。この講義が、そのための第一歩となることを願っています。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>思考力は「思考スキル」「思考<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">意欲</span></span>」「思考体力」の3要素からなる。これからの時代は、文理の壁を越え、自らの「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">Value Proposition</span></span>」を問い続けながら、主体的に学びを<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">デザイン</span></span>していく力が求められる。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+        
+        <div class="button-container">
+            <a href="page6.html" class="nav-button">← 前の講座へ</a>
+            <a href="page8.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、ZEN大学（仮称・設置認可申請中）が提供する講義「人文社会入門 第7回 経営学とは何か」（講師：千葉 尚志 先生）を元に作成されました。</li>
+                <li><a href="https://zen-univ.jp/" target="_blank" rel="noopener noreferrer">ZEN大学（仮称・設置認可申請中）</a></li>
+                <li>伊賀泰代 (2012) 『採用基準』ダイヤモンド社.</li>
+                <li>秋山仁 (2024)「3か月でマスターする数学」NHK出版. <a href="https://mag.nhk-book.co.jp/article/54070" target="_blank" rel="noopener noreferrer">https://mag.nhk-book.co.jp/article/54070</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

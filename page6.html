@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第6回 文化資源とは何か</title>
+    <style>
+        :root {
+            --primary-color: #4a4a9c; /* 濃い紫 */
+            --secondary-color: #7b68ee; /* 紫 */
+            --accent-color: #f5a623; /* オレンジ系アクセント */
+            --background-color: #f8f7ff; /* 薄いラベンダー */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f2f8ff;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fffaf0;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第6回 文化資源とは何か</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 文化資源とは何か？</a>
+                    <ul>
+                        <li><a href="#sec1-1">1.1 問い：文化ってなんだと思いますか？</a></li>
+                        <li><a href="#sec1-2">1.2 概要とポイント：文化資源の定義と特徴</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. 文化資源を保存する：収集と組織化</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：文化資源はどうやって保存されていくのか？</a></li>
+                        <li><a href="#sec2-2">2.2 事例：立命館大学ゲーム研究センターの取り組み</a></li>
+                        <li><a href="#sec2-3">2.3 概要とポイント：データベース構築の基礎</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. 文化資源を活用する①：過去を探る</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：俳優はいつ頃日本に誕生したのか？</a></li>
+                        <li><a href="#sec3-2">3.2 事例：浮世絵から探る芸能の歴史</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. 文化資源を活用する②：未来を創る</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：ゲームを保存することで何がわかるのか？</a></li>
+                        <li><a href="#sec4-2">4.2 事例：ゲームアーカイブとメタバース共存社会</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. まとめ：文化資源のサイクルと未来</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 文化資源とは何か？</h2>
+            <p>「文化」と聞くと、何を思い浮かべますか？ 伝統芸能、美術品、歴史的建造物...。それらはもちろん文化の一部ですが、私たちが日々楽しんでいるマンガやアニメ、ゲームもまた、現代を映し出す重要な「文化」です。この講義では、そうした身近なものも含め、「文化資源」という広い視点から文化の価値と可能性を探っていきます。</p>
+            
+            <h3 id="sec1-1">1.1 問い：文化ってなんだと思いますか？</h3>
+            <p>文化とは、ある時代や社会の人々の営みそのものです。歴史、価値観、生活様式、創造物など、多岐にわたる要素が含まれます。そして、それらの文化を知るための手がかりとなる資料や記録、それが「文化資源」です。</p>
+
+            <h3 id="sec1-2">1.2 概要とポイント：文化資源の定義と特徴</h3>
+            <p>文化を体現しているモノや営みなどを指す言葉として、「文化財」「文化遺産」「文化資産」などがあります。しかし、これらの言葉には「すでに歴史的な評価が確立している」「金銭などの価値として計量できる」といったニュアンスが含まれがちです。</p>
+            <p>それに対して、この講義で使う<strong class="text-action">「文化資源（Cultural Resources）」</strong>という言葉は、より広い意味を持ちます。</p>
+            <div class="card">
+                <div class="card-header">文化資源とは</div>
+                <p>文化資源とは、ある時代の社会と文化を知るための手がかりとなる貴重な資料の総体であり、これを私たちは<strong class="marker">文化資料体</strong>と呼びます。文化資料体には、博物館や資料庫に収めきれない建物や都市の景観、あるいは伝統的な芸能や祭礼など、<strong class="text-problem">有形無形のもの</strong>が含まれます。<br>（文化資源学会の定義より）</p>
+                <p>重要なのは、<strong class="marker">「多くの人々が共通して認識するような確立した評価や価値を持つ対象であるとは限らない」</strong>という点です。つまり、まだ価値が定まっていないもの、これから価値が見出される可能性を秘めたものも、すべて文化資源なのです。</p>
+            </div>
+
+            <div class="question-box">
+                <h4>問題1.1</h4>
+                <p>「文化遺産」や「文化資産」という用語には、すでに<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">歴史的</span></span>な評価が確立していたり、金銭的価値で計量できたりするというニュアンスがある。それに対し、「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">文化資源</span></span>」は、まだ評価が定まっていない<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">潜在的</span></span>な可能性を持つモノや営みもすべて含む、より広い概念である。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. 文化資源を保存する：収集と組織化</h2>
+            <p>マンガ、ゲーム、アニメ...。私たちの身の回りには、無数の文化資源が溢れています。しかし、それらは意識して保存しなければ、時代の流れと共に失われてしまいます。では、文化資源はどのように保存され、未来へ受け継がれていくのでしょうか？</p>
+
+            <h3 id="sec2-1">2.1 問い：文化資源はどうやって保存されていくのか？</h3>
+            <p>文化資源の保存は、大きく分けて<strong class="text-action">「収集」</strong>と<strong class="text-confirm">「組織化」</strong>の二つのステップで進められます。まず、対象となるモノや情報を集め、次にそれらを誰もが利用しやすい形に整理するのです。</p>
+
+            <h3 id="sec2-2">2.2 事例：立命館大学ゲーム研究センターの取り組み</h3>
+            <p>具体的な事例として、立命館大学ゲーム研究センター（RCGS）のゲームアーカイブを見てみましょう。ここでは、ゲームという文化資源を保存するために、膨大な数の資料が収集・整理されています。</p>
+            <ul>
+                <li><strong>ゲームソフト：</strong>11,467点</li>
+                <li><strong>ゲームハードと周辺機器：</strong>ハード121点、周辺機器273点</li>
+                <li><strong>ゲーム関連資料：</strong>専門誌3,097点、雑誌1,144点、攻略本373冊、チラシ1,288枚など</li>
+            </ul>
+            <p>これらは単に倉庫に集められているだけではありません。RCGSでは、これらの情報を誰でも検索・閲覧できる<strong class="marker">オンラインのデータベース</strong>として公開しています。これにより、研究者だけでなく、一般の人々もゲームの歴史や文化に触れることができるのです。</p>
+            
+            <h3 id="sec2-3">2.3 概要とポイント：データベース構築の基礎</h3>
+            <p>このようなデータベースを作るには、情報を「組織化」するためのルールが必要です。その基礎となるのが、図書館情報学の<strong class="text-problem">FRBR（書誌レコードの機能要件）</strong>という考え方です。</p>
+            <p>これは、利用者が情報を探す際の行動（発見→識別→選択→入手）と、情報の対象（著作→表現形→体現形→個別資料）を対応させるモデルです。例えば「ポケットモンスター」という<strong class="text-action">「著作(Work)」</strong>は、「赤・緑」や「ダイヤモンド・パール」といった様々な<strong class="text-confirm">「表現形(Expression)」</strong>（バージョン）で存在します。さらに、それらは日本版やアメリカ版といった<strong class="text-problem">「体現形(Manifestation)」</strong>（パッケージ）に分かれ、私たち一人ひとりが持っているカセットやディスクが<strong class="marker">「個別資料(Item)」</strong>となります。</p>
+            <p>このような階層的なルール（メタデータ）に基づいて情報を整理することで、膨大な文化資源を効率的に管理し、活用することが可能になるのです。</p>
+            
+            <div class="card">
+                <div class="card-header">まとめ：文化資源の保存</div>
+                <ul>
+                    <li>文化資源は、物理的なモノ（入れ物）に収納して収集・保存する必要がある。</li>
+                    <li>実際に活用するためには、内容に応じて整理し、一定のルール（メタデータ）を用いて組織化する必要がある。</li>
+                    <li>組織化された文化資源は、誰もがアクセスできるデータベースとして提供されることで、その価値を最大限に発揮する。</li>
+                </ul>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap3">3. 文化資源を活用する①：過去を探る</h2>
+            <p>デジタルアーカイブ化された文化資源は、私たちに過去への扉を開いてくれます。歴史書や絵画といった断片的な情報をつなぎ合わせることで、当時の人々の暮らしや文化を、よりリアルに追体験することができるのです。</p>
+
+            <h3 id="sec3-1">3.1 問い：俳優はいつ頃日本に誕生したのか？</h3>
+            <p>「俳優（アイドル）」という存在は、いつ日本に誕生したのでしょうか？ この問いを探るため、過去の文化資源を紐解いてみましょう。日本最古の歴史書である『日本書紀』（720年）には、興味深い記述があります。</p>
+            <blockquote style="border-left: 3px solid var(--secondary-color); padding-left: 15px; font-style: italic;">
+                <p>「今より以後は、吾、将に汝の俳優（ワザオサ／ワザオギ）の民と為らむ」</p>
+                <p style="text-align: right;">―『日本書紀』巻第二神代下</p>
+            </blockquote>
+            <p>これは、神々の前で舞を披露した神への言葉で、「これからは、あなたの俳優（わざを演じる者）として仕えましょう」という意味です。ここから、<strong class="marker">古代の日本では、神を楽しませるためのパフォーマー</strong>が「俳優」の起源であった可能性が見えてきます。</p>
+
+            <h3 id="sec3-2">3.2 事例：浮世絵から探る芸能の歴史</h3>
+            <p>では、その「俳優」たちは、具体的にどのように踊っていたのでしょうか？ 『日本書紀』の別の箇所には、踊りの様子が文章で記されていますが、それだけでは具体的なイメージは掴みづらいです。</p>
+            <p>ここで役立つのが、江戸時代の<strong class="text-action">「浮世絵」</strong>という文化資源です。立命館大学が構築した「浮世絵ポータルデータベース」のようなデジタルアーカイブを使えば、全国の博物館や図書館が所蔵する浮世絵を、キーワードで横断的に検索できます。</p>
+            <p>例えば、「歌舞伎」「踊り」といったキーワードで検索すると、当時の人気役者や踊りの一場面を描いた浮世絵が数多く見つかります。徳川美術館所蔵の「歌舞伎図屏風」などからは、<strong class="text-confirm">舞台の様子、衣装、観客の熱気</strong>まで伝わってきます。さらに、これらの絵画と、柏崎市立博物館が公開している「綾子舞」の映像などを組み合わせることで、静止画だった踊りが、より立体的なイメージとして動き出すのです。</p>
+            <p>このように、<strong class="marker">点在する文化資源をデジタル技術でつなぎ合わせることで、私たちは過去の文化をより深く、多角的に理解することができる</strong>ようになります。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>『日本書紀』の記述によると、古代の「俳優」とは、<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">神</span></span>の前で舞を披露するパフォーマーを指していた。その具体的な踊りの様子は、江戸時代の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">浮世絵</span></span>などの文化資源を<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">デジタルアーカイブ</span></span>で検索・比較することで、より立体的に理解できる。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. 文化資源を活用する②：未来を創る</h2>
+            <p>文化資源の活用は、過去を知るためだけにとどまりません。特にゲームのような現代の文化資源は、これからの社会、とりわけ「メタバース共存社会」をデザインするための、貴重な「知恵の宝庫」となる可能性を秘めています。</p>
+
+            <h3 id="sec4-1">4.1 問い：ゲームを保存することで何がわかるのか？</h3>
+            <p>ゲームを文化資源としてアーカイブする目的は、単に古いゲームを遊べるようにするだけではありません。その<strong class="text-action">「アソビ」の構造やルール、プレイヤーの体験</strong>そのものを保存し、分析することにあります。</p>
+            <ul>
+                <li><strong>エミュレータ：</strong>古いハードウェアをソフトウェアで再現し、過去のゲームを現代のPCで動かす技術。</li>
+                <li><strong>プレイ映像記録：</strong>プレイヤーがどのようにゲームを遊び、何を感じるかを記録する。表情や行動も重要なデータ。</li>
+                <li><strong>データベース：</strong>ゲームのルール、ストーリー、デザインなどを体系的に整理し、分析可能にする。</li>
+            </ul>
+            <p>これらの多角的なアプローチによって、ゲームがどのように人々の心を引きつけ、コミュニティを形成し、社会的な役割を果たしてきたのかを解明できるのです。</p>
+
+            <h3 id="sec4-2">4.2 事例：ゲームアーカイブとメタバース共存社会</h3>
+            <p>ゲームの社会的役割は、時代と共に大きく変化してきました。単なる「エンタテインメント」から、教育や訓練に使う「シリアスゲーム」、日常にゲーム要素を取り入れる「ゲーミフィケーション」へと進化し、今や<strong class="marker">「メタバース」</strong>という新たな社会のプラットフォームとして注目されています。</p>
+            <p>メタバースとは、人々がアバターとして交流し、経済活動を行う仮想空間です。この新しい「世界」あるいは「社会」をどうデザインすべきか？ ここで、ゲームアーカイブが蓄積してきた知見が活きてきます。</p>
+            <div class="card">
+                <div class="card-header">ゲームから学ぶ未来のデザイン</div>
+                <p>ゲームは、これまで仮想空間における<strong class="text-problem">「個人やコミュニティのあり方」「社会デザインと制度設計」「ヒトやモノの“振る舞い”」</strong>を、膨大な試行錯誤の中でデザインしてきました。その歴史は、これから私たちがメタバースを構築していく上での、かけがえのない知恵の宝庫なのです。</p>
+            </div>
+
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>ゲームアーカイブは、単に古いゲームを保存するだけでなく、その<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">アソビ</span></span>の構造を分析する。その知見は、メタバースという新たな<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">社会</span></span>をデザインするための「知恵の宝庫」となる。そこでは、デジタル化された文化資源の<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">真正性（アウラ）</span></span>をどう実装するかが課題となる。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. まとめ：文化資源のサイクルと未来</h2>
+            <p>今回の講義では、「文化資源」という概念を軸に、その保存、活用、そして未来への応用について学んできました。文化資源は、過去の遺産であると同時に、未来を創造するための羅針盤でもあるのです。</p>
+            
+            <div class="card">
+                <div class="card-header">文化資源をめぐるサイクル</div>
+                <p>文化資源は、静的なものではなく、常に動き続けるエコシステムの中に存在します。それは、<strong class="text-action">「創造」→「利活用」→「記憶・アーカイブ」→「再創造」</strong>という循環のプロセスです。</p>
+                <div style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+                    <svg width="300" height="200" viewBox="0 0 100 66">
+                        <path d="M 50,5 A 45,25 0 1,1 49.9,5.01" stroke="#aaa" stroke-width="0.5" fill="none" />
+                        <circle cx="50" cy="5" r="3" fill="var(--secondary-color)" />
+                        <text x="50" y="5" font-size="5" text-anchor="middle" dy="-4">創造</text>
+                        <circle cx="90" cy="33" r="3" fill="var(--secondary-color)" />
+                        <text x="90" y="33" font-size="5" text-anchor="middle" dx="6" dy="1.5">利活用</text>
+                        <circle cx="50" cy="61" r="3" fill="var(--secondary-color)" />
+                        <text x="50" y="61" font-size="5" text-anchor="middle" dy="6">記憶</text>
+                        <circle cx="10" cy="33" r="3" fill="var(--secondary-color)" />
+                        <text x="10" y="33" font-size="5" text-anchor="middle" dx="-6" dy="1.5">再創造</text>
+                    </svg>
+                </div>
+                <p>現代では、このサイクルがさらに複雑化しています。クリエイター、コミュニティ、メディア、そして私たち消費者（ユーザー）が相互に関わり合い、<strong class="marker">戦略的にコンテンツをアーカイブし、新たな創造へとつなげていく</strong>ことが求められています。</p>
+            </div>
+            
+            <h3 id="sec5-1">これからの文化資源との向き合い方</h3>
+            <p>ビジュアライゼーション技術や生成AIの発展により、私たちは文化資源をより体感的、経験的に学ぶことができる仮想環境を構築できるようになりました。メタバースのような仮想空間と現実空間がツインとなって活用される近未来において、<strong class="text-confirm">文化資源は私たちの生活や学び、遊びを豊かにする、さらに重要な役割を担う</strong>ことになるでしょう。</p>
+            <p>その新しい情報空間の中で、どのような生活を送り、何を学び、どう遊ぶのか。AIと共存していく人間として、どのようなアイデアやチャレンジが求められているのか。文化資源を深く理解し、創造的に活用する力こそが、これからの時代を生き抜くための鍵となるのです。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>文化資源は「創造」→「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">利活用</span></span>」→「記憶・アーカイブ」→「再創造」というサイクルの中にある。現代のデジタル環境では、このサイクルを<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">戦略的</span></span>に回し、AIと<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">共存</span></span>しながら新しい価値を創造していくことが求められる。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+        
+        <div class="button-container">
+            <a href="page5.html" class="nav-button">← 前の講座へ</a>
+            <a href="page7.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、N-gaku osobowości KADOKAWA Dwight Gakuen が提供する講義「人文社会入門 第6回 文化資源とは何か」（講師：細井 浩一 先生）を元に作成されました。</li>
+                <li><a href="https://www.nnn.ed.nico/" target="_blank" rel="noopener noreferrer">N高等学校・S高等学校</a></li>
+                <li>文化資源学会「文化資源」 <a href="https://bunkashigen.jp/about.html" target="_blank" rel="noopener noreferrer">https://bunkashigen.jp/about.html</a></li>
+                <li>立命館大学ゲーム研究センター「RCGSコレクション」<a href="https://collection.rcgs.jp/" target="_blank" rel="noopener noreferrer">https://collection.rcgs.jp/</a></li>
+                <li>立命館大学アート・リサーチセンター「浮世絵ポータルデータベース」<a href="https://www.dh-jac.net/db/nishikie/search_portal.php" target="_blank" rel="noopener noreferrer">https://www.dh-jac.net/db/nishikie/search_portal.php</a></li>
+                <li>Fukuda, K., et al. (2019). "Developing Online Catalog of Video Games using Omeka". ICOM International Committee for Documentation (CIDOC) 2019.</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第10回 科学哲学の考え方</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 濃い紺 */
+            --secondary-color: #00509e; /* 青 */
+            --accent-color: #d9534f; /* 赤系アクセント */
+            --background-color: #f4f8fa; /* 薄い青 */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f7f9fc;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fef7f7;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .flowchart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .flow-item {
+            padding: 10px 20px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            background-color: var(--action-blue);
+            text-align: center;
+        }
+        .flow-arrow {
+            font-size: 2em;
+            color: var(--secondary-color);
+        }
+        .two-column {
+            display: flex;
+            gap: 20px;
+        }
+
+        .two-column > div {
+            flex: 1;
+        }
+
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .two-column {
+                flex-direction: column;
+            }
+            .flowchart {
+                flex-direction: column;
+            }
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第10回 科学哲学の考え方</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 科学哲学へようこそ ～なぜ科学を哲学するの？～</a></li>
+                <li><a href="#chap2">2. Q1. 科学って何？ ～ポパーの反証主義～</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：科学と「疑似科学」を分けるもの</a></li>
+                        <li><a href="#sec2-2">2.2 概要とポイント：間違えることができるから科学</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. Q2. 科学は正しい？ ～帰納推論と正当化～</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：なぜ「科学＝真理」と言い切れないのか</a></li>
+                        <li><a href="#sec3-2">3.2 概要とポイント：証拠による「正当化」のプロセス</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. Q3. 科学的な説明って何？ ～3つのタイプ～</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：「説明」にはどんな種類がある？</a></li>
+                        <li><a href="#sec4-2">4.2 概要とポイント：記述・予測・因果</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. Q4. 科学の目的は？ ～真理の探求か、便利な道具か～</a>
+                    <ul>
+                        <li><a href="#sec5-1">5.1 問い：科学は何を目指しているのか</a></li>
+                        <li><a href="#sec5-2">5.2 概要とポイント：科学実在論 vs プラグマティズム</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap6">6. まとめ：科学と「正しくつきあう」ために</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 科学哲学へようこそ ～なぜ科学を哲学するの？～</h2>
+            <p>「科学」と「哲学」。一見すると、全く別の分野に見えるかもしれません。しかし、私たちの生活に深く根ざした「科学」を正しく理解し、賢く付き合っていくためには、「科学とは何か？」という哲学的な問いが不可欠です。この学問を<b class="text-action">「科学哲学」</b>と呼びます。</p>
+            <p>現代社会は科学技術なしには成り立ちません。物理学がもたらしたスマートフォン、化学が生んだプラスチック、生物学の恩恵であるワクチンや医療、そして情報科学が生んだAI。私たちは日々、科学の成果を享受しています。</p>
+            <p>一方で、科学は戦争、公害、環境破壊といった負の側面も持っています。「〇〇は科学的に健康に良い」「科学的な子育て」といった言葉が飛び交う現代において、<b class="marker">私たちは何を信じ、どう判断すれば良いのでしょうか？</b> 科学哲学は、そのための羅針盤となる知恵を与えてくれます。</p>
+            
+            <div class="card">
+                <div class="card-header">科学哲学が問うこと</div>
+                <ul>
+                    <li><strong class="text-problem">「科学的」とはどういうことか？</strong>：何をもって「科学的」と呼び、そうでないもの（疑似科学）と区別するのか。</li>
+                    <li><strong class="text-confirm">科学的な説明とは何か？</strong>：科学は物事を「説明する」と言われるが、その「説明」にはどんな種類があるのか。</li>
+                    <li><strong class="text-action">科学の目的は何か？</strong>：科学は「真理の探求」を目指すのか、それとも「便利な道具」であるべきか。</li>
+                </ul>
+            </div>
+            <p>科学を妄信する「科学主義」にも、逆に全てを疑う「反科学主義」にも陥らず、客観的に「科学とは何か」を理解すること。それが科学哲学を学ぶ目的なのです。</p>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. Q1. 科学って何？ ～ポパーの反証主義～</h2>
+            <h3 id="sec2-1">2.1 問い：科学と「疑似科学」を分けるもの</h3>
+            <p>「これは科学です」と言われると、私たちは「ちゃんとしてそう」「正しそう」と感じる傾向があります。しかし、世の中には科学のふりをした<b class="text-problem">「疑似科学」</b>も存在します。例えば、以下のような説をどう考えますか？</p>
+            <ul>
+                <li><b>創造科学</b>：生物の誕生や進化には、神のような超知性体の導きが必要だったとする説。</li>
+                <li><b>ホメオパシー</b>：病気の原因となる物質を極限まで薄めたものを摂取することで、その病気が治るという考え。</li>
+                <li><b>血液型診断</b>：血液型によって性格が決まっているとする説。</li>
+            </ul>
+            <p>これらと、物理学や化学のような「本物の科学」との違いは、一体どこにあるのでしょうか。</p>
+
+            <h3 id="sec2-2">2.2 概要とポイント：間違えることができるから科学</h3>
+            <p>この問いに鮮やかな答えを与えたのが、20世紀の哲学者カール・ポパーです。彼は「科学と非科学を分ける基準」として<b class="text-action">「反証可能性」</b>という概念を提唱しました。</p>
+            <div class="card">
+                <div class="card-header">ポパーの反証主義</div>
+                <p><strong class="marker">「反証可能であること」こそが、科学の条件である。</strong></p>
+                <p><b>反証可能とは？</b><br>
+                「どんな観測・実験結果が出れば、その理論が間違っていると証明（＝反証）されるか」が、あらかじめ明確に決まっていること。</p>
+                <ul>
+                    <li><b class="text-confirm">例：アインシュタインの相対性理論</b><br>「もし光より速い物質が観測されれば、この理論は反証される」と明確に言える。</li>
+                    <li><b class="text-problem">例：星占いや血液型診断</b><br>「A型は几帳面だが、そうでないこともある」「今日の運勢は良いが、注意も必要」のように、どんな結果が出ても「例外」や「解釈」で逃げられるため、決して反証されない。</li>
+                </ul>
+            </div>
+            
+            <p>ポパーによれば、科学とは<b class="marker">「生き残りをかけたバトルロワイヤル」</b>のようなものです。さまざまな理論が立てられ、実験や観察によって次々とテストされます。そして、予測が外れた理論（反証された理論）は容赦なく棄却されていきます。</p>
+            <p>つまり、私たちが今「正しい」と信じている科学理論は、「絶対に正しい真理」なのではなく、<b class="text-confirm">「これまでの数々の厳しいテストに耐えて生き残ってきた、反証可能だがまだ反証されていない理論」</b>にすぎないのです。科学は常に未完成で、発展途上にある。それがポパーの捉えた科学の姿でした。</p>
+            
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>科学と疑似科学を分ける基準として、哲学者のカール・ポパーは<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">反証可能性</span></span>を提唱した。これは、どんな実験結果が出れば理論が間違いだと証明されるかが明確である、という性質のことである。この考え方によれば、科学は常に<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">未完成</span></span>であり、厳しいテストを生き残った理論が一時的に受け入れられているにすぎない。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. Q2. 科学は正しい？ ～帰納推論と正当化～</h2>
+            <h3 id="sec3-1">3.1 問い：なぜ「科学＝真理」と言い切れないのか</h3>
+            <p>ポパーの考え方に従うと、科学は「絶対に正しい」とは言えなくなります。なぜなら、科学は<b class="text-action">「帰納（きのう）推論」</b>という方法に根本的に依存しているからです。</p>
+            <p>帰納推論とは、限られた数の観察（過去のデータ）から、まだ観察していないものを含む全体（未来）についての法則を導き出す思考法です。これは非常に強力な方法ですが、常に「例外」の可能性がつきまといます。</p>
+            
+            <div class="card">
+                <div class="card-header">事例：カラスはなぜ黒い？</div>
+                <p>私たちは「カラスは黒い」と信じています。なぜでしょうか？</p>
+                <ol>
+                    <li>今まで見てきたカラスは、すべて黒かった。（<b>観察データ</b>）</li>
+                    <li>だから、きっと世界中のカラスはすべて黒いだろう。（<b>帰納推論による予測</b>）</li>
+                </ol>
+                <p>しかし、この推論は、<b class="text-problem">明日、白いカラスが見つかるかもしれない</b>という可能性を完全に否定することはできません。実際、アルビノ（色素が欠乏した個体）の白いカラスは存在します。このように、帰納推論は100%の確実性を保証できないのです。</p>
+            </div>
+            
+            <h3 id="sec3-2">3.2 概要とポイント：証拠による「正当化」のプロセス</h3>
+            <p>科学が「絶対の真理」ではないとしても、私たちはどの仮説が「より正しそうか」を判断することはできます。そのカギとなるのが<b class="text-confirm">「正当化（justification）」</b>というプロセスです。仮説は、より良い「根拠（証拠）」によって、より強く正当化されます。</p>
+            
+            <div class="two-column">
+                <div class="card">
+                    <div class="card-header">悪い（弱い）根拠</div>
+                    <ul>
+                        <li>「私の周りのA型の人は几帳面な人が多い気がする」</li>
+                        <li>「私のA型の友人10人のうち7人は几帳面だ」</li>
+                    </ul>
+                    <p>⇒ 個人的な経験や、偏った小さなサンプルに基づいている。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">良い（強い）根拠</div>
+                    <ul>
+                        <li>「ランダムに集めた多数の被験者に性格テストを受けさせたところ、A型の人の几帳面さを示すスコアは統計的に有意に高かった」</li>
+                    </ul>
+                    <p>⇒ 客観的で大規模なデータと、統計的な分析に基づいている。</p>
+                </div>
+            </div>
+
+            <p>科学的な正当化は、一般に以下のステップを踏んで行われます。この各段階で「より良い」方法を追求することで、仮説の信頼性が高まっていきます。</p>
+            <div class="flowchart">
+                <div class="flow-item">1. 実験・観察</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">2. データ化</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">3. 統計処理</div>
+            </div>
+            <p>このように、科学は絶対の真理を語るのではなく、<strong class="marker">証拠に基づいて仮説をより良く正当化していく、地道なプロセス</strong>なのです。「良い正当化とは何か」を考えることで、私たちは科学をより深く評価できるようになります。</p>
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>科学が絶対の真理と言えないのは、限られたデータから全体を予測する<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">帰納推論</span></span>に依存しているからである。しかし、科学は証拠によって仮説を<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">正当化</span></span>することで、その信頼性を高める。そのプロセスには、実験・観察、データ化、そして<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">統計処理</span></span>といったステップが含まれる。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. Q3. 科学的な説明って何？ ～3つのタイプ～</h2>
+            <h3 id="sec4-1">4.1 問い：「説明」にはどんな種類がある？</h3>
+            <p>私たちは「科学は物事を説明してくれる」とよく言います。しかし、一口に「説明」と言っても、その中身はさまざまです。以下の3つの文は、すべて科学的な「説明」ですが、その性質は少しずつ異なります。</p>
+            <ul>
+                <li>「人間とチンパンジーは、同じヒト科に属する」</li>
+                <li>「2050年までに、海面は20cm上昇するだろう」</li>
+                <li>「喫煙は肺がんの原因である」</li>
+            </ul>
+            <p>これらの「説明」の違いはどこにあるのでしょうか？科学哲学では、科学的説明を主に3つのタイプに分類して考えます。</p>
+            
+            <h3 id="sec4-2">4.2 概要とポイント：記述・予測・因果</h3>
+            <p>科学的説明は、大きく<b class="text-confirm">「記述・要約」</b>、<b class="text-action">「予測」</b>、<b class="text-problem">「因果的説明」</b>の3つに分けられます。これらは説明力と確実性において、トレードオフの関係にあります。</p>
+            
+            <div class="two-column">
+                <div>
+                    <div class="card">
+                        <div class="card-header">① 記述・要約 (Description)</div>
+                        <p><b>実際に起きたことや、成立している事実をありのままに記述・要約すること。</b><br>
+                        例：「DNAは、細胞内の核に折りたたまれて格納されている」<br>
+                        ⇒ 確実性は高いが、「なぜそうなのか」という理由までは説明しない。</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">② 予測 (Prediction)</div>
+                        <p><b>直接は観測していない未知の事柄を、証拠に基づいて推論すること。</b><br>
+                        例：「恐竜はおよそ6600万年前に絶滅した」<br>
+                        ⇒ 未来のことだけでなく、過去や直接見えないこと（月の水など）の推論も含む。帰納推論なので間違う可能性もある。</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">③ 因果的説明 (Causal Explanation)</div>
+                    <p><b>ある現象が「なぜ」生じたのか、その原因を特定して理由を説明すること。</b><br>
+                    例：「恐竜の絶滅は、巨大隕石の衝突によって生じた」<br>
+                    ⇒ 最も説明力が高いが、因果関係の証明は非常に難しく、立証が困難な場合が多い。</p>
+                </div>
+            </div>
+
+            <p>この3つの関係をまとめると、以下のようになります。</p>
+            <div style="text-align: center; margin: 20px 0;">
+                <p style="font-weight: bold; color: var(--primary-color);">確実性 <span style="font-size:1.5em; vertical-align: middle;">←</span> [記述] ― [予測] ― [因果] <span style="font-size:1.5em; vertical-align: middle;">→</span> 説明力</p>
+            </div>
+            <p><b class="marker">記述から因果へと進むにつれて説明力は高まりますが、同時に立証が難しくなり、確実性は低くなる傾向にあります。</b>科学者は、これらの異なるタイプの「説明」を使い分けながら、世界の謎に迫っているのです。</p>
+
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>科学的な説明は大きく3つに分類される。事実をありのままに報告する<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">記述</span></span>、未知の事柄を推論する<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">予測</span></span>、そして現象の理由を明らかにする<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">因果的説明</span></span>である。このうち最も説明力が高いのは<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">因果的説明</span></span>だが、確実性は低くなる傾向がある。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. Q4. 科学の目的は？ ～真理の探求か、便利な道具か～</h2>
+            <h3 id="sec5-1">5.1 問い：科学は何を目指しているのか</h3>
+            <p>最後の問いは、科学の根本的な「目的」についてです。科学者たちは、一体何を目指して研究活動を行っているのでしょうか。この問いに対する考え方は、大きく二つの立場に分かれます。</p>
+            
+            <h3 id="sec5-2">5.2 概要とポイント：科学実在論 vs プラグマティズム</h3>
+            <p>科学の目的をめぐる二大潮流が<b class="text-confirm">「科学実在論」</b>と<b class="text-action">「プラグマティズム」</b>です。どちらが正しいというわけではなく、それぞれに長所と短所があります。</p>
+            
+            <div class="two-column">
+                <div class="card">
+                    <div class="card-header">科学実在論 (Scientific Realism)</div>
+                    <p><b>科学の目的は、世界の「真実の姿」を探求することである。</b></p>
+                    <ul>
+                        <li><b class="text-confirm">利点</b>：
+                            <ul>
+                                <li>常識に合致している。「なぜ科学はうまくいくのか？」という問いに「正しいからだ」と明快に答えられる。</li>
+                            </ul>
+                        </li>
+                        <li><b class="text-problem">欠点</b>：
+                            <ul>
+                                <li>「本当に真実に到達できているのか」を確認する術がない。（ポパーの反証主義を思い出してください）</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">プラグマティズム (Pragmatism)</div>
+                    <p><b>科学の目的は、現象をより良く「予測し制御する」ための、便利な道具を作ることである。</b></p>
+                     <ul>
+                        <li><b class="text-confirm">利点</b>：
+                            <ul>
+                                <li>目的（予測や制御の成功）を達成できたか直に確認できる。</li>
+                                <li>「なぜ科学が重要か」を社会的な有用性から説明できる。</li>
+                            </ul>
+                        </li>
+                        <li><b class="text-problem">欠点</b>：
+                            <ul>
+                                <li>「なぜ科学が予測に成功するのか」という根源的な問いには答えない（問わない）。</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>プラグマティズム的な視点に立つと、科学は<b class="marker">「私たちの生活を良くするための道具」</b>と捉えられます。そうなると、「どのような道具であることが望ましいか？」という新しい問いが生まれます。</p>
+            <p>ここから、<b class="text-action">「科学と価値との関係」</b>という重要なテーマが浮かび上がります。科学は社会のニーズに応えるべきか？私たちの価値観は科学にどう影響を与えるべきか？</p>
+
+            <div class="card">
+                <div class="card-header">事例：フェミニスト科学の視点</div>
+                <p>伝統的に科学の世界は男性中心で進められてきました。その結果、研究テーマや被験者の選定において、無意識のうちに男性の視点や身体が基準とされてきた側面があります。</p>
+                <p><b>フェミニスト科学</b>は、こうした偏り（バイアス）を批判し、<strong class="text-problem">「科学は誰のための道具なのか？」</strong>と問い直します。社会的強者や多数派だけでなく、すべての人に開かれた科学のあり方を探るこの動きは、プラグマティズム的な視点から生まれた重要な流れの一つです。</p>
+            </div>
+            
+            <div class="question-box">
+                <h4>問題5.1</h4>
+                <p>科学の目的について、世界の真実を探求する立場を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">科学実在論</span></span>という。一方、科学を予測や制御に役立つ便利な道具と捉える立場を<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">プラグマティズム</span></span>という。後者の立場からは、科学における<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">価値</span></span>やバイアスの問題が重要になる。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap6">6. まとめ：科学と「正しくつきあう」ために</h2>
+            <p>今回の講義では、「科学哲学」というレンズを通して、私たちが当たり前だと思っている「科学」を４つの基本的な問いから見つめ直しました。科学は決して単純な真理の体系ではなく、複雑で、人間的な営みであることが見えてきたのではないでしょうか。</p>
+            
+            <div class="card">
+                <div class="card-header">今回の学びのポイント</div>
+                <ul>
+                    <li><b class="text-action">Q1. 科学とは？</b><br>
+                    → 間違いを証明できる「反証可能性」が科学を科学たらしめる一つの基準である（ポパーの反証主義）。</li>
+                    <li><b class="text-problem">Q2. 科学は正しい？</b><br>
+                    → 絶対に正しいとは言えない。科学は、証拠によって仮説を「正当化」していくプロセスである。</li>
+                    <li><b class="text-confirm">Q3. 科学的な説明とは？</b><br>
+                    → 「記述」「予測」「因果」の3タイプがあり、それぞれ説明力と確実性のバランスが異なる。</li>
+                    <li><strong style="color:var(--primary-color);">Q4. 科学の目的は？</strong><br>
+                    → 「真理の探求」（実在論）か、「便利な道具」（プラグマティズム）か、という二つの大きな考え方がある。</li>
+                </ul>
+            </div>
+            
+            <p>現代社会において、科学は科学者だけの問題ではありません。科学的知見をどう利用し、評価し、判断するかは、私たち一人ひとりの課題です。</p>
+            <p>科学と正しくつきあうためには、「『良い』科学とは何か」を自分なりに考える視点を持つことが大切です。<b class="marker">科学の主張を鵜呑みにせず、その根拠（正当化のプロセス）は何か、それはどんな種類の「説明」なのか、そしてその背後にはどんな「目的」や「価値観」があるのか</b>を考えてみる。この講義が、そうした批判的な思考の第一歩となれば幸いです。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>科学理論は、間違いを指摘できる<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">反証可能性</span></span>を持つべきだとポパーは考えた。科学は「絶対の真理」ではなく、限られた観察から法則を導く<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">帰納推論</span></span>を用いるため、常に誤りの可能性を含む。そのため、証拠による<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">正当化</span></span>のプロセスが重要となる。科学の目的をめぐっては、真理の探求を目指す<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">科学実在論</span></span>と、実用的な道具と見なす<span class="fill-in" onclick="toggleAnswer(this)">(5)<span class="answer">プラグマティズム</span></span>という対立する考え方がある。</p>
+            </div>
+            <div class="page-number">6</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page9.html" class="nav-button">← 前の講座へ</a>
+            <a href="page11.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、ZEN大学（仮称・設置認可申請中）が提供する講義「人文社会入門 第10回 科学哲学の考え方」（講師：大塚 淳 先生）を元に作成されました。</li>
+                <li><a href="https://zen-univ.jp/" target="_blank" rel="noopener noreferrer">ZEN大学（仮称・設置認可申請中）</a></li>
+                <li>伊勢田哲治 (2003). 疑似科学と科学の哲学. 名古屋大学出版会.</li>
+                <li>大塚淳 (2021). 科学の考え方・学び方. 中央公論新社.</li>
+                <li>ポパー, K. R. (1971-1972). 科学的発見の論理（大内義信, 森博 訳）. 恒星社厚生閣.</li>
+                <li>クーン, T. S. (1971). 科学革命の構造（中山茂 訳）. みすず書房.</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

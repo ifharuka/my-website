@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第13回 文学的な捉え方(2)</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 濃い紺色 */
+            --secondary-color: #336699; /* やや明るい青 */
+            --accent-color: #e60033; /* 赤色のアクセント */
+            --background-color: #f4f8fa; /* 薄い青みがかった背景 */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .lecturer {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f0f5f9;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fff5f5;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .two-column {
+            display: flex;
+            gap: 20px;
+        }
+
+        .two-column > div {
+            flex: 1;
+        }
+
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .two-column {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第13回 文学的な捉え方(2)</h1>
+        <p class="lecturer">講師：プラダン・ゴウランガ・チャラン 先生</p>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 文学と社会のダイナミズム ～カウンターカルチャーの視点～</a></li>
+                <li><a href="#chap2">2. グローバル化と言語多様性の危機 ～スピヴァクの警鐘～</a></li>
+                <li><a href="#chap3">3. 文学の「政治性」 ～社会を動かす力～</a></li>
+                <li><a href="#chap4">4. 情報社会と文学 ～分極化に抗うために～</a></li>
+                <li><a href="#chap5">5. まとめ</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 文学と社会のダイナミズム ～カウンターカルチャーの視点～</h2>
+            <p>前回の講義では、文学が作者個人の内面だけでなく、その時代の社会や歴史を映し出す鏡であることを学びました。今回はさらに一歩進んで、文学が社会にどう働きかけ、より良い社会づくりに貢献できるのかを探ります。</p>
+            <p>この問いを考える上で、文化人類学の視点が非常に役立ちます。文化人類学者エルナンデス・アルバロ・ダビド先生との対談では、文化が単なる「静的なもの」ではなく、<b class="marker">社会や歴史と相互に影響し合う動的なものである</b>ことが示されました。</p>
+            
+            <div class="card">
+                <div class="card-header">カウンターカルチャーとは？</div>
+                <p>特に重要なのが<b class="text-problem">「カウンターカルチャー」</b>という概念です。これは、社会の主流（メインストリーム）となっている文化や価値観に対して、異議を唱え、対抗する文化のことを指します。</p>
+                <ul>
+                    <li><b>事例１：1960年代のヒッピー運動</b><br>
+                    アメリカでベトナム戦争に反対した若者たちから始まったこの運動は、当時の保守的な社会通念に反発し、自由や愛、平和を掲げました。彼らの音楽やファッションは、既存の文化に対する強力な「カウンター」として機能したのです。</li>
+                    <li><b>事例２：松尾芭蕉と俳句</b><br>
+                    江戸時代、和歌や短歌は貴族の文化、つまり当時の「主流」でした。それに対し、松尾芭蕉は庶民の言葉を取り入れた俳句という形式を確立し、大衆文化としての新たな潮流を生み出しました。これもまた、既存の文化への挑戦と言えます。</li>
+                </ul>
+            </div>
+            
+            <p>このように、社会には常に「標準」とされる文化と、それに挑戦する「標準ではない」文化が存在し、互いに緊張関係にあります。文学もまた、このダイナミズムの中に位置づけられます。ある時代に「標準」とされたシェイクスピアのような文学もあれば、それに疑問を投げかける新たな文学も生まれるのです。この<b class="text-action">「標準」と「非標準」のせめぎ合いこそが、文化や社会を発展させる原動力</b>となります。</p>
+
+            <div class="question-box">
+                <h4>問題1.1</h4>
+                <p>社会の主流文化に対抗する文化を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">カウンターカルチャー</span></span>と呼びます。1960年代アメリカの<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">ヒッピー運動</span></span>はその代表例です。貴族文化であった和歌・短歌に対し、<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">松尾芭蕉</span></span>が確立した俳句も、大衆文化としての一種のカウンターカルチャーと捉えることができます。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. グローバル化と言語多様性の危機 ～スピヴァクの警鐘～</h2>
+            <p>現代社会の大きな特徴である「グローバリゼーション」。人やモノ、情報が国境を越えて行き交うことで、私たちの生活は便利になりました。しかし、その一方で失われつつあるものはないでしょうか？</p>
+            <p>ポストコロニアル研究者であり、フェミニストでもある思想家<b class="marker">ガヤトリ・スピヴァク</b>は、この点に鋭い警鐘を鳴らします。彼女は、特に経済的な利益を優先する「悪いグローバリゼーション」が、世界の文化的多様性、とりわけ<b class="text-problem">言語の多様性</b>を脅かしていると指摘します。</p>
+
+            <div class="card">
+                <div class="card-header">事例：インドのコールセンターとアイデンティティ</div>
+                <p>グローバル化の負の側面を象徴するのが、インドに集中するコールセンターです。安い賃金と英語を話せる人材を求めて、世界の多くの企業がインドに業務を委託しています。しかし、そこでは何が起きているのでしょうか。</p>
+                <ul>
+                    <li>インド人の従業員は、アメリカの顧客に対応するため、<b class="text-problem">アメリカン・アクセント</b>で話すことを強いられます。</li>
+                    <li>自分の本名を隠し、<b class="text-problem">ジョンやメアリーといった英語圏の名前</b>を名乗ります。</li>
+                    <li>アメリカの時差に合わせて夜間に働くため、生活リズムが崩れ、<b class="text-action">自らのアイデンティティが揺らいでいきます。</b></li>
+                </ul>
+                <p>経済的な理由から英語が日常的に使われるようになり、家庭内の言語さえも英語に置き換わっていく。これは、まさにグローバル経済がマイナー言語を侵食していく過程なのです。</p>
+            </div>
+
+            <p>スピヴァクによれば、このような現象は単なる経済的な搾取に留まらず、文化を破壊する<b class="text-problem">不道徳な行為</b>です。彼女は、経済的に豊かな「グローバルノース」の人々が、翻訳に頼るのではなく、<b class="text-action">自ら外国語を学び、原語で海外文学を読むことの重要性</b>を訴えます。それは、失われゆく言語の多様性を守るための、私たち一人ひとりに課せられた責任なのです。</p>
+            <p>たとえ社会主義的な理想を掲げた「良いグローバリゼーション」でさえ、均一化を目指す傾向がある以上、私たちは意識的に母語の多様性を守らなければならない、とスピヴァクは力説します。</p>
+
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>思想家<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">ガヤトリ・スピヴァク</span></span>は、経済的利益を優先するグローバリゼーションが言語の多様性を脅かしていると警告しました。その具体例として、インドの<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">コールセンター</span></span>では、従業員が現地のアイデンティティを隠し、英語というグローバル言語の使用を強制される状況が挙げられます。スピヴァクは、豊かな国の人々が翻訳に頼らず<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">外国語</span></span>を学ぶことが、文化的多様性を守る責任であると主張しています。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. 文学の「政治性」 ～社会を動かす力～</h2>
+            <p>スピヴァクは、文学の創作も読書も、そして文学研究でさえも「政治的な行為」であると述べます。ここで言う「政治性」とは、国会や選挙といった狭い意味での政治ではなく、<b class="marker">「社会に働きかけ、変化を促す力」</b>と捉えることができます。</p>
+            <p>文学は、単に美しい言葉で心を慰めたり、心地よい感動を与えたりするだけのものではありません。むしろ、読者の心に<b class="text-problem">「不快感」や「違和感」</b>を呼び起こし、私たちが当たり前だと思っている価値観を揺さぶることで、行動を促す力を持っているのです。</p>
+
+            <div class="two-column">
+                <div class="card">
+                    <div class="card-header">多和田葉子：二言語という挑戦</div>
+                    <p>作家の多和田葉子氏は、日本語とドイツ語という二つの言語を同時に使って創作活動を行っています。これは、読者を「母語」という最も快適な言語空間（コンフォートゾーン）から意図的に引き離す試みです。彼女の作品を読むことは、外国語に触れ、他者の視点を受け入れる訓練となり、結果として世界の言語的多様性を守ることに繋がります。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">ジュンパ・ラヒリ：言語選択という抵抗</div>
+                    <p>インド系アメリカ人作家のジュンパ・ラヒリ氏は、英語で高い評価を得た後、イタリアに移住し、イタリア語だけで執筆することを決意しました。欧米の出版社は彼女を「インド系移民の作家」という枠にはめ、そのディアスポラ的なアイデンティティを「売り」にしてきました。ラヒリがイタリア語を選んだのは、そうした<b class="text-action">市場の論理や、特定のアイデンティティの消費から自由になるための、力強い政治的な選択</b>だったのです。</p>
+                </div>
+            </div>
+            
+            <p>多和田氏の小説『献灯使』では、核兵器や原発に対する明確な反対の立場が示され、読者に安住の地から出て他者を求めることを促します。彼女たちの創作は、新自由主義やグローバリズム、民族的な排外主義といった現代社会の大きな問題に、文学という手法で真摯に向き合う「政治的な」実践なのです。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>文学における<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">政治性</span></span>とは、社会に働きかけ、変化を促す力を指します。文学は読者に違和感や不快感を与え、<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">コンフォートゾーン</span></span>から出るよう促すことがあります。ジュンパ・ラヒリが英語ではなくイタリア語での執筆を選んだのは、市場が作り出した「インド系移民作家」という<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">アイデンティティ</span></span>の消費から自由になるための抵抗でした。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. 情報社会と文学 ～分極化に抗うために～</h2>
+            <p>インターネットやSNSは、私たちの生活に不可欠なツールとなりました。しかし、その過剰な浸透は、社会に新たな問題をもたらしています。その代表的なものが<b class="marker">「意見の分極化」と「エコーチェンバー現象」</b>です。</p>
+            
+            <div class="two-column">
+                <div class="card">
+                    <div class="card-header">意見の分極化 (Polarization)</div>
+                    <p>社会全体の意見の多様性が失われ、賛成か反対か、右か左かといった<b class="text-problem">二極に対立が激化する状態</b>を指します。例えば「憲法改正」を巡る議論で、賛成派と反対派の意見ばかりが目立ち、中立的な意見や他の代替案が無視されてしまうような状況です。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">エコーチェンバー現象 (Echo chamber)</div>
+                    <p>SNSなどで自分と似た意見を持つ人ばかりと交流することで、自分の考えが正しいと信じ込み、<b class="text-action">異なる意見に触れる機会が極端に少なくなる状態</b>です。閉鎖的な空間で自分の意見が反響（エコー）し、増幅されていく様子を指します。</p>
+                </div>
+            </div>
+            
+            <p>SNSのアルゴリズムは、ユーザーが関心を持つテーマを優先的に表示し、無関心なものや不快に感じる可能性のある情報を見せないように設計されています。その結果、私たちは知らず知らずのうちに、<b class="text-confirm">心地よいけれど狭いバーチャルな世界</b>に閉じ込められ、視野が狭くなってしまう危険性があるのです。こうした現象は、民主主義制度が正常に機能することを妨げる、深刻な問題だと指摘されています。</p>
+            <p>では、このような状況で文学には何ができるのでしょうか？<br>
+            文学は、まさにこの<b class="text-action">エコーチェンバーを打ち破るための強力な装置</b>となり得ます。文学を読むことは、自分とは全く異なる文化、思想、世界観を持つ「他者」と偶然に出会う空間です。この予期せぬ出会いこそが、SNSのアルゴリズムが作り出す閉鎖的な世界から私たちを解放し、凝り固まった主観的な考えを見つめ直す機会を与えてくれます。</p>
+            <p>文学を通してコンフォートゾーンから外に出る体験は、意見の分極化を防ぎ、主体性を育む上で、情報社会に生きる私たちにとってますます重要な意味を持っているのです。</p>
+
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>SNSの普及により、意見の多様性が失われる<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">分極化</span></span>や、同じ意見ばかりに触れることで視野が狭くなる<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">エコーチェンバー</span></span>現象が問題となっています。これらの問題に対し、文学は、読者を異文化や他者と偶然に出会わせることで、主観的な視野を広げ、自己の<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">再形成</span></span>を促す重要な役割を果たします。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. まとめ</h2>
+            <p>今回の講義では、文学が現代社会の様々な課題、特に「グローバル化」と「情報社会化」に対して、どのような役割を果たしうるのかを考えてきました。</p>
+
+            <div class="card">
+                <div class="card-header">今回の学びのポイント</div>
+                <ul>
+                    <li><b class="text-problem">グローバル化と言語・文化の危機</b>：経済的利益を追求するグローバル化は、世界のマイナーな言語や文化を絶滅の危機に追いやっています。私たちはその悪影響を無視せず、文化的多様性を守る責任があります。その一つの方法が、翻訳に頼らずに外国語を学び、原語で文学を読むことです。</li>
+                    <li><b class="text-action">文学者の政治的な実践</b>：多和田葉子やジュンパ・ラヒリのように、多くの作家はグローバル化やアイデンティティの消費に危機感を抱いています。彼らは、標準語ではない言語やグローバル言語以外の言語で創作することで、言語的多様性を守るという政治的な実践を行っています。</li>
+                    <li><b class="text-confirm">情報社会における文学の重要性</b>：SNSが引き起こす意見の分極化やエコーチェンバー現象は、私たちを閉鎖的な環境に閉じ込める危険性があります。このような状況だからこそ、国内外の文学作品を読むことを通して、慣れ親しんだ主観から外に出て、他者や異文化と偶然に出会う体験が、自己形成のために極めて重要になります。</li>
+                </ul>
+            </div>
+            
+            <p>文学は、単なる娯楽や現実逃避の手段ではありません。それは、より良い社会を築くための教訓的・道徳的・実用的な機能を持ち、私たちに現実社会の問題と向き合い、実際に行動するよう働きかける力強いメディアなのです。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>経済的な理由だけでなく、<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">文化的多様性</span></span>を守ることも重要です。そのために私たちは、できるだけ外国語を習い、原語で文学作品を読む努力をすべきです。多和田葉子やジュンパ・ラヒリのような作家は、標準的ではない言語を用いることで、<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">言語的な多様性</span></span>を守ろうとしています。情報社会において、意見の<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">分極化</span></span>やエコーチェンバー問題が深刻化する中、文学は他者との偶然の出会いを提供し、自己形成を促す重要な役割を担っています。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page12.html" class="nav-button">← 前の講座へ</a>
+            <a href="page14.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、ZEN大学（仮称・設置認可申請中）が提供する講義「人文社会入門 第13回 文学的な捉え方(2)」（講師：プラダン・ゴウランガ・チャラン 先生）および対談VTR（対談者：エルナンデス・アルバロ・ダビド 先生）を元に作成されました。</li>
+                <li><a href="https://zen-univ.jp/" target="_blank" rel="noopener noreferrer">ZEN大学（仮称・設置認可申請中）</a></li>
+                <li>Spivak, G. C. (2012). *An Aesthetic Education in the Era of Globalization*. Harvard University Press.</li>
+                <li>多和田葉子 (1987). 『あなたのいるところだけなにもない』. 河出書房新社.</li>
+                <li>多和田葉子 (2014). 『献灯使』. 講談社.</li>
+                <li>Lahiri, J. (2018). *In Other Words* (translated by Ann Goldstein). Knopf. (原著: *In altre parole*, 2015).</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

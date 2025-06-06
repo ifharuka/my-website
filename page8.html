@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第8回 心理学の世界</title>
+    <style>
+        :root {
+            --primary-color: #4a2c7a; /* 濃い紫 */
+            --secondary-color: #7d5bbe; /* 紫 */
+            --accent-color: #f5a623; /* オレンジ系アクセント */
+            --background-color: #f3f0f9; /* 薄い紫 */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f7f5fa;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fffaf0;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: #f5f2f9;
+        }
+        
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .two-column {
+            display: flex;
+            gap: 20px;
+        }
+
+        .two-column > div {
+            flex: 1;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .two-column {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第8回 心理学の世界</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 心理学ってどんな学問？</a>
+                    <ul>
+                        <li><a href="#sec1-1">1.1 問い：心理学ってどんな学問だと思いますか？</a></li>
+                        <li><a href="#sec1-2">1.2 概要とポイント：多様な領域と研究方法</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. 心を探る方法：心理学の研究アプローチ</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：自分の性格を知るにはどうすればいい？</a></li>
+                        <li><a href="#sec2-2">2.2 概要とポイント：実験・調査・検査</a></li>
+                        <li><a href="#sec2-3">2.3 事例：性格検査（質問紙）をやってみよう！</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. 人は一生涯、発達する：発達心理学の世界</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：大人になったと思った瞬間は？</a></li>
+                        <li><a href="#sec3-2">3.2 概要とポイント：エリクソンの発達段階説</a></li>
+                        <li><a href="#sec3-3">3.3 事例：他の動物と比べた人間の特徴</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. 行動はこうして変わる：学習心理学の基礎</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：最近、新しく始めた習慣は？</a></li>
+                        <li><a href="#sec4-2">4.2 概要とポイント：学習のメカニズム</a></li>
+                        <li><a href="#sec4-3">4.3 事例：オペラント条件づけを日常に活かす</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. 「集団」の中の個人：社会心理学の視点</a>
+                    <ul>
+                        <li><a href="#sec5-1">5.1 問い：一人でいる時と大勢でいる時、行動はどう違う？</a></li>
+                        <li><a href="#sec5-2">5.2 概要とポイント：集団が個人に与える影響</a></li>
+                        <li><a href="#sec5-3">5.3 事例：渋谷ハロウィンはなぜ暴徒化したか？</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap6">6. 文化と心：文化心理学のアプローチ</a>
+                    <ul>
+                        <li><a href="#sec6-1">6.1 問い：日本人はなぜマスクを長く着用した？</a></li>
+                        <li><a href="#sec6-2">6.2 概要とポイント：文化差を生む心のメカニズム</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap7">7. まとめ：心理学で「心」を科学する</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 心理学ってどんな学問？</h2>
+            <p>「心理学」と聞くと、皆さんは何を思い浮かべますか？ 相手の心を読み解くテクニック、あるいはカウンセリングのような専門的な場面を想像するかもしれません。実は、心理学の世界はもっと広くて多様な領域から成り立っています。まずは、その全体像から見ていきましょう。</p>
+            
+            <h3 id="sec1-1">1.1 問い：心理学ってどんな学問だと思いますか？</h3>
+            <p>「心理学」とは、その名の通り「心の理（ことわり）を学ぶ」学問です。しかし、心は目に見えません。では、目に見えないものをどうやって科学的に探究するのでしょうか？</p>
+            <p>心理学の大きな特徴は、<strong class="text-action">「行動」を手がかりに「心」を推測する</strong>というアプローチにあります。人の行動や反応を注意深く観察し、データを集め、そこから心の働きや法則性を解き明かしていくのです。それはまさに、目に見えないものを見える形にしようとする知的な探求と言えるでしょう。</p>
+
+            <h3 id="sec1-2">1.2 概要とポイント：多様な領域と研究方法</h3>
+            <p>心理学は一つの学問というより、さまざまな分野が集まった学問群と考える方が実態に近いかもしれません。大きく分けて、心の普遍的な法則を探る<strong class="text-problem">「基礎心理学」</strong>と、その知見を社会の具体的な問題解決に活かす<strong class="text-confirm">「応用心理学」</strong>があります。</p>
+
+            <div class="two-column">
+                <div class="card">
+                    <div class="card-header">基礎心理学の主な領域</div>
+                    <ul>
+                        <li><b>認知心理学</b>：知覚、記憶、思考など「知的な」側面を研究。</li>
+                        <li><b>学習心理学</b>：経験による行動の変化（学習）のメカニズムを探る。</li>
+                        <li><b>発達心理学</b>：人が生まれてから死ぬまでの心身の変化を研究。</li>
+                        <li><b>社会心理学</b>：集団の中での個人の行動や心理を研究。</li>
+                        <li><b>人格心理学</b>：「その人らしさ」であるパーソナリティを研究。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <div class="card-header">応用心理学の主な領域</div>
+                    <ul>
+                        <li><b>臨床心理学</b>：心の悩みや問題を抱える人を支援する方法を研究。</li>
+                        <li><b>教育心理学</b>：効果的な学習方法や教育環境を研究。</li>
+                        <li><b>産業心理学</b>：職場での人間関係や生産性向上などを研究。</li>
+                        <li><b>災害心理学</b>：災害時の人の心の動きやケアを研究。</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p>最近では、<strong class="marker">「進化心理学」</strong>（人間を進化したサルとして捉え、行動の起源を探る）や<strong class="marker">「文化心理学」</strong>（文化が心に与える影響を探る）といった新しい視点も生まれており、心理学の世界は常に広がり続けています。</p>
+
+            <div class="question-box">
+                <h4>問題1.1</h4>
+                <p>心理学は、目に見える<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">行動</span></span>を手がかりに、目に見えない<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">心</span></span>の働きを探究する実証的な学問である。心の普遍的な法則を探る<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">基礎心理学</span></span>と、社会問題の解決を目指す応用心理学に大別される。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. 心を探る方法：心理学の研究アプローチ</h2>
+            <p>心理学が「科学」であるためには、客観的で再現可能な方法で心を探る必要があります。そのために、心理学者はさまざまな研究方法を駆使しています。ここでは、その代表的な方法と、実際に性格検査を体験してみましょう。</p>
+
+            <h3 id="sec2-1">2.1 問い：自分の性格を知るにはどうすればいい？</h3>
+            <p>友人や家族から「あなたは〇〇な性格だね」と言われたり、自分で「自分は内向的かも」と感じたりすることがあると思います。心理学では、こうした「性格」をどのように客観的に捉えようとするのでしょうか？</p>
+
+            <h3 id="sec2-2">2.2 概要とポイント：実験・調査・検査</h3>
+            <p>心理学の研究方法は、主に「実験」「調査」「検査」の3つに分けられます。これらは、心の働きを客観的なデータとして捉えるための重要なツールです。</p>
+            <div class="card">
+                <div class="card-header">心理学の主な研究方法</div>
+                <ul>
+                    <li><b class="text-action">実験 (Experiment)</b>：原因と結果の関係を調べるために、ある条件（独立変数）を操作し、その結果どう行動が変化するか（従属変数）を測定します。</li>
+                    <li><b class="text-problem">調査 (Survey)</b>：アンケートなどを用いて、多くの人から意見や行動に関するデータを集めます。世論調査などが代表例です。</li>
+                    <li><b class="text-confirm">検査 (Test)</b>：知能検査や性格検査など、標準化された手続きで個人の特性を測定します。行動を客観的に評価するための「ものさし」と言えます。</li>
+                </ul>
+            </div>
+            <p>特に「検査」で重要なのは<strong class="marker">「標準化」</strong>という概念です。これは、たくさんの人に事前に検査を実施し、その結果を基に「平均的な人はこのくらいの点数」という基準（相対化の基準）を作っておくことです。これにより、個人の結果が平均と比べてどの位置にあるのかを客観的に評価できます。</p>
+            
+            <h3 id="sec2-3">2.3 事例：性格検査（質問紙）をやってみよう！</h3>
+            <p>では、実際に性格検査の一つである「ニューキャッスル・パーソナリティ評定尺度」の短縮版を体験してみましょう。この検査は、人間の性格を5つの基本的な因子（<b class="text-action">ビッグファイブ</b>）で捉えようとするものです。以下の12の質問に対し、自分に最も当てはまるものを直感で選んでください。</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:5%;">No.</th>
+                            <th>質問文</th>
+                            <th style="width:12%;">きわめて<br>当てはまる</th>
+                            <th style="width:12%;">やや<br>当てはまる</th>
+                            <th style="width:12%;">どちらでも<br>ない</th>
+                            <th style="width:12%;">やや<br>当てはまらない</th>
+                            <th style="width:12%;">きわめて<br>当てはまらない</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>1</td><td>知らない人とすぐ話ができる</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>2</td><td>人が快適で幸せかどうか気にかかる</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>3</td><td>絵画等の制作、著述、音楽を作る</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>4</td><td>かなり前から準備する</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>5</td><td>落ち込んだり憂鬱になったりする</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>6</td><td>パーティーや社交イベントを企画する</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>7</td><td>人を侮辱する</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>8</td><td>哲学的、精神的な問題を考える</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>9</td><td>ものごとの整理ができない</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>10</td><td>ストレスを感じたり不安になったりする</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>11</td><td>むずかしい言葉を使う</td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr><td>12</td><td>他の人の気持ちを思いやる</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="footnote">出典：Nettle, D. (2007). 竹内和世訳 (2009) 『パーソナリティを科学する：特性5因子であなたがわかる』白揚社 pp.263-270より。</p>
+            
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>心理学では、原因と結果の因果関係を調べる<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">実験</span></span>、アンケートなどを用いる<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">調査</span></span>、個人の特性を測る<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">検査</span></span>といった研究方法が用いられる。特に検査では、客観的な評価基準を設けるための<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">標準化</span></span>が重要となる。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. 人は一生涯、発達する：発達心理学の世界</h2>
+            <p>私たちは、生まれてから死ぬまで、常に変化し続けます。身体的な成長はもちろん、考え方や感情、人との関わり方も変わっていきます。発達心理学は、こうした「一生涯の発達」を科学する分野です。</p>
+
+            <h3 id="sec3-1">3.1 問い：大人になったと思った瞬間は？</h3>
+            <p>選挙権を得たとき、お年玉をあげる側になったとき、あるいは親のありがたみが分かったとき。あなたが「大人になったな」と感じた瞬間は、心理学的に見ると、ある発達段階の「課題」を乗り越えた証かもしれません。</p>
+
+            <h3 id="sec3-2">3.2 概要とポイント：エリクソンの発達段階説</h3>
+            <p>心理学者エリクソンは、人の一生を8つの段階に分け、それぞれの段階で達成すべき心理的な<strong class="text-action">「発達課題」</strong>と、それを乗り越えることで生じる<strong class="text-problem">「心理的危機」</strong>を提唱しました。この理論は、人の一生を連続的な成長のプロセスとして捉える視点を提供してくれます。</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>段階 (Stage)</th>
+                            <th>発達段階</th>
+                            <th>発達課題</th>
+                            <th>心理的危機</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Ⅰ</td><td>乳児期</td><td><b>基本的信頼感</b></td><td>不信</td></tr>
+                        <tr><td>Ⅱ</td><td>幼児前期</td><td>自律性</td><td>恥、疑い</td></tr>
+                        <tr><td>Ⅲ</td><td>就学前期</td><td>自主性</td><td>罪悪感</td></tr>
+                        <tr><td>Ⅳ</td><td>学童期</td><td>スキル、有能感</td><td>劣等感</td></tr>
+                        <tr><td>Ⅴ</td><td>青年期*</td><td><b>アイデンティティ</b></td><td>役割の混乱</td></tr>
+                        <tr><td>Ⅵ</td><td>成人前期</td><td>親密性</td><td>孤独</td></tr>
+                        <tr><td>Ⅶ</td><td>壮年期</td><td>生成継承性</td><td>停滞</td></tr>
+                        <tr><td>Ⅷ</td><td>老年期</td><td>自我の統合</td><td>絶望</td></tr>
+                    </tbody>
+                </table>
+                <p class="footnote">*思春期を含む。出典：Erikson, E.H. (1963) 等の文献を基に作成。</p>
+            </div>
+            <p>例えば、生まれてすぐの乳児期には「<b>基本的信頼感</b>」を育むことが課題です。これは「世界は安全で信頼できる場所だ」と感じる心であり、後の人間関係の土台となります。そして、皆さんの多くが経験している青年期の課題は「<b>アイデンティティ（自己同一性）の確立</b>」です。「自分は何者で、どう生きていきたいのか」を問い、自分なりの答えを見つけることが求められます。</p>
+
+            <h3 id="sec3-3">3.3 事例：他の動物と比べた人間の特徴</h3>
+            <p>人間の発達を考える上で興味深いのは、他の動物との比較です。人間は<strong class="marker">「生理的早産」</strong>といって、脳が非常に未熟な状態で生まれてきます。チンパンジーの新生児の脳が成体の40%の大きさなのに対し、人間はわずか23%です。これは、直立歩行で産道が狭くなったことと、脳が巨大化したことのトレードオフの結果だと考えられています。</p>
+            <p>この未熟さゆえに、人間の赤ちゃんは養育者に完全に依存します。だからこそ、乳児期に「この世界と養育者は信頼できる」という基本的信頼感を築くことが、生き延びるために不可欠なのです。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>エリクソンの発達段階説によれば、人は一生涯にわたり心理的な課題に直面する。乳児期の課題は「<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">基本的信頼感</span></span>」の獲得であり、これは人間が<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">生理的早産</span></span>で未熟な状態で生まれることと深く関係している。一方、青年期の課題は「<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">アイデンティティ</span></span>の確立」である。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. 行動はこうして変わる：学習心理学の基礎</h2>
+            <p>新しい習慣を身につけたり、苦手なことを克服したり。私たちの行動は、経験を通じて日々変化しています。心理学では、このような比較的永続的な行動の変容を<strong class="text-action">「学習」</strong>と呼びます。ここでは、その代表的なメカニズムを見ていきましょう。</p>
+            
+            <h3 id="sec4-1">4.1 問い：最近、新しく始めた習慣は？</h3>
+            <p>あなたが最近始めた習慣（例えば、毎朝決まった時間に起きる、ジムに通うなど）は、どのようにして身についたのでしょうか？そこには、学習心理学で説明できる「条件づけ」の原理が働いているかもしれません。</p>
+
+            <h3 id="sec4-2">4.2 概要とポイント：学習のメカニズム</h3>
+            <p>学習のメカニズムには、大きく分けて2つのタイプがあります。パブロフの犬で有名な<strong class="text-problem">「古典的条件づけ（レスポンデント条件づけ）」</strong>と、ごほうびや罰によって行動が変化する<strong class="text-confirm">「オペラント条件づけ」</strong>です。</p>
+
+            <div class="card">
+                <div class="card-header">パブロフの犬と古典的条件づけ</div>
+                <p>生理的な反射（唾液）と、本来は無関係な刺激（ベルの音）が結びつく学習。</p>
+                 <div style="display: flex; justify-content: center; align-items: center; padding: 10px; text-align: center; flex-wrap: wrap; gap: 15px;">
+                    <div>ベルの音 (中性刺激)</div>
+                    <div style="font-size: 1.5em; color: var(--secondary-color);">＋</div>
+                    <div>食物 (無条件刺激)</div>
+                    <div style="font-size: 1.5em; color: var(--secondary-color);">→</div>
+                    <div>唾液 (無条件反射)</div>
+                </div>
+                <p style="text-align:center; font-weight: bold; margin-top: 10px;">これを繰り返すと…</p>
+                 <div style="display: flex; justify-content: center; align-items: center; padding: 10px; text-align: center; flex-wrap: wrap; gap: 15px;">
+                    <div>ベルの音 (条件刺激)</div>
+                    <div style="font-size: 1.5em; color: var(--secondary-color);">→</div>
+                    <div>唾液 (条件反射)</div>
+                </div>
+                <p>梅干しを見ただけで唾液が出るのも、この一種です。「見る」という経験と「酸っぱい」という味覚が結びついています。</p>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">お手とオペラント条件づけ</div>
+                <p>自発的な行動とその結果（ごほうび／罰）が結びつく学習。</p>
+                <div style="display: flex; justify-content: center; align-items: center; padding: 10px; text-align: center; flex-wrap: wrap; gap: 15px;">
+                    <div>「お手」という言葉<br>(弁別刺激)</div>
+                    <div style="font-size: 1.5em; color: var(--secondary-color);">→</div>
+                    <div>犬が前足を出す<br>(オペラント反応)</div>
+                    <div style="font-size: 1.5em; color: var(--secondary-color);">→</div>
+                    <div>ほめられる<br>(強化刺激)</div>
+                </div>
+                <p>この「弁別刺激 → オペラント反応 → 強化刺激」という<strong class="marker">３項随伴性</strong>が学習されることで、特定の状況で特定の行動が起こりやすくなります。</p>
+            </div>
+            
+            <h3 id="sec4-3">4.3 事例：オペラント条件づけを日常に活かす</h3>
+            <p>このオペラント条件づけは、私たちの習慣形成にも応用できます。ある研究者は、夜間大学院への通学をサボる誘惑に打ち勝つため、自分自身にこの原理を適用しました。</p>
+            <p>彼は、通学という大きな目標を「駅まで歩く」「電車に乗る」「バスに乗り換える」といった小さなステップ（スモールステップ）に分解し、<strong class="text-action">各ステップの終わりに自分にごほうび（チョコレート）を与えました</strong>。その結果、数週間で誘惑を克服し、最終的にはチョコの助けも不要になったそうです。ごほうびをうまく使うことで、望ましい行動を強化できる良い例です。</p>
+
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>経験による比較的永続的な行動の変容を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">学習</span></span>と呼ぶ。生理的な反射と刺激が結びつく<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">古典的条件づけ</span></span>に対し、自発的な行動とその結果（ごほうび等）が結びつく学習を<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">オペラント条件づけ</span></span>という。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. 「集団」の中の個人：社会心理学の視点</h2>
+            <p>私たちは、一人でいる時と、大勢の人の中にいる時とで、行動や考え方が変わることがあります。社会心理学は、このような「集団」が個人の心や行動にどのような影響を与えるのかを探る学問です。</p>
+
+            <h3 id="sec5-1">5.1 問い：一人でいる時と大勢でいる時、行動はどう違う？</h3>
+            <p>友人と二人きりの時は本音で深く話せるけれど、大勢の飲み会では聞き役に回ることが多い。あるいは、一人ではやらないような大胆な行動を、集団の中ではついやってしまう。こうした経験はありませんか？</p>
+
+            <h3 id="sec5-2">5.2 概要とポイント：集団が個人に与える影響</h3>
+            <p>集団の中にいることで、個人の行動は良くも悪くも変化します。その代表的な現象が<strong class="text-problem">「傍観者効果」</strong>と<strong class="text-action">「群集心理」</strong>です。</p>
+            
+            <div class="card">
+                <div class="card-header">なぜ誰も助けないのか？：傍観者効果</div>
+                <p>1964年、ニューヨークで女性が30分以上も暴漢に襲われ殺害される事件（キティ・ジェノヴィーズ事件）が起きました。38人もの目撃者がいたにもかかわらず、誰も助けようとしませんでした。これはなぜでしょうか？</p>
+                <p>心理学者のダーリーとラタネは、これが「傍観者効果」によるものだと考えました。<b class="marker">目撃者が多いほど、「誰かが助けるだろう」と責任が分散し、結果的に誰も行動しなくなる</b>という現象です。彼らの実験では、助けを求める人がいる場面で、自分以外に目撃者がいない場合（2人きり）はほぼ全員が助けたのに対し、目撃者が5人いる場合（合計6人）は助ける人の割合が大幅に低下し、援助までの時間も長くなることが示されました。</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">群集心理の特徴</div>
+                <p>群集の中にいると、個人は理性を失い、普段はしないような行動をとることがあります。これには3つの特徴が関係しています。</p>
+                <ul>
+                    <li><b>一体感</b>：共通の目的を持つことで高揚感が生まれ、冷静な判断が難しくなる。</li>
+                    <li><b>無責任性</b>：集団の中では個人の役割や義務が曖昧になり、「みんながやっているから」と無責任な行動をとりやすくなる。</li>
+                    <li><b>無名性</b>：自分が誰であるかを知られていないという安心感から、行動の抑制が効きにくくなる。</li>
+                </ul>
+            </div>
+
+            <h3 id="sec5-3">5.3 事例：渋谷ハロウィンはなぜ暴徒化したか？</h3>
+            <p>2018年10月、渋谷のハロウィンで若者が軽トラックを横転させるなどの暴徒化事件が起きました。これはまさに群集心理が働いた例と言えます。「ハロウィンを楽しむ」という共通の目的で集まった人々が、<strong class="text-action">一体感</strong>の中で高揚し、雑踏の中での<strong class="text-problem">無名性</strong>と、誰がやっても同じという<strong class="text-confirm">無責任性</strong>から、普段なら絶対にしないような破壊行動に至ってしまったのです。</p>
+
+            <div class="question-box">
+                <h4>問題5.1</h4>
+                <p>目撃者が多いほど援助行動が抑制される現象を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">傍観者効果</span></span>という。これは責任が<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">分散</span></span>することが一因である。また、集団の中では一体感、無責任性、<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">無名性</span></span>といった特徴から、普段はしないような暴徒的行動が起きやすくなる。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap6">6. 文化と心：文化心理学のアプローチ</h2>
+            <p>私たちの心や行動は、私たちが生まれ育った「文化」から大きな影響を受けています。文化心理学は、文化の違いが人の心にどのように作用するのかを科学的に解き明かす分野です。</p>
+
+            <h3 id="sec6-1">6.1 問い：日本人はなぜマスクを長く着用した？</h3>
+            <p>コロナ禍において、日本人は欧米人に比べて、より多くの人がより長くマスクを着用し続けました。この違いはどこから来るのでしょうか？「同調圧力が強いから」「健康意識が高いから」など、さまざまな理由が考えられますが、文化心理学はさらに深い視点を提供してくれます。</p>
+
+            <h3 id="sec6-2">6.2 概要とポイント：文化差を生む心のメカニズム</h3>
+            <p>この「皆マスク」現象について、心理学的にはいくつかの仮説が立てられ、検証が進められています。</p>
+            <div class="card">
+                <div class="card-header">日本人のマスク着用率の高さに関する3つの仮説</div>
+                <ol>
+                    <li><b class="text-problem">同調圧力仮説</b>：日本社会は欧米に比べ、集団に同調すべきという圧力が高い。</li>
+                    <li><b class="text-confirm">健康配慮仮説</b>：日本人は欧米人に比べ、健康に配慮した行動を採るべきという意識が高い。</li>
+                    <li><b class="text-action">コミュニケーション仮説</b>：日本人は欧米人に比べ、口を覆われた状態での音声コミュニケーションに不自由を感じにくい。</li>
+                </ol>
+            </div>
+            <p>大阪大学の研究チームが2024年に発表したウェブ調査の結果によると、「周囲が着用している」こと（同調圧力）の影響はあったものの、それ以上に<strong class="marker">「自分がしたいから」という個人の判断</strong>（健康配慮）が大きかったと報告されています。同調圧力仮説だけでは、この現象を完全には説明できないようです。</p>
+            <p>一方で、<strong class="text-action">コミュニケーション仮説</strong>も非常に興味深い視点です。研究によると、会話の際、欧米人は相手の「口」をよく見るのに対し、日本人は「目や鼻」のあたりをよく見る傾向があります。この視線の文化差は、なんと乳幼児期から存在することが分かっています。つまり、日本人にとって口元がマスクで隠れても、コミュニケーションへの支障が欧米人ほど大きくないため、マスク着用への抵抗が少なかったのではないか、というわけです。</p>
+            
+            <div class="question-box">
+                <h4>問題6.1</h4>
+                <p>日本人のマスク着用率の高さには、複数の要因が考えられる。その一つが<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">コミュニケーション仮説</span></span>である。会話時に、欧米人が相手の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">口</span></span>をよく見るのに対し、日本人は<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">目や鼻</span></span>を見る傾向があり、マスクで口元が隠れても支障が少ないため、という考え方である。</p>
+            </div>
+            <div class="page-number">6</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap7">7. まとめ：心理学で「心」を科学する</h2>
+            <p>今回の講義では、広大な心理学の世界を旅してきました。心という目に見えないものを、いかに科学的に、実証的に捉えようとしてきたか、その一端を感じていただけたのではないでしょうか。</p>
+            
+            <div class="card">
+                <div class="card-header">心理学とは</div>
+                <ul>
+                    <li><strong class="text-action">心と行動に関する実証的な学問</strong>である。</li>
+                    <li>認知心理学、社会心理学、発達心理学、学習心理学、人格心理学など、<strong class="text-problem">多様な領域からなる</strong>。</li>
+                    <li>実験、検査、調査などの方法で<strong class="text-confirm">行動を測定し、内面を推測する</strong>。</li>
+                </ul>
+                <p>私たちは、赤ちゃんの頃から社会や文化の中で発達し、さまざまな経験を通じて学習し、時には集団の中で普段とは違う自分になったりもします。心理学は、そうした人間のあらゆる側面に光を当て、そのメカニズムを解き明かそうとする、非常にダイナミックな学問です。</p>
+            </div>
+            
+            <h3 id="sec7-1">これからの学びに活かす</h3>
+            <p>この講義で紹介した心理学の知識は、自分自身の心を理解したり、他者とのコミュニケーションを円滑にしたり、あるいは社会の出来事をより深く読み解いたりするための強力なツールとなります。</p>
+            <p>もし興味がわいたら、ぜひ「心理学」の専門的な講義も履修してみてください。あなたの知的好奇心を満たし、世界を見る新たな視点を与えてくれるはずです。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>心理学は、目に見える<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">行動</span></span>を客観的に測定・観察することを通して、人の<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">心</span></span>の働きを科学的に探究する学問である。人の一生涯の変化を追う<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">発達心理学</span></span>や、集団と個人の関係を探る<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">社会心理学</span></span>など、多様な領域がある。</p>
+            </div>
+            <div class="page-number">7</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page7.html" class="nav-button">← 前の講座へ</a>
+            <a href="page9.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、ZEN大学（仮称・設置認可申請中）が提供する講義「人文社会入門 第8回 心理学の世界」（講師：積山 薫 先生）を元に作成されました。</li>
+                <li><a href="https://zen-univ.jp/" target="_blank" rel="noopener noreferrer">ZEN大学（仮称・設置認可申請中）</a></li>
+                <li>越智啓太 (2006). 心理学の領域. 心理学ワールド, 33, 23-25.</li>
+                <li>Nettle, D. (2009). パーソナリティを科学する: 特性5因子であなたがわかる（竹内和世 訳）. 白揚社.</li>
+                <li>Erikson, E. H. (1963). Child and society. W. W. Norton & Company.</li>
+                <li>Darley, J. M., & Latané, B. (1968). Bystander intervention in emergencies: diffusion of responsibility. Journal of personality and social psychology, 8(4, Pt.1), 377–383.</li>
+                <li>京都大学 (2021). 日本人は幼少期から話者の目を見ることを発見一口を選好する英語圏との文化・言語差一. <a href="https://www.kyoto-u.ac.jp/ja/research-news/2021-05-21-0" target="_blank" rel="noopener noreferrer">https://www.kyoto-u.ac.jp/ja/research-news/2021-05-21-0</a></li>
+                <li>大阪大学 (2024). マスク着用、日本で定着したのは「同調圧力」や「安心感」より「個人の判断」が大きかった. <a href="https://resou.osaka-u.ac.jp/ja/research/2024/20240112_1" target="_blank" rel="noopener noreferrer">https://resou.osaka-u.ac.jp/ja/research/2024/20240112_1</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第14回 政治学は世界をどう見るか</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 濃い紺色 */
+            --secondary-color: #336699; /* やや明るい青 */
+            --accent-color: #e60033; /* 赤色のアクセント */
+            --background-color: #f4f8fa; /* 薄い青みがかった背景 */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 5px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .lecturer {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f0f5f9;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fff5f5;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .two-column {
+            display: flex;
+            gap: 20px;
+        }
+
+        .two-column > div {
+            flex: 1;
+        }
+
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .two-column {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第14回 政治学は世界をどう見るか</h1>
+        <p class="lecturer">講師：山内 康英 先生</p>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. イントロダクション：なぜ政治を学ぶのか？</a>
+                    <ul>
+                        <li><a href="#sec1_1">1.1. 高校の「公共」から大学の「政治学」へ</a></li>
+                        <li><a href="#sec1_2">1.2. 政治と私たちの生活</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap2">2. 民主主義のしくみ：政治体制の原型を探る</a>
+                    <ul>
+                        <li><a href="#sec2_1">2.1. 国民主権のメカニズム</a></li>
+                        <li><a href="#sec2_2">2.2. フランス革命と三つの宣言</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. 世界の多様な政治・経済体制</a>
+                    <ul>
+                        <li><a href="#sec3_1">3.1. 民主主義のさまざまな形</a></li>
+                        <li><a href="#sec3_2">3.2. 政治と経済の組み合わせ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. 国際社会と主権国家</a>
+                    <ul>
+                        <li><a href="#sec4_1">4.1. 主権国家とは何か？</a></li>
+                        <li><a href="#sec4_2">4.2. 海をめぐるルール作り：国際法のダイナミズム</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. まとめと展望：政治を考える「ものさし」</a>
+                    <ul>
+                        <li><a href="#sec5_1">5.1. ３つの倫理的視点</a></li>
+                        <li><a href="#sec5_2">5.2. ZEN大学で学ぶ政治学</a></li>
+                    </ul>
+                </li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. イントロダクション：なぜ政治を学ぶのか？</h2>
+            <h3 id="sec1_1">1.1. 高校の「公共」から大学の「政治学」へ</h3>
+            <p>皆さんは高校時代、「公民」という教科で政治や経済、倫理について学びました。2022年度からはこの公民科のカリキュラムが変わり、「公共」が必修科目となりました。これは、18歳選挙権の導入などを背景に、<b class="marker">若い世代が主体的に社会に参加する力を育むこと</b>が、より一層重要になったからです。</p>
+            <p>大学で学ぶ「政治学」は、この高校での学びをさらに深め、発展させるものです。歴史的・社会的な視点やグローバルな観点を取り入れ、最新の研究成果を交えながら、より専門的かつ批判的に政治という現象を読み解いていきます。</p>
+            
+            <h3 id="sec1_2">1.2. 政治と私たちの生活</h3>
+            <p>「政治」と聞くと、国会での議論や選挙など、少し遠い世界のことのように感じるかもしれません。しかし、政治は私たちの生活に深く関わっています。例えば、新しいビジネスを始めようとするとき、NPOを立ち上げて地域貢献をしたいと考えたとき、そこには必ず法律や行政のルールが関わってきます。</p>
+            
+            <div class="two-column">
+                <div class="card">
+                    <div class="card-header">事例：ITビジネスと電気通信事業法</div>
+                    <p>もしあなたが新しいITサービスを立ち上げるなら、<b class="text-action">電気通信事業法</b>の知識は不可欠です。どのような届け出が必要か、ユーザーの情報をどう扱うべきか。法律を知らなければ、ビジネスを始めることすらできません。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">事例：NPOと地方自治体</div>
+                    <p>地域を盛り上げるためにNPO法人を設立する場合、市町村などの<b class="text-action">地方自治体との協力</b>が鍵となります。地域の情報化政策や補助金の仕組みを理解することで、より効果的な活動が可能になります。</p>
+                </div>
+            </div>
+
+            <p>このように、社会的な課題の多くは、すでに国や自治体による法律や政策が存在します。そして、もし既存のルールでは解決できない新しい問題に直面したとき、<b class="text-problem">私たち自身が新しい法律や政策を作っていく</b>必要があります。その活動の中心となるのが、国会議事堂がある「永田町」（立法府）や、各省庁が集まる「霞が関」（行政府）なのです。政治学を学ぶことは、こうした社会の仕組みを理解し、主体的に関わるための第一歩となります。</p>
+
+            <div class="question-box">
+                <h4>問題1.1</h4>
+                <p>2022年度から高校の公民科で必修となった科目は<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">公共</span></span>です。これは、選挙権年齢が<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">18歳</span></span>以上に引き下げられたことなどを背景に、若者が主体的に社会に参加する力を育むことを目的としています。日本の立法府の拠点がある場所は<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">永田町</span></span>、行政府の中心は<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">霞が関</span></span>と呼ばれています。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap2">2. 民主主義のしくみ：政治体制の原型を探る</h2>
+            <h3 id="sec2_1">2.1. 国民主権のメカニズム</h3>
+            <p>日本の政治の基本は「国民主権」です。これは、国の政治のあり方を最終的に決める力（主権）が国民にあるという考え方です。では、この国民主権は具体的にどのような仕組みで動いているのでしょうか。</p>
+            <p>それは、<b class="marker">「オープンエンドな政治過程」</b>という言葉で説明できます。法律や政策は一度決まったら終わりではなく、常に社会からの評価にさらされます。その評価に基づき、新たな政策を始めたり、既存の法律を改正したりすることができます。この、<b class="text-action">決定→実行→評価→修正というフィードバックのサイクル</b>が、民主主義をダイナミックに動かす原動力なのです。</p>
+            
+            <div class="card">
+                <div class="card-header">民主主義の３つの要素</div>
+                <ul>
+                    <li><b>国民：</b>国民国家を構成するメンバーであること。</li>
+                    <li><b>主権：</b>選挙権を持つ国民（市民）が最終的な決定権を持つこと。</li>
+                    <li><b>民主主義：</b>政府が国民の同意によって生まれ、維持されること。つまり、政治的正当性の源泉は国民にある。</li>
+                </ul>
+            </div>
+            
+            <h3 id="sec2_2">2.2. フランス革命と三つの宣言</h3>
+            <p>この「国民主権による民主主義」という政治体制の原型は、いつ、どこで生まれたのでしょうか。その答えは、<b class="text-problem">18世紀末のフランス革命</b>にさかのぼることができます。</p>
+            <p>フランス革命は、封建的な身分制度を打ち破り、「近代」という新しい時代の扉を開きました。その理念を象徴するのが、1789年に採択された<b class="text-confirm">「フランス人権宣言（人および市民の権利の宣言）」</b>です。この宣言は、人間の自由と平等をうたい、あらゆる主権が本質的に国民に存することを明確にしました。</p>
+            
+            <p>このフランス人権宣言の精神は、後の世に大きな影響を与え、<b class="text-action">「日本国憲法」</b>や1948年の<b class="text-action">「世界人権宣言」</b>にも受け継がれています。これらの文書に共通するのは、以下の3つの重要な原則です。</p>
+            <ol>
+                <li>人間が生まれながらに持つ人権、尊厳、権利の平等。</li>
+                <li>公共の目的によってのみ正当化される自由の制限。</li>
+                <li>主権が国民に存するという国民主権の原則。</li>
+            </ol>
+            <p>私たちは、歴史の大きな流れの中で確立された、この普遍的な価値観の上で生活しているのです。</p>
+
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>国民主権による民主主義の政治体制の原型は、1789年の<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">フランス革命</span></span>に見ることができます。この革命で採択された「<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">人権宣言</span></span>」は、政治的正当性の源泉が国民にあることを示しました。この理念は、日本の<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">憲法</span></span>や世界人権宣言にも受け継がれています。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. 世界の多様な政治・経済体制</h2>
+            <h3 id="sec3_1">3.1. 民主主義のさまざまな形</h3>
+            <p>民主主義と一口に言っても、その形は一つではありません。古代ギリシャの都市国家（ポリス）では、市民が直接集まって議論し、物事を決める<b class="marker">「直接民主制」</b>が行われていました。しかし、何千万人もの国民がいる現代の国家で、これをそのまま行うのは不可能です。</p>
+            <p>そのため、現代の多くの国では、国民が選挙で代表者を選び、その代表者が議会で政治を行う<b class="text-action">「代表制（間接）民主主義」</b>が採用されています。これもまた、政治体制と、その時代や社会の経済のあり方が密接に関わっていることを示しています。</p>
+            
+            <h3 id="sec3_2">3.2. 政治と経済の組み合わせ</h3>
+            <p>政治体制と経済体制の組み合わせは、世界を見渡すと非常に多様です。代表的なパターンを見てみましょう。</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>分類</th>
+                            <th>政治体制</th>
+                            <th>経済体制</th>
+                            <th>代表例</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>西側先進国型</b></td>
+                            <td>代表制民主主義</td>
+                            <td>資本主義市場経済</td>
+                            <td>日本、アメリカ、ヨーロッパ諸国</td>
+                        </tr>
+                        <tr>
+                            <td><b>旧ソ連・東欧型（崩壊）</b></td>
+                            <td>人民民主主義（一党独裁）</td>
+                            <td>計画経済</td>
+                            <td>旧ソビエト連邦、東欧諸国</td>
+                        </tr>
+                        <tr>
+                            <td><b>中国型</b></td>
+                            <td>人民民主主義（共産党指導）</td>
+                            <td>社会主義的市場経済</td>
+                            <td>中華人民共和国</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>さらに、同じ代表制民主主義の中でも、政治の仕組み（機構）は国によって異なります。</p>
+            <ul>
+                <li><b>議院内閣制（イギリス、日本など）：</b> 内閣が議会の信任に基づいて成立し、議会に対して責任を負う仕組み。立法府（議会）と行政府（内閣）が密接に連携します。</li>
+                <li><b>大統領制（アメリカなど）：</b> 国民が直接選挙で大統領（行政府の長）を選びます。大統領は議会から独立した強い権限を持ちますが、議会も大統領をチェックする権限（チェック・アンド・バランス）を持っています。</li>
+            </ul>
+            <p>これらの違いを理解することは、世界のニュースを読み解き、各国の政治の動きを深く知る上で非常に重要です。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>国民が直接政治に参加する制度を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">直接民主制</span></span>といい、代表者を通じて政治を行う制度を<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">代表制民主主義</span></span>といいます。日本の政治機構は<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">議院内閣制</span></span>、アメリカは<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">大統領制</span></span>を採用しています。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. 国際社会と主権国家</h2>
+            <h3 id="sec4_1">4.1. 主権国家とは何か？</h3>
+            <p>私たちは「国際社会」という言葉をよく耳にしますが、これは一体何なのでしょうか。国際社会は、約200の<b class="marker">「主権国家」</b>をメンバーとして構成されています。主権国家とは、以下の「国家の三要素」を持つ国のことです。</p>
+            <ul>
+                <li><b>領域（領土、領海、領空）</b></li>
+                <li><b>国民</b></li>
+                <li><b>主権（政府による統治権）</b></li>
+            </ul>
+            <p>しかし、国の数は単純ではありません。ある国を「国家」として正式に認める<b class="text-problem">「国家承認」</b>は、各国の政治的な判断に委ねられているため、国によって認める国家の数が異なるのです。</p>
+
+            <div class="card">
+                <div class="card-header">事例：国家承認をめぐる複雑な現実</div>
+                <ul>
+                    <li><b>台湾（中華民国）：</b> 多くの国は、中国（中華人民共和国）との関係を重視し、台湾を公式な国家として承認していませんが、経済や文化の面では緊密な関係を維持しています。</li>
+                    <li><b>チベット亡命政府：</b> ダライ・ラマ14世が率いる亡命政府は、領域や国民を実質的に支配していませんが、国際社会で一定の影響力を持っています。しかし、これを正式に国家として承認している国は現時点ではありません。</li>
+                </ul>
+            </div>
+            
+            <h3 id="sec4_2">4.2. 海をめぐるルール作り：国際法のダイナミズム</h3>
+            <p>国家間のルールである国際法も、各国の利害関係を反映して変化してきました。その典型が「海洋法」の歴史です。</p>
+            <p>17世紀、海洋大国だったオランダの法学者グロチウスは「海は万人の共有物」とする<b class="text-action">「海洋自由論」</b>を唱えました。これに対し、オランダの漁船団に自国の漁場を脅かされていたイギリスの法学者セルデンは「海も国家が所有できる」とする<b class="text-problem">「閉鎖海論」</b>で対抗しました。</p>
+            <p>この対立は、その後も海軍力を持つ「海洋国」と、沿岸の資源を守りたい「沿岸国」との間で続きました。そして長い交渉の末、1982年に<b class="text-confirm">「国連海洋法条約」</b>が採択され、現在の国際的な海のルールが確立されたのです。</p>
+
+            <div class="card">
+                <div class="card-header">現在の海のルール（国連海洋法条約）</div>
+                <ul>
+                    <li><b>領海：</b>沿岸から12カイリ（約22km）までの海域。沿岸国の主権が及びます。</li>
+                    <li><b>排他的経済水域（EEZ）：</b>沿岸から200カイリ（約370km）までの海域。沿岸国が水産資源や鉱物資源を探査・開発する権利を持ちます。</li>
+                </ul>
+            </div>
+
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>国家の三要素は、領域、国民、<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">主権</span></span>です。17世紀に「海洋自由論」を唱えたのはオランダの法学者<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">グロチウス</span></span>です。現在の国際的な海のルールを定めた国連海洋法条約では、沿岸から12カイリまでを<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">領海</span></span>、200カイリまでを<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">排他的経済水域</span></span>としています。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap5">5. まとめと展望：政治を考える「ものさし」</h2>
+            <h3 id="sec5_1">5.1. ３つの倫理的視点</h3>
+            <p>これまで政治の仕組みや歴史を見てきましたが、私たちが政治的な判断を下すとき、どのような「ものさし」を持つべきでしょうか。倫理学には、大きく分けて３つの考え方があります。</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>考え方</th>
+                            <th>提唱者</th>
+                            <th>判断の基準</th>
+                            <th>特徴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>徳倫理学</b></td>
+                            <td>アリストテレス</td>
+                            <td>共同体における「善き人格」</td>
+                            <td>コミュニティの中での役割や人格の卓越性を重視する。</td>
+                        </tr>
+                        <tr>
+                            <td><b>義務論</b></td>
+                            <td>カント</td>
+                            <td>普遍的な道徳法則（義務）</td>
+                            <td>行為の「結果」ではなく、その行為の「動機」が正しいかを問う。</td>
+                        </tr>
+                        <tr>
+                            <td><b>功利主義</b></td>
+                            <td>ベンサム</td>
+                            <td>最大多数の最大幸福（結果）</td>
+                            <td>社会全体の幸福や利益が最大になる行為を正しいとする。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>現代社会は、個人の自由や市場経済を重視する功利主義的な考え方が主流になりがちです。しかし、共同体の一員としての責任（徳倫理学）や、普遍的な正しさ（義務論）といった視点も、より良い社会を築くためには不可欠です。高校の「公共」でこれらの考え方を学ぶのは、複雑な社会問題に対して多角的な視点を持つためなのです。</p>
+
+            <h3 id="sec5_2">5.2. ZEN大学で学ぶ政治学</h3>
+            <p>ZEN大学の政治学関連の科目では、これらの基礎的な知識を発展させ、現代社会の具体的な課題に迫ります。</p>
+            <ul>
+                <li><b>民主主義論：</b>高校の「公共」を発展させ、民主主義の理論と実践を深く学びます。</li>
+                <li><b>国際関係論：</b>グローバル化する国際社会の力学を、安全保障や経済の観点から分析します。</li>
+                <li><b>情報社会の総合安全保障：</b>サイバー攻撃や情報戦など、現代ならではの安全保障問題を探求します。</li>
+            </ul>
+            <p>政治学を学ぶことは、単に知識を得るだけでなく、社会をより良く変えていくための「力」を身につけることです。この講義が、皆さんの知的好奇心を刺激し、未来を考えるきっかけとなることを願っています。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>アリストテレスが提唱した、共同体の中での善き生き方を問う考え方を<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">徳倫理学</span></span>といいます。一方、行為の動機を重視し、普遍的な義務に従うべきだとしたのは<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">カント</span></span>の義務論です。「最大多数の最大幸福」をスローガンに、社会全体の利益を最大化することを重視する考え方は<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">功利主義</span></span>と呼ばれます。</p>
+            </div>
+            <div class="page-number">1</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page13.html" class="nav-button">← 前の講座へ</a>
+            <a href="page15.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、ZEN大学（仮称・設置認可申請中）が提供する講義「人文社会入門 第14回 政治学は世界をどう見るか」（講師：山内 康英 先生）を元に作成されました。</li>
+                <li><a href="https://zen-univ.jp/" target="_blank" rel="noopener noreferrer">ZEN大学（仮称・設置認可申請中）</a></li>
+                <li>文部科学省. (2018). 高等学校学習指導要領（平成30年告示）解説 公民編.</li>
+                <li>日本学術会議 心理学・教育学委員会. (2016). 提言「18歳を市民に―市民性の涵養をめざす高等学校公民科の改革―」.</li>
+                <li>外務省. 「世界と日本のデータを見る」. (2024年9月閲覧).</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>

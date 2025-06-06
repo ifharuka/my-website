@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人文社会入門 第11回 法学の世界</title>
+    <style>
+        :root {
+            --primary-color: #003366; /* 濃い紺 */
+            --secondary-color: #00509e; /* 青 */
+            --accent-color: #d9534f; /* 赤系アクセント */
+            --background-color: #f4f8fa; /* 薄い青 */
+            --text-color: #333;
+            --white-color: #ffffff;
+            --marker-yellow: #fff1a7;
+            --confirm-green: #e6f4ea;
+            --action-blue: #e7f3ff;
+        }
+
+        body {
+            font-family: 'Yu Gothic UI', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: var(--white-color);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+
+        .page {
+            border: 1px solid #ddd;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #aaa;
+            font-size: 0.9em;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 70px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-left: 5px solid var(--secondary-color);
+            padding-left: 15px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            border-bottom: 1px dashed var(--secondary-color);
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        p {
+            margin-bottom: 1.2em;
+        }
+
+        strong, b {
+            color: var(--primary-color);
+        }
+
+        .marker {
+            background: linear-gradient(transparent 60%, var(--marker-yellow) 60%);
+        }
+        
+        .text-confirm { color: #28a745; font-weight: bold; }
+        .text-action { color: #007bff; font-weight: bold; }
+        .text-problem { color: var(--accent-color); font-weight: bold; }
+
+        .toc {
+            background-color: #f7f9fc;
+            border: 1px solid var(--secondary-color);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        .toc h2 {
+            margin-top: 0;
+            border-left: none;
+            padding-left: 0;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .toc ul ul {
+            padding-left: 20px;
+        }
+
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        .question-box {
+            border: 2px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #fef7f7;
+        }
+
+        .fill-in {
+            font-weight: bold;
+            color: var(--accent-color);
+            border-bottom: 2px dotted var(--accent-color);
+            cursor: pointer;
+            padding: 0 5px;
+        }
+
+        .answer {
+            display: none;
+            background-color: var(--marker-yellow);
+            padding: 2px 5px;
+            border-radius: 3px;
+            margin: 0 5px;
+        }
+        
+        .answer.visible {
+            display: inline-block;
+        }
+
+        .card {
+            background-color: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .card-header {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .three-column {
+            display: flex;
+            gap: 20px;
+        }
+
+        .three-column > div {
+            flex: 1;
+        }
+
+        .flowchart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .flow-item {
+            padding: 10px 20px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            background-color: var(--action-blue);
+            text-align: center;
+        }
+        .flow-arrow {
+            font-size: 2em;
+            color: var(--secondary-color);
+        }
+
+        .footnote {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 30px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+        
+        .references {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        .references ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .references li {
+            margin-bottom: 10px;
+        }
+        
+        .button-container {
+            text-align: center;
+            margin: 40px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-button:hover {
+            background-color: var(--secondary-color);
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .page {
+                padding: 1rem;
+            }
+            h1 { font-size: 1.8em; }
+            h2 { font-size: 1.5em; }
+            h3 { font-size: 1.2em; }
+            .three-column {
+                flex-direction: column;
+            }
+            .flowchart {
+                flex-direction: column;
+            }
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>人文社会入門 第11回 法学の世界</h1>
+
+        <nav class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chap1">1. 法学へようこそ ～法律はあなたの「武器」になる～</a></li>
+                <li><a href="#chap2">2. ケーススタディ①：SNSの誹謗中傷 ～とりあえず削除してほしい！～</a>
+                    <ul>
+                        <li><a href="#sec2-1">2.1 問い：誰にどうやって頼む？</a></li>
+                        <li><a href="#sec2-2">2.2 概要とポイント：3つの交渉相手と証拠保全</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap3">3. ケーススタディ②：SNSの誹謗中傷 ～損害を賠償させたい！～</a>
+                    <ul>
+                        <li><a href="#sec3-1">3.1 問い：削除だけでは終わらない？</a></li>
+                        <li><a href="#sec3-2">3.2 概要とポイント：投稿者特定の壁とコスト</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap4">4. ケーススタディ③：フェイクニュース ～規制は必要か？～</a>
+                    <ul>
+                        <li><a href="#sec4-1">4.1 問い：嘘の情報はどこまで許されるのか</a></li>
+                        <li><a href="#sec4-2">4.2 概要とポイント：表現の自由と共同規制</a></li>
+                    </ul>
+                </li>
+                <li><a href="#chap5">5. まとめ：法律を「知る」から「使う」へ</a></li>
+                <li><a href="#references">参考文献・リンク</a></li>
+            </ul>
+        </nav>
+
+        <div class="page">
+            <h2 id="chap1">1. 法学へようこそ ～法律はあなたの「武器」になる～</h2>
+            <p>「法律」と聞くと、どんなイメージが浮かびますか？「難しそう」「六法全書が分厚い」「怖い」「守らなきゃいけないもの」。多くの方が、少しネガティブで、自分とは遠い存在だと感じているかもしれません。</p>
+            <p>しかし、法律は決して遠い存在ではありません。むしろ、<b class="marker">私たちの日常生活に深く関わり、いざという時に自分を守るための強力な「武器」</b>になります。SNSでのトラブル、アルバイト先での問題、買い物での契約など、あらゆる場面で法律は私たちの権利と生活を支えています。</p>
+
+            <div class="card">
+                <div class="card-header">法律に対する多様なイメージ</div>
+                <ul>
+                    <li><strong class="text-problem">ネガティブな側面</strong>：「怖い」「守らないと罰せられる」といった強制的なイメージ。</li>
+                    <li><strong class="text-confirm">ポジティブな側面</strong>：「みんなが安心して暮らすためのルール」という社会の基盤としてのイメージ。</li>
+                    <li><strong class="text-action">主体的な側面</strong>：「自分たちで作っていく決まり」という社会参加の道具としてのイメージ。</li>
+                </ul>
+            </div>
+            
+            <p>この講義では、抽象的な法律論ではなく、SNSの誹謗中傷やフェイクニュースといった<b class="text-action">具体的なケーススタディ</b>を通して、法律がどのように機能し、私たちがそれをどう「使える」のかを探求していきます。「知らなかった」では済まされない時代だからこそ、法律を自分の武器として使いこなすための第一歩を踏み出しましょう。</p>
+            <div class="page-number">1</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap2">2. ケーススタディ①：SNSの誹謗中傷 ～とりあえず削除してほしい！～</h2>
+            <h3 id="sec2-1">2.1 問い：誰にどうやって頼む？</h3>
+            <p>まずは、現代社会で誰もが遭遇しうるこの問題から考えてみましょう。</p>
+            <div class="card">
+                <div class="card-header">事例：VTuberへの誹謗中傷</div>
+                <p>ある著名なVTuberがオリジナルグッズの予約販売を開始しました。すると、複数の人物からSNS上で「商品が高すぎる」「薬物でも入っているのでは？」といった、事実無根の悪質な誹謗中傷やデマの書き込みが相次ぎました。このままでは、自身の活動や商品の売れ行きに大きなダメージが及びかねません。</p>
+            </div>
+            <p>もしあなたがこのVTuberだったら、まずは何を望みますか？多くの人は「とにかく、この書き込みを消してほしい！」と思うはずです。では、その投稿を削除してもらうために、<b class="text-problem">誰に、どのような方法で働きかければ良いのでしょうか？</b></p>
+            
+            <h3 id="sec2-2">2.2 概要とポイント：3つの交渉相手と証拠保全</h3>
+            <p>投稿の削除を求める場合、交渉相手は主に3つ考えられます。それぞれにメリットとデメリットが存在します。</p>
+
+            <div class="three-column">
+                <div class="card">
+                    <div class="card-header">① 投稿者と直接交渉</div>
+                    <p>DMなどで直接削除を依頼する方法。<b class="text-confirm">費用をかけずに短期で解決できる可能性</b>がある一方、無視されたり、やり取りを晒されて<b class="text-problem">さらに炎上するリスク</b>も。そもそもDMが送れない場合もあります。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">② プラットフォーマーに依頼</div>
+                    <p>SNSの運営会社（プラットフォーマー）の削除依頼フォームなどから申請する方法。投稿者が応じなくても削除できる可能性がある一方、<b class="text-problem">対応に時間がかかったり、運営の裁量で削除されない</b>こともあります。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">③ 裁判所に求める</div>
+                    <p>法的な手続き（仮処分）を通じて削除を求める方法。法に従った<b class="text-confirm">公正な解決が期待</b>できますが、<b class="text-problem">時間とコスト</b>がかかり、「表現の自由」への配慮から削除が認められない場合もあります。</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">最重要アクション：証拠保全</div>
+                <p>どの方法を選ぶにしても、まず最初に行うべきは<b class="text-action">「証拠保全」</b>です。インターネット上の情報は簡単に削除されてしまうため、問題の投稿を見つけたら、すぐに証拠を残しましょう。</p>
+                <ul>
+                    <li><strong class="marker">URLがわかる形でスクリーンショットを撮る。</strong></li>
+                    <li><strong class="marker">可能であれば、PDF化して保存・印刷しておく。</strong>（改ざんが難しいため、より強力な証拠になります）</li>
+                    <li><strong class="marker">投稿の前後関係がわかるように、周辺の投稿も一緒に保存する。</strong></li>
+                </ul>
+                <p>適切な証拠がなければ、後の交渉や手続きが非常に困難になります。まず保全、それから行動です。</p>
+            </div>
+            
+            <div class="question-box">
+                <h4>問題2.1</h4>
+                <p>SNSでの誹謗中傷投稿の削除を求める場合、まず最初に行うべき最も重要なことは<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">証拠保全</span></span>である。交渉相手としては、投稿者本人、SNS運営会社である<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">プラットフォーマー</span></span>、そして最終手段としての<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">裁判所</span></span>が考えられる。</p>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap3">3. ケーススタディ②：SNSの誹謗中傷 ～損害を賠償させたい！～</h2>
+            <h3 id="sec3-1">3.1 問い：削除だけでは終わらない？</h3>
+            <p>投稿が削除されれば、一件落 Estudos。しかし、問題はそれだけで終わらないかもしれません。一度広がったデマによって失われた信頼や売上は、投稿を消しただけでは戻ってきません。また、模倣犯が次々と現れる可能性もあります。</p>
+            <p>そこで次のステップとして、「投稿者を特定して、生じた損害を賠償させたい」「二度とこのようなことがないよう、責任を追及したい」と考えるのは自然なことです。しかし、ここには非常に高いハードルが存在します。</p>
+
+            <h3 id="sec3-2">3.2 概要とポイント：投稿者特定の壁とコスト</h3>
+            <p>損害賠償を請求するには、まず<b class="text-problem">「誰が投稿したのか」を特定</b>する必要があります。この「発信者情報開示請求」が、法的手続きの中でも特に時間とコストのかかるプロセスです。</p>
+
+            <div class="flowchart">
+                <div class="flow-item">① 証拠保全 <br>（超重要！）</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">② 裁判所へ <br> IPアドレス開示請求</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">③ 裁判所へ <br> 契約者情報開示請求</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-item">④ 投稿者特定！</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">投稿者特定の大きな壁</div>
+                <ul>
+                    <li><b class="text-problem">時間の壁（ログ保存期間）</b>：SNSのサーバーが通信記録（アクセスログ）を保存している期間は、一般的に<b class="marker">3～6ヶ月</b>と非常に短い。この期間内に裁判所の手続きを終えなければ、IPアドレス（ネット上の住所）を特定できなくなります。</li>
+                    <li><b class="text-problem">コストの壁</b>：投稿者を特定するまでの一連の手続きには、数十万円から100万円以上の弁護士費用がかかる場合があります。</li>
+                    <li><b class="text-confirm">賠償額の壁</b>：多大な労力と費用をかけて投稿者を特定し、裁判で勝ったとしても、認められる賠償額（慰謝料）は数十万円程度になることが多く、費用倒れになる可能性があります。</li>
+                </ul>
+            </div>
+
+            <p>さらに、VTuberという存在には特有の難しさもあります。名誉毀損は「誰の」名誉が傷つけられたかで判断されます。例えば「VTuberの〇〇（キャラクター名）は性格が悪い」という書き込みは、架空のキャラクターへの批判と見なされ、<b class="text-action">中の人（演者）への名誉毀損とは認められにくい</b>のです。中の人個人を特定するような書き込みでなければ、法的に追及するのは困難を極めます。</p>
+
+            <div class="question-box">
+                <h4>問題3.1</h4>
+                <p>誹謗中傷の投稿者を特定する法的手続きを<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">発信者情報開示請求</span></span>という。この手続きは時間との勝負であり、SNS運営会社が通信記録（<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">アクセスログ</span></span>）を保存している短い期間内に行う必要がある。また、VTuberへの誹謗中傷の場合、それが<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">中の人（演者）</span></span>個人への攻撃であると立証できなければ、名誉毀損が成立しにくいという問題がある。</p>
+            </div>
+            <div class="page-number">3</div>
+        </div>
+
+        <div class="page">
+            <h2 id="chap4">4. ケーススタディ③：フェイクニュース ～規制は必要か？～</h2>
+            <h3 id="sec4-1">4.1 問い：嘘の情報はどこまで許されるのか</h3>
+            <p>誹謗中傷から一歩進んで、より社会的な問題である「フェイクニュース」について考えてみましょう。意図的に作られた偽の情報がSNSで拡散され、社会に混乱をもたらす事例が後を絶ちません。選挙の結果を左右したり、人々の健康を危険にさらしたりすることさえあります。</p>
+            <p>このような有害なフェイクニュースは、法律で規制すべきでしょうか？一見すると「当然規制すべきだ」と思えます。しかし、この問題は「表現の自由」という、民主主義社会の根幹をなす権利と深く関わっており、非常にデリケートな議論を必要とします。</p>
+
+            <h3 id="sec4-2">4.2 概要とポイント：表現の自由と共同規制</h3>
+            <p>フェイクニュース規制の議論は、国や文化によって大きく異なります。代表的なのが、規制に積極的なヨーロッパと、慎重なアメリカの対立です。</p>
+
+            <div class="three-column">
+                <div class="card">
+                    <div class="card-header">🇪🇺 ヨーロッパ（規制積極派）</div>
+                    <p>ナチスによるプロパガンダの歴史的教訓から、ヘイトスピーチなど<b class="text-problem">「有害な表現」は積極的に規制すべき</b>という考え方が強い。国が法律でプラットフォーマーに削除義務を課すなど、<b class="text-action">トップダウンの規制</b>が進んでいます。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">🇺🇸 アメリカ（規制慎重派）</div>
+                    <p>「思想の自由市場」という考え方が根底にあり、<b class="text-confirm">多様な意見が自由に戦うことで、より良い真実が見出される</b>という信念が強い。国家による言論への介入には極めて慎重で、<b class="text-action">表現の自由</b>を最大限に尊重します。</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">🇯🇵 日本と世界の現在</div>
+                    <p>どちらの考え方にも一長一短があります。そこで現在、主流になりつつあるのが<b class="text-action">「共同規制（Co-regulation）」</b>という考え方です。</p>
+                </div>
+            </div>
+            
+            <p><b class="marker">共同規制</b>とは、国家が「こういう情報を削除しなさい」と直接介入するのではなく、プラットフォーマーに<b class="text-confirm">自主的なルール作りと、その運用の透明化</b>を促すアプローチです。国は最低限の枠組み（例：違法情報の削除義務）だけを定め、プラットフォーマーが自主的にルールを策定し、どのような基準で投稿を削除したかを公開・報告させます。これにより、表現の自由への過度な介入を避けつつ、プラットフォーマーの社会的責任を促すことができると考えられています。</p>
+
+            <div class="question-box">
+                <h4>問題4.1</h4>
+                <p>フェイクニュースの規制は、民主主義の基本的人権である<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">表現の自由</span></span>とのバランスが非常に難しい問題である。国家が直接介入するのではなく、プラットフォーマーの自主的なルール作りを促すアプローチを<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">共同規制</span></span>と呼ぶ。これは、過度な言論統制を避けつつ、プラットフォーマーに社会的責任を果たさせることを目的としている。</p>
+            </div>
+            <div class="page-number">4</div>
+        </div>
+        
+        <div class="page">
+            <h2 id="chap5">5. まとめ：法律を「知る」から「使う」へ</h2>
+            <p>今回の講義では、SNSでのトラブルという身近な事例を通して、法律がどのように機能し、私たちが直面する問題の解決にどう役立つのかを見てきました。法律は、ただ守るべき堅苦しいルールではなく、<b class="marker">自らの権利を守り、問題を解決するための実践的な「武器」</b>なのです。</p>
+            
+            <div class="card">
+                <div class="card-header">今回の学びのポイント</div>
+                <ul>
+                    <li><b class="text-action">目的の明確化</b>：法律を使う前に「何を達成したいのか（削除、賠償、処罰など）」を明確にすることが、適切な手段を選ぶ第一歩。</li>
+                    <li><b class="text-problem">証拠の重要性</b>：特にネット上のトラブルでは、客観的な証拠を迅速に確保する「証拠保全」が、その後の展開を大きく左右する。</li>
+                    <li><b class="text-confirm">手続きの選択</b>：直接交渉、プラットフォーマーへの依頼、裁判所への申立てなど、複数の選択肢があり、それぞれにメリット・デメリット、そしてコストが存在する。</li>
+                    <li><strong style="color:var(--primary-color);">能動的な姿勢</b>：法律は、待っているだけでは助けてくれない。自ら学び、考え、行動することで、初めて強力な武器となる。</li>
+                </ul>
+            </div>
+            
+            <p>私たちは誰もが情報の発信者であり、同時に受信者でもある時代に生きています。それは、誰もが加害者にも被害者にもなりうるということです。そのような社会で賢く、そしてたくましく生きていくために、法律という武器の存在を知り、その使い方を学ぶことの重要性は、ますます高まっています。</p>
+            <p>この講義が、皆さんにとって「法学」が少しでも身近なものとなり、自らの生活と社会を考えるきっかけとなれば幸いです。</p>
+
+            <div class="question-box">
+                <h4>最終問題</h4>
+                <p>SNS上の誹謗中傷に対して法的に対抗する際、まず最も重要なのは<span class="fill-in" onclick="toggleAnswer(this)">(1)<span class="answer">証拠保全</span></span>である。投稿者を特定する<span class="fill-in" onclick="toggleAnswer(this)">(2)<span class="answer">発信者情報開示請求</span></span>は、時間と費用がかかる難しい手続きである。また、損害賠償だけでなく、<span class="fill-in" onclick="toggleAnswer(this)">(3)<span class="answer">刑事罰</span></span>を求める（警察に相談する）という選択肢も存在する。法律は受け身でいるだけでは機能せず、自ら<span class="fill-in" onclick="toggleAnswer(this)">(4)<span class="answer">能動的</span></span>に学び、使うことで初めて自分を守る武器となる。</p>
+            </div>
+            <div class="page-number">5</div>
+        </div>
+
+        <div class="button-container">
+            <a href="page10.html" class="nav-button">← 前の講座へ</a>
+            <a href="page12.html" class="nav-button">次の講座へ →</a>
+        </div>
+
+        <div id="references" class="references">
+            <h3>参考文献・リンク</h3>
+            <ul>
+                <li>本教材は、ZEN大学（仮称・設置認可申請中）が提供する講義「人文社会入門 第11回 法学の世界」（講師：山口 真由 先生）を元に作成されました。</li>
+                <li><a href="https://zen-univ.jp/" target="_blank" rel="noopener noreferrer">ZEN大学（仮称・設置認可申請中）</a></li>
+                <li>山口真由 (2017). 『リベラルという病』. 新潮社.</li>
+                <li>総務省. (n.d.). 「インターネット上の誹謗中傷への対策」.</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function toggleAnswer(element) {
+            const answer = element.querySelector('.answer');
+            if (answer) {
+                answer.classList.toggle('visible');
+            }
+        }
+    </script>
+</body>
+</html>
